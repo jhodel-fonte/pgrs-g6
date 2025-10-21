@@ -1,0 +1,219 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+  background: #f9f9f9;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Header Section */
+.header {
+  flex: 0.35;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #246BFD, #573cff);
+}
+
+.header img {
+  max-width: 400px;
+  width: 50%;
+}
+
+/* Form Section (Login/Register) */
+.form-section {
+  flex: 0.65;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 30px 20px;
+  background: #fff;
+  border: 2px solid #246BFD;
+}
+
+.form-section h2 {
+  flex: 0.65;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+  max-width: 400px;
+  margin: auto;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  padding: 10px 15px;
+  margin-bottom: 18px;
+  background: #fff;
+  width: 100%;
+  max-width: 350px;
+}
+
+.input-group i {
+  margin-right: 12px;
+  color: #333;
+  font-size: 16px;
+}
+
+.input-group input {
+  border: none;
+  outline: none;
+  flex: 1;
+  background: transparent;
+  font-size: 14px;
+}
+
+/* Buttons (Login/Register) */
+.btn {
+  display: block;
+  background: #246BFD;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px 0 15px;
+  transition: 0.3s ease;
+  width: 100%;
+  max-width: 350px;
+  box-shadow: 0px 4px 6px rgba(0,0,0,0.15);
+}
+
+.btn:hover {
+  background: #0d4bd7;
+}
+
+.forgot {
+  width: 100%;
+  max-width: 350px;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.forgot a {
+  color: #246BFD;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.signup {
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.signup a {
+  color: #246BFD;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Error and success messages */
+.error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 5px;
+  display: block;
+}
+
+.success {
+  color: green;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Landing Page Styling */
+.landing-container {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 400px;
+  margin: 50px auto;
+}
+
+.landing-container img {
+  width: 100px;
+  margin-bottom: 15px;
+}
+
+.landing-container h1 {
+  margin: 10px 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.landing-container p {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Landing Page Button (override form button style) */
+.landing-container .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  background: #4facfe;
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+  width: auto;
+}
+
+.landing-container .btn:hover {
+  background: #00c6ff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header img {
+    max-width: 250px;
+  }
+  .form-section h2 {
+    font-size: 22px;
+  }
+  .btn {
+    font-size: 14px;
+  }
+}
+
+body.landing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+}

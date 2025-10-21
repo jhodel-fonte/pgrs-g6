@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notification Parser</title>
+    <style>
+        .notification { border: 1px solid #ccc; margin: 10px; padding: 10px; }
+        .high { background-color: #ffebee; }
+        .default { background-color: #e8f5e8; }
+        .low { background-color: #f3e5f5; }
+    </style>
+</head>
+<body>
+    <input type="file" id="fileInput" accept=".txt">
+    <div id="output"></div>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                parseNotifications(e.target.result);
+            };
+            
+            reader.readAsText(file);
+        });
+
+        function parseNotifications(content) {
+            const notifications = [];
+            const blocks = content.split('NotificationRecord(');
+            
+            blocks.forEach(block => {
+                if (block.trim()) {
+                    const notif = {
+                        package: extractValue(block, 'pkg='),
+                        importance: extractValue(block, 'importance='),
+                        tickerText: extractValue(block, 'tickerText='),
+                        number: extractValue(block, 'number=')
+                    };
+                    
+                    if (notif.package) notifications.push(notif);
+                }
+            });
+            
+            displayNotifications(notifications);
+        }
+
+        function extractValue(text, key) {
+            const regex = new RegExp(key + '([^\\s\\n]+)');
+            const match = text.match(regex);
+            return match ? match[1] : null;
+        }
+
+        function displayNotifications(notifications) {
+            const output = document.getElementById('output');
+            output.innerHTML = '<h2>📱 Notifications Found: ' + notifications.length + '</h2>';
+            
+            notifications.forEach(notif => {
+                const div = document.createElement('div');
+                div.className = 'notification ' + getImportanceClass(notif.importance);
+                div.innerHTML = `
+                    <strong>${notif.package}</strong><br>
+                    Importance: ${notif.importance}<br>
+                    ${notif.tickerText && notif.tickerText !== 'null' ? 'Preview: ' + notif.tickerText + '<br>' : ''}
+                    ${notif.number && notif.number !== '0' ? 'Count: ' + notif.number : ''}
+                `;
+                output.appendChild(div);
+            });
+        }
+
+        function getImportanceClass(imp) {
+            return imp === '4' || imp === '5' ? 'high' : 
+                   imp === '3' ? 'default' : 'low';
+        }
+    </script>
+</body>
+</html>
