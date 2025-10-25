@@ -1,0 +1,7 @@
+About sa Foldering and roles nila dito
+
+yung controller bale siya ang pinaka communication 
+mula sa public then sa application or src
+siya yung tatawag ng mga functions or classes na nasa src
+
+tas src ito ay 
