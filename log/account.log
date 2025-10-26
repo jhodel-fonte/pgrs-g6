@@ -1,0 +1,61 @@
+[2025-10-26 05:10:03] Error Account Key
+[2025-10-26 05:10:52] Error Updating Data: Unauthorize Account Key
+[2025-10-26 05:12:11] Error Updating Data: Unauthorize Account Key
+[2025-10-26 05:12:39] Error Updating Data: Unauthorize Account Key, Value Input:mobileNum
+[2025-10-26 05:13:13] Error Updating Data: Unauthorize Account Table Row Key, Value Input: mobileNum
+[2025-10-26 05:13:31] Error Updating Data: Unauthorize Account Table Row Key : mobileNum
+[2025-10-26 05:15:50] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '5 = 012345678 WHERE accId = 1' at line 1
+[2025-10-26 05:17:19] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`) ON UPDATE NO ACTION)
+[2025-10-26 05:19:10] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:26:54] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:31:52] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:34:20] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:34:49] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:35:00] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:36:24] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:36:30] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:36:34] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:36:50] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:37:38] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:38:44] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:38:52] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:39:37] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:40:07] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:40:08] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:40:30] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:40:34] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:40:52] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:40:54] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:41:18] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:41:46] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:41:59] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:42:02] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:42:04] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:42:10] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:44:02] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:44:17] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:44:28] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:44:44] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:44:45] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:45:02] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:45:11] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:45:52] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:46:03] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:47:05] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:47:20] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:47:24] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:47:26] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:48:12] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:49:34] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:50:28] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:50:33] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:50:35] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:50:36] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 05:51:42] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+Warning 
+
+Error[2025-10-26 06:00:46] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`))
+[2025-10-26 06:02:17] Exeption : Error Updating Data! Unauthorize Account Table Row Key : 8
+[2025-10-26 06:02:53] Exeption : Fail to Update Data! Unauthorize Account Table Row Key : 8[2025-10-26 06:03:20] Exception : Fail to Update Data! Unauthorize Account Table Row Key : 8
+[2025-10-26 06:03:27] Exception : Fail to Update Data! Unauthorize Account Table Row Key : 8
+[2025-10-26 06:03:28] Exception : Fail to Update Data! Unauthorize Account Table Row Key : 8

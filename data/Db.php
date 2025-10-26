@@ -18,7 +18,7 @@ class Database { //Database Connection
          
         } catch (Exception $error) {
             error_log(date('[Y-m-d H:i:s] ') . $error->getMessage() . PHP_EOL, 3, __DIR__ . '/../log/database.log');
-            die("Database Connection Error!");
+            die("Database Connection Error!" ."<script>console.log('Database Connection Error! Check Log For details')</script>");
         }
 
     }
