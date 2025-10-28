@@ -1,3 +1,17 @@
+<?php
+session_start();
+
+if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isValid'] == 1 ) {
+    //aready login without looging out havw acc if this one is met
+    header("Location: ../view/landing.php");
+    exit;
+}
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,10 +30,10 @@
         <div class="form-section">
             <div class="card">
                 <h2>Login</h2>
-                <form id="loginForm" action="../controller/auth.php" method="post">
+                <form id="loginForm" action="../controller/auth.php?login=1" method="post">
                     <div class="input-group">
                         <i class="fa-solid fa-user"></i>
-                        <input type="text" id="email" name="email" placeholder="Email">
+                        <input type="text" id="username" name="username" placeholder="Username">
                     </div>
                     <!--Password-->
                     <div class="input-group">

@@ -14,7 +14,7 @@ require __DIR__ ."../../utillities/dbUpdate.php";
 class UserAcc {//this class communicates to database Account Table
     private $conn;
     private $accId;
-    private $name;
+    private $name;  // still not sure if i use this variables
     private $username;
     private $passHash;//always salt the password the time it enter the server
     private $auth; //not sure for this variable but mostly it is for role i guess
@@ -37,7 +37,7 @@ class UserAcc {//this class communicates to database Account Table
             if ($result && $result->num_rows > 0) {
                 return $result->fetch_assoc();
             } else {
-                throw new Exception("No results found for ID: $id");
+                throw new Exception("No Account results found for ID: $id");
             }
 
         } catch (Exception $r) {
@@ -47,8 +47,27 @@ class UserAcc {//this class communicates to database Account Table
     }
 
     //create account 
-    function register($name, $username, $passHash, $auth) {
+    function register($username, $hashedPass, $mNumber) {
+        try {
+            $num = sanitizeInput($mNumber);
+            $defaultRole = 4;
+            $defaultStatus = 4;
+            // $hashedPass = securePassword($passInput);
 
+            $reg = $this->conn->prepare("Call CreateNewAccount(?, ?, ?, ?, ?)");
+            $reg->bind_param("ssiii", $username, $hashedPass, $num, $defaultRole, $defaultStatus);
+
+            if (!$reg->execute()){
+                throw new Exception($reg->error);
+            };
+
+            return true;
+
+        } catch (Exception $errs) {
+            echo "<script>console.log('Account Update Error! Check Log For details')</script>";
+            error_log(date('[Y-m-d H:i:s] ') . $errs->getMessage() . PHP_EOL, 3, __DIR__ . '../../../log/account.log');
+            exit();
+        }
     }
 
     //update account
@@ -60,12 +79,16 @@ class UserAcc {//this class communicates to database Account Table
         $value = sanitizeInput($value);
 
         try {
+            if (!in_array($key, $keyList, true)) {
+                // echo "Updated : " .$key ." = " .$value;
+                throw new Exception("Exception : Fail to Update Data! Unauthorize Account Table Row Key : " .$key);
+            }
 
-            if (array_key_exists($key, $keyList)) {
+            /*if (array_key_exists($key, $keyList)) {
                 $key = $keyList[$key];
             } else {
                 throw new Exception("Exception : Fail to Update Data! Unauthorize Account Table Row Key : " .$key);
-            }
+            } */
 
             $update = $this->conn->prepare("CALL `UpdateAccById`(?, ?, ?)");
             $update->bind_param("iss", $id, $key, $value);
@@ -73,7 +96,7 @@ class UserAcc {//this class communicates to database Account Table
             if (!$update->execute()){
                 throw new Exception($update->error);
             };
-            echo "Updated : " .$key ." = " .$value;
+            // echo "Updated : " .$key ." = " .$value;
             return $update->affected_rows;//returms if has effect on database rows
 
         } catch (Exception $p) {
@@ -88,10 +111,30 @@ class UserAcc {//this class communicates to database Account Table
 
     }
 
+    function getAccByUsername($userN) {
+        try {
+            $query = $this->conn->prepare("Call SelectUserAccByUname(?)");
+            $id = sanitizeInput($userN);
+            $query->bind_param("s", $id);
+            $query->execute();
+            $result = $query->get_result();
+
+            if ($result && $result->num_rows > 0) {
+                return $result->fetch_assoc();
+            } else {
+                throw new Exception("No Account results found for ID: $id");
+            }
+
+        } catch (Exception $r) {
+            // echo "Message: " .$r->getMessage();
+            return 0;
+        }
+    }
+
 }
 
-$temp = new UserAcc();
-$data = $temp->getAccById(1);
+// $temp = new UserAcc();
+// $data = $temp->getAccById(1);
 // echo $data;
 // var_dump($data);
 
@@ -99,7 +142,10 @@ $data = $temp->getAccById(1);
 //     echo $user;
 // }
 
-// echo strlen(securePassword('ehh'));
-// $temp->update(1, 8, 0);
+// $mpp = securePassword('ehh');
+// $temp->update(1, "roleId", 2);
+/* if ($temp->register("abcde", $mpp, "091234567")){
+    echo "Register Success";
+} */
 
 ?>

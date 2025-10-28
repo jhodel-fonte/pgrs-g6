@@ -59,3 +59,27 @@ Error[2025-10-26 06:00:46] Cannot add or update a child row: a foreign key const
 [2025-10-26 06:02:53] Exeption : Fail to Update Data! Unauthorize Account Table Row Key : 8[2025-10-26 06:03:20] Exception : Fail to Update Data! Unauthorize Account Table Row Key : 8
 [2025-10-26 06:03:27] Exception : Fail to Update Data! Unauthorize Account Table Row Key : 8
 [2025-10-26 06:03:28] Exception : Fail to Update Data! Unauthorize Account Table Row Key : 8
+[2025-10-26 08:12:21] Exception : Fail to Update Data! Unauthorize Account Table Row Key : 8
+[2025-10-26 08:12:45] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE accId = 0' at line 1
+[2025-10-26 08:14:20] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE accId = 0' at line 1
+[2025-10-26 08:14:23] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE accId = 0' at line 1
+[2025-10-26 08:14:55] Exception : Fail to Update Data! Unauthorize Account Table Row Key : roleId 
+[2025-10-26 08:15:09] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE accId = 0' at line 1
+[2025-10-26 08:15:41] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE accId = 0' at line 1
+[2025-10-26 08:16:31] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE accId = 0' at line 1
+[2025-10-26 08:18:00] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE accId = 0' at line 1
+[2025-10-26 08:18:14] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE accId = 0' at line 1
+[2025-10-26 08:19:43] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE accId = 0' at line 1
+[2025-10-26 08:19:44] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE accId = 0' at line 1
+[2025-10-26 08:19:44] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE accId = 0' at line 1
+[2025-10-26 08:26:45] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '8 =  WHERE accId = 0' at line 1
+[2025-10-26 08:27:06] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '8 =  WHERE accId = 0' at line 1
+[2025-10-26 08:27:20] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE accId = 0' at line 1
+[2025-10-26 08:27:21] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE accId = 0' at line 1
+[2025-10-26 08:27:22] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE accId = 0' at line 1
+[2025-10-26 08:27:34] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE accId = 0' at line 1
+[2025-10-26 08:30:26] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE accId = 0' at line 1
+[2025-10-26 08:33:26] Exception : Fail to Update Data! Unauthorize Account Table Row Key : roleId
+[2025-10-26 08:33:37] Exception : Fail to Update Data! Unauthorize Account Table Row Key : roleIds
+[2025-10-26 08:34:25] Exception : Fail to Update Data! Unauthorize Account Table Row Key : roleIds
+[2025-10-26 08:35:31] Exception : Fail to Update Data! Unauthorize Account Table Row Key : roleId
