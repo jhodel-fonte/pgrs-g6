@@ -47,15 +47,15 @@ class UserAcc {//this class communicates to database Account Table
     }
 
     //create account 
-    function register($username, $hashedPass, $mNumber) {
+    function register($username, $hashedPass, $mNumber, $pgCode, $email) {
         try {
             $num = sanitizeInput($mNumber);
             $defaultRole = 4;
             $defaultStatus = 4;
             // $hashedPass = securePassword($passInput);
 
-            $reg = $this->conn->prepare("Call CreateNewAccount(?, ?, ?, ?, ?)");
-            $reg->bind_param("ssiii", $username, $hashedPass, $num, $defaultRole, $defaultStatus);
+            $reg = $this->conn->prepare("Call CreateNewAccount(?, ?, ?, ?, ?, ?, ?)");
+            $reg->bind_param("ssiiiis", $username, $hashedPass, $num, $defaultRole, $defaultStatus, $pgCode, $email);
 
             if (!$reg->execute()){
                 throw new Exception($reg->error);

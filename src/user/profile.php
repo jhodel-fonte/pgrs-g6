@@ -52,6 +52,29 @@ class profileMng {  //Profile functions for user
         }
     }
 
+    function addProfile($fName, $lName, $Gnder, $DOB) {
+        try {
+            $fName = sanitizeInput($fName);
+            $lName = sanitizeInput($lName);
+            $Gnder = sanitizeInput($Gnder);
+            $DOB = sanitizeInput($DOB);
+
+            $reg = $this->conn->prepare("Call CreateNewAccount(?, ?, ?, ?)");
+            $reg->bind_param("ssss", $fName, $lName, $Gnder, $DOB);
+
+            if (!$reg->execute()){
+                throw new Exception($reg->error);
+            };
+
+            return true;
+
+        } catch (Exception $errs) {
+            echo "<script>console.log('Account Update Error! Check Log For details')</script>";
+            error_log(date('[Y-m-d H:i:s] ') . $errs->getMessage() . PHP_EOL, 3, __DIR__ . '../../../log/account.log');
+            exit();
+        }
+    }
+
     
 
     function updateUser(){//still not sure how to update by certain object

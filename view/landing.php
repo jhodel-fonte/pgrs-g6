@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (isset($_SESSION['user'])) {
+if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isValid'] == 1 ) {
   //hmmm i think this one set variables any ways it is on the session so it easy to recall
   $user = $_SESSION['user'];
   // var_dump($user);
@@ -28,8 +28,9 @@ require_once __DIR__ .'../../controller/logout.php';
 <body class="landing">
   <div class="landing-container">
     <img src="assets/logo.png" alt="UNITY Logo">
-    <h1>Welcome, <span id="username"><?= (isset($user['username'])) ? $user['username'] : "NO Name"  ?></span> 🎉</h1>
+    <h1>Welcome, <span id="username"><?= (isset($user['username'])) ? $user['username'] : "NO Name" ?></span> 🎉</h1>
     <p>You are now logged in to Unity System. <br> (sample landing page)</p>
+    <p>PG-CODE : <span><?= (isset($user['pgCode'])) ? $user['pgCode'] : "NO Name"  ?></span></p>
 
   <form method="GET">
     <input type="hidden" name="logout" value="1">
