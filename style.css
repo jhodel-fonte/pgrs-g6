@@ -1,0 +1,421 @@
+/* =====================
+   GLOBAL STYLES
+===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background-color: #f5f6fa;
+}
+
+  /* ===== General Layout ===== */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+  }
+
+  /* ===== Sidebar (Desktop) ===== */
+  .sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #007bff;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+  }
+
+  .sidebar h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 20px;
+  }
+
+  .sidebar ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .sidebar ul li {
+    margin: 10px 0;
+  }
+
+  .sidebar ul li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    transition: background 0.3s;
+  }
+
+  .sidebar ul li a:hover,
+  .sidebar ul li.active a {
+    background-color: #007bff;
+    border-radius: 5px;
+  }
+
+  .logout-btn a {
+    color: #ffb3b3;
+  }
+
+  /* ===== Main Content Adjustments ===== */
+  body {
+    padding-top: 70px; /* Para hindi matakpan ng mobile navbar */
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+
+  /* Desktop view adjustments */
+  @media (min-width: 992px) {
+    body {
+      padding-top: 0; /* Wala nang fixed navbar sa desktop */
+    }
+
+    .main-content {
+      margin-left: 250px; /* Space para sa sidebar */
+      padding-top: 20px;
+    }
+  }
+
+  /* Navbar active link style (mobile) */
+  .nav-link.active {
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+  }
+
+
+
+/* MAIN CONTENT */
+.main-content {
+  margin-left: 250px;
+  padding: 30px;
+  background-color: #f7f8fb;
+  min-height: 100vh;
+  color: #222;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+    padding: 15px;
+  }
+  .main-content {
+    margin-left: 210px;
+  }
+}
+
+
+/* =====================
+   MAIN CONTENT
+===================== */
+.main-content {
+  margin-left: 230px; /* offset for fixed sidebar */
+  padding: 40px 50px;
+  min-height: 100vh;
+  background-color: #f5f6fa;
+}
+
+header h1 {
+  font-size: 26px;
+  margin-bottom: 5px;
+  color: #222;
+}
+
+header p {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+/* =====================
+   DASHBOARD CARDS
+===================== */
+.cards {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: white;
+  flex: 1;
+  min-width: 250px;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+  text-align: center;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.card .count {
+  font-size: 34px;
+  font-weight: bold;
+  color: #111;
+}
+
+/* Card color accents */
+.total {
+  border-left: 6px solid #3498db;
+}
+
+.pending {
+  border-left: 6px solid #f1c40f;
+}
+
+.resolved {
+  border-left: 6px solid #27ae60;
+}
+
+/* =====================
+   FORM SECTION
+===================== */
+.form-section {
+  background: #fff;
+  padding: 35px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-width: 700px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #007bff;
+}
+
+/* Submit Button */
+.btn-submit {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px 18px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-submit:hover {
+  background-color: #003687;
+}
+
+/* =====================
+   RESPONSIVE LAYOUT
+===================== */
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: auto;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .cards {
+    flex-direction: column;
+  }
+
+  .form-section {
+    padding: 20px;
+  }
+}
+/* =====================
+   MY REPORTS (CARD GRID)
+===================== */
+.report-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+}
+
+.report-card {
+  background-color: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.report-image {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+
+.report-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.status-label {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+}
+
+.status-label.pending {
+  background-color: #f4b400;
+}
+
+.status-label.progress {
+  background-color: #007bff;
+}
+
+.status-label.resolved {
+  background-color: #28a745;
+}
+
+.report-info {
+  padding: 18px 20px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.report-info h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
+}
+
+.report-info .category span {
+  color: #0046ad;
+  font-weight: 600;
+}
+
+.report-info .desc {
+  font-size: 14px;
+  color: #444;
+}
+
+.report-info .location,
+.report-info .date {
+  font-size: 13px;
+  color: #666;
+}
+
+/* =====================
+   PROGRESS TRACKER (Shopee Parcel-style)
+===================== */
+.progress-tracker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.progress-tracker .step {
+  text-align: center;
+  flex: 1;
+  position: relative;
+}
+
+.progress-tracker .circle {
+  width: 36px;
+  height: 36px;
+  background-color: #dcdcdc;
+  border-radius: 50%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-tracker .step.active .circle {
+  background-color: #0046ad;
+  color: #fff;
+}
+
+.progress-tracker p {
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.progress-tracker .line {
+  height: 4px;
+  background-color: #dcdcdc;
+  flex: 1;
+  margin: 0 6px;
+}
+
+.progress-tracker .line.active {
+  background-color: #0046ad;
+}
+
+/* =====================
+   VIEW BUTTON
+===================== */
+.btn-view {
+  align-self: flex-start;
+  background-color: #0046ad;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-view:hover {
+  background-color: #003687;
+}
