@@ -4,7 +4,7 @@ class smsHandler {
     private $smsUrl = 'https://sms.iprogtech.com/api/v1/sms_messages';
     private $otpUrl = 'https://sms.iprogtech.com/api/v1/otp/send_otp';
     private $apiToken = '92b811ed5d06c8640a7122f69ac1eac583b41b55';
-
+    private $number;
     function sendSms($dataArray) {
 
         $data = [
@@ -26,6 +26,7 @@ class smsHandler {
     }
 
     function sendOtp($number) {
+        $this->number = $number;
         $data = [
         'api_token' => $this->apiToken,
         'phone_number' => $number
@@ -71,9 +72,9 @@ class smsHandler {
 $otps = new smsHandler();
 // echo $otps->sendOtp('09949751617');
 
-echo $otps->verfyOtp('09949751617', '835624');
-echo "<br>";
-echo $otps->verfyOtp('09949751617', '835623');
+// echo $otps->verfyOtp('09949751617', '835624');
+// echo "<br>";
+// echo $otps->verfyOtp('09949751617', '835623');
 
  
 ?>
