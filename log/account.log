@@ -83,3 +83,27 @@ Error[2025-10-26 06:00:46] Cannot add or update a child row: a foreign key const
 [2025-10-26 08:33:37] Exception : Fail to Update Data! Unauthorize Account Table Row Key : roleIds
 [2025-10-26 08:34:25] Exception : Fail to Update Data! Unauthorize Account Table Row Key : roleIds
 [2025-10-26 08:35:31] Exception : Fail to Update Data! Unauthorize Account Table Row Key : roleId
+[2025-10-29 18:14:24] Incorrect number of arguments for PROCEDURE unity_pgsys_db.CreateNewAccount; expected 5, got 7
+[2025-10-29 18:14:24] Incorrect number of arguments for PROCEDURE unity_pgsys_db.CreateNewAccount; expected 5, got 7
+[2025-10-29 18:14:33] Incorrect number of arguments for PROCEDURE unity_pgsys_db.CreateNewAccount; expected 5, got 7
+[2025-10-29 18:14:33] Incorrect number of arguments for PROCEDURE unity_pgsys_db.CreateNewAccount; expected 5, got 7
+[2025-10-29 18:17:10] Duplicate entry '102' for key 'profileId'
+[2025-10-29 18:17:10] Duplicate entry '102' for key 'profileId'
+[2025-10-29 18:17:38] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_3` FOREIGN KEY (`pgCode`) REFERENCES `profile` (`userId`) ON DELETE CASCADE)
+[2025-10-29 18:17:38] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_3` FOREIGN KEY (`pgCode`) REFERENCES `profile` (`userId`) ON DELETE CASCADE)
+[2025-10-29 18:19:35] Incorrect number of arguments for PROCEDURE unity_pgsys_db.CreateNewAccount; expected 7, got 4
+[2025-10-29 18:20:06] Incorrect number of arguments for PROCEDURE unity_pgsys_db.CreateNewAccount; expected 7, got 4
+[2025-10-29 18:20:08] Incorrect number of arguments for PROCEDURE unity_pgsys_db.CreateNewAccount; expected 7, got 4
+[2025-10-29 18:20:28] Incorrect number of arguments for PROCEDURE unity_pgsys_db.CreateNewAccount; expected 7, got 4
+[2025-10-29 18:20:28] Incorrect number of arguments for PROCEDURE unity_pgsys_db.CreateNewAccount; expected 7, got 4
+[2025-10-29 18:20:49] Incorrect number of arguments for PROCEDURE unity_pgsys_db.CreateNewAccount; expected 7, got 4
+[2025-10-29 18:20:49] Incorrect number of arguments for PROCEDURE unity_pgsys_db.CreateNewAccount; expected 7, got 4
+[2025-10-29 18:21:04] Incorrect number of arguments for PROCEDURE unity_pgsys_db.CreateNewAccount; expected 7, got 4
+[2025-10-29 18:21:05] Incorrect number of arguments for PROCEDURE unity_pgsys_db.CreateNewAccount; expected 7, got 4
+[2025-10-29 18:21:05] Incorrect number of arguments for PROCEDURE unity_pgsys_db.CreateNewAccount; expected 7, got 4
+[2025-10-29 18:21:05] Incorrect number of arguments for PROCEDURE unity_pgsys_db.CreateNewAccount; expected 7, got 4
+[2025-10-29 20:04:13] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_3` FOREIGN KEY (`pgCode`) REFERENCES `profile` (`userId`) ON DELETE CASCADE)
+[2025-10-29 20:05:40] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_3` FOREIGN KEY (`pgCode`) REFERENCES `profile` (`userId`) ON DELETE CASCADE)
+[2025-10-29 20:07:36] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_3` FOREIGN KEY (`pgCode`) REFERENCES `profile` (`userId`) ON DELETE CASCADE ON UPDATE NO ACTION)
+[2025-10-29 20:09:06] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_3` FOREIGN KEY (`pgCode`) REFERENCES `profile` (`userId`) ON DELETE CASCADE ON UPDATE NO ACTION)
+[2025-10-29 20:12:11] Cannot add or update a child row: a foreign key constraint fails (`unity_pgsys_db`.`account`, CONSTRAINT `account_ibfk_3` FOREIGN KEY (`pgCode`) REFERENCES `profile` (`userId`) ON DELETE CASCADE ON UPDATE NO ACTION)

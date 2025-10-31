@@ -2,12 +2,10 @@
 session_start();
 
 if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isValid'] == 1 ) {
-    //aready login without looging out havw acc if this one is met
+    //aready login so it will redirect to main
     header("Location: ../view/landing.php");
     exit;
 }
-
-
 
 ?>
 
@@ -26,11 +24,24 @@ if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isVali
         <div class="header">
             <img src="assets/logo.png" alt="Unity logo">
         </div>
+
+    <?php
+
+    if (isset($_GET['error'])) {
+        echo "
+            <div>
+                <p>Error : " .htmlspecialchars($_GET['error']) ."</p>
+            </div>
+        ";
+    }
+
+    ?>
+
         <!--Email-->
         <div class="form-section">
             <div class="card">
                 <h2>Login</h2>
-                <form id="loginForm" action="../controller/auth.php?login=1" method="post">
+                <form id="loginForm" action="../request/auth.php?login=1" method="post">
                     <div class="input-group">
                         <i class="fa-solid fa-user"></i>
                         <input type="text" id="username" name="username" placeholder="Username">
@@ -59,7 +70,11 @@ if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isVali
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
     <!-- <script src="js/main.js"></script> -->
 
-
+    <script>
+        if (performance.navigation.type === 1) {
+            window.location.href = "login.php";
+        }     
+    </script>
     
 </body>
 </html>
