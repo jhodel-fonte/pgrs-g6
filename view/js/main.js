@@ -74,3 +74,33 @@ $(document).ready(function() {
     }
     
 })
+// verification
+// Move cursor automatically
+    const inputs = document.querySelectorAll('.otp-input input');
+    inputs.forEach((input, index) => {
+      input.addEventListener('input', () => {
+        if (input.value.length === 1 && index < inputs.length - 1) {
+          inputs[index + 1].focus();
+        }
+      });
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !input.value && index > 0) {
+          inputs[index - 1].focus();
+        }
+      });
+    });
+
+    // Submit event
+    document.getElementById('verifyForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      let code = '';
+      inputs.forEach(i => code += i.value);
+      alert('Entered verification code: ' + code);
+      // You can replace this alert with an AJAX request to your backend. kaw na bahala jhods
+    });
+
+    // Resend code
+    document.getElementById('resendBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('A new verification code has been sent!');
+    });

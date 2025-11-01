@@ -17,3 +17,4 @@
 [2025-10-25 18:25:52] Access denied for user 'pgsys_admin'@'localhost' (using password: YES)
 [2025-10-25 18:25:53] Access denied for user 'pgsys_admin'@'localhost' (using password: YES)
 [2025-10-25 18:26:35] Access denied for user 'pgsys_admin'@'localhost' (using password: YES)
+[2025-10-29 14:56:19] Connection failed: No connection could be made because the target machine actively refused it
