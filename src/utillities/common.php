@@ -1,6 +1,6 @@
 <?php
 //this file to help some functions like input sanitation hashing
-//this is a utility function
+//tito yung helpers
 
 function sanitizeInput($input) {//remove whitespace
     $var = gettype($input);
@@ -28,7 +28,5 @@ function verifyPassword($inputPass, $hashedPass) { //return bool result
     $temp = sanitizeInput($inputPass);
     return password_verify($temp, $hashedPass);
 }
-
-// echo sanitizeInput('sas');
 
 ?>

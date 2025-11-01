@@ -11,11 +11,13 @@ function verifyOtpForNumber($number, $otp) {
     $handler = new smsHandler();
     $res = $handler->verifyOtp($number, $otp);
     
-    if ($res['staus'] == 'success') {
+    if ($res['status'] == 'success') {
             return true;
         }
     return false;
 }
 ?>
+
+
 
 
