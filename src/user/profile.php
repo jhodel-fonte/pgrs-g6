@@ -1,6 +1,7 @@
 <?php
 //for modify sa data then pag kuha na din, bale madalas gamitin ito for profile page
 require_once __DIR__ ."../../../data/Db.php";
+require_once __DIR__ ."../../utillities/common.php";
 
 class profileMng {  //Profile functions for user
     private $User;
@@ -59,19 +60,28 @@ class profileMng {  //Profile functions for user
             $Gnder = sanitizeInput($Gnder);
             $DOB = sanitizeInput($DOB);
 
-            $reg = $this->conn->prepare("Call CreateNewAccount(?, ?, ?, ?)");
+            $reg = $this->conn->prepare("Call CreateNewProfile(?, ?, ?, ?)");
             $reg->bind_param("ssss", $fName, $lName, $Gnder, $DOB);
 
             if (!$reg->execute()){
                 throw new Exception($reg->error);
             };
 
-            return true;
+            $result = $reg->get_result();
+            if ($result && $row = $result->fetch_assoc()) {
+                $newId = $row['pgId'];
+                if ($newId == null){
+                    throw new Exception('No changes found');
+                }
+                return ["pgID" => $newId];
+            }
+
+            // return true;
 
         } catch (Exception $errs) {
             echo "<script>console.log('Account Update Error! Check Log For details')</script>";
             error_log(date('[Y-m-d H:i:s] ') . $errs->getMessage() . PHP_EOL, 3, __DIR__ . '../../../log/account.log');
-            exit();
+            return ["error" => "Error"];
         }
     }
 
@@ -84,6 +94,6 @@ class profileMng {  //Profile functions for user
 
 
 }
-
-
+// $userProfile = new profileMng();
+// $userProfile->addProfile('mm', 'sr', 'male', '06/10/2025');
 ?>

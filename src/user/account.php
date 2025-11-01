@@ -7,9 +7,9 @@
 //this is for account this class mostly use when verifying user
 //Account Table
 
-require __DIR__ ."../../../data/Db.php";
-require __DIR__ ."../../utillities/common.php";
-require __DIR__ ."../../utillities/dbUpdate.php";
+require_once __DIR__ ."../../../data/Db.php";
+require_once __DIR__ ."../../utillities/common.php";
+require_once __DIR__ ."../../utillities/dbUpdate.php";
 
 class UserAcc {//this class communicates to database Account Table
     private $conn;
@@ -56,12 +56,12 @@ class UserAcc {//this class communicates to database Account Table
 
             $reg = $this->conn->prepare("Call CreateNewAccount(?, ?, ?, ?, ?, ?, ?)");
             $reg->bind_param("ssiiiis", $username, $hashedPass, $num, $defaultRole, $defaultStatus, $pgCode, $email);
-
+            
             if (!$reg->execute()){
                 throw new Exception($reg->error);
             };
-
-            return true;
+            echo $reg->insert_id;
+            // return true;
 
         } catch (Exception $errs) {
             echo "<script>console.log('Account Update Error! Check Log For details')</script>";
@@ -133,7 +133,7 @@ class UserAcc {//this class communicates to database Account Table
 
 }
 
-// $temp = new UserAcc();
+$temp = new UserAcc();
 // $data = $temp->getAccById(1);
 // echo $data;
 // var_dump($data);
@@ -144,8 +144,8 @@ class UserAcc {//this class communicates to database Account Table
 
 // $mpp = securePassword('ehh');
 // $temp->update(1, "roleId", 2);
-/* if ($temp->register("abcde", $mpp, "091234567")){
-    echo "Register Success";
-} */
+// if ($temp->register("abcde", $mpp, "091234567", 100, "fontejoel@gmail.com")){
+//     echo "Register Success";
+// }
 
 ?>

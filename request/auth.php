@@ -5,7 +5,7 @@
 
 // $user = new User();
 
-require __DIR__ .'../../src/auth/loginAuth.php';
+require_once __DIR__ .'../../src/auth/loginAuth.php';
 
 
 if (isset($_GET['login']) && $_GET['login'] == 1) {
@@ -13,7 +13,8 @@ if (isset($_GET['login']) && $_GET['login'] == 1) {
         $user = login($_POST['username'], $_POST['password']);
 
         if (isset($user['response'])) {
-            header("Location: login.php?error=" . urlencode($user['response']));
+
+            header("Location: ../view/login.php?error=" . urlencode($user['response']));
             exit;
         } else {
    
