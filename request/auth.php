@@ -5,7 +5,7 @@
 
 // $user = new User();
 
-require_once __DIR__ .'../../src/auth/loginAuth.php';
+/* require_once __DIR__ .'../../src/auth/loginAuth.php';
 
 
 if (isset($_GET['login']) && $_GET['login'] == 1) {
@@ -17,7 +17,7 @@ if (isset($_GET['login']) && $_GET['login'] == 1) {
             
             // exit;
         } else {
-   
+            
             session_start();
             $_SESSION['user'] = $user;
             $_SESSION['isValid'] = 1; 
@@ -26,10 +26,10 @@ if (isset($_GET['login']) && $_GET['login'] == 1) {
             exit;
         }
     }
-}
+} */
 
 
-/* require_once __DIR__ . '/../../src/auth/loginAuth.php';
+require_once __DIR__ . '../../src/auth/loginAuth.php';
 
 if (isset($_GET['login']) && $_GET['login'] == 1) {
     if (isset($_POST['username']) && isset($_POST['password'])) {
@@ -39,7 +39,7 @@ if (isset($_GET['login']) && $_GET['login'] == 1) {
             session_start();
             $_SESSION['user'] = $user;
             $_SESSION['isValid'] = 1;
-
+            echo "";
             header("Location: ../public/otp.php");
             exit;
         } else {
@@ -48,7 +48,7 @@ if (isset($_GET['login']) && $_GET['login'] == 1) {
         }
     }
 }
- */
+
 
 
 
