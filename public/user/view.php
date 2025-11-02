@@ -1,5 +1,6 @@
 <?php
-require_once '../config/config.php'; // PDO connection
+// require_once '../config/config.php'; // PDO connection
+require_once __DIR__ .'../../../src/data/config.php';
 
 // Fetch reports ordered by latest first
 try {

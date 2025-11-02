@@ -1,6 +1,6 @@
 <?php
 session_start();
-// require_once '../config/config.php';
+require_once __DIR__ .'../../../src/data/config.php';
 
 // Redirect if not logged in
 if (!isset($_SESSION['user'])) {
@@ -149,7 +149,7 @@ try {
     <main class="main-content">
         <header>
             <h1>Dashboard</h1>
-            <p>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>!</p>
+            <p>Welcome, <?php echo htmlspecialchars($_SESSION['user']['userprofile']['username']); ?>!</p>
         </header>
 
         <section class="cards">

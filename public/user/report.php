@@ -1,13 +1,16 @@
 <?php 
 session_start();
-// require_once __DIR__ .'../../../src/user/';
+require_once __DIR__ .'../../../src/data/config.php';
 
 // Redirect if not logged in
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user'])) {
     header("Location: ../login.php");
     exit;
 }
 
+var_dump($_SESSION['user']);
+
+$userData = $_SESSION['user'];
 $message = '';
 $error = '';
 
@@ -193,7 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <form method="POST" enctype="multipart/form-data">
     <div class="form-group">
         <label for="name">Name:</label>
-        <input type="text" name="name" id="name" value="<?= htmlspecialchars($_SESSION['name']); ?>" readonly>
+        <input type="text" name="name" id="name" value="<?= (isset($userData['userprofile']['username'])) ? $userData['userprofile']['username'] : 'Error Name'  ?>" readonly>
     </div>
 
     <div class="form-group">

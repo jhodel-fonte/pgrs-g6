@@ -108,3 +108,13 @@
 [2025-11-02 11:00:38] {"status":"error","message":"Invalid or Expired OTP"}
 [2025-11-02 11:00:59] {"status":"success","message":"OTP sent successfully","data":{"otp_code":"856699","otp_code_expires_at":"2025-11-02T18:05:59.712+08:00","otp_code_confirmed":false,"phone_number":"2147483647","message":"Your OTP code is 856699. It is valid for 5 minutes. Do not share this code with anyone."}}
 [2025-11-02 11:01:11] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 12:55:15] {"status":"success","message":"OTP sent successfully","data":{"otp_code":"416542","otp_code_expires_at":"2025-11-02T20:00:15.445+08:00","otp_code_confirmed":false,"phone_number":"2147483647","message":"Your OTP code is 416542. It is valid for 5 minutes. Do not share this code with anyone."}}
+[2025-11-02 12:56:06] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 13:09:16] {"status":"success","message":"OTP sent successfully","data":{"otp_code":"837272","otp_code_expires_at":"2025-11-02T20:14:16.683+08:00","otp_code_confirmed":false,"phone_number":"2147483647","message":"Your OTP code is 837272. It is valid for 5 minutes. Do not share this code with anyone."}}
+[2025-11-02 13:09:39] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 13:10:49] {"status":"success","message":"OTP sent successfully","data":{"otp_code":"356524","otp_code_expires_at":"2025-11-02T20:15:49.035+08:00","otp_code_confirmed":false,"phone_number":"2147483647","message":"Your OTP code is 356524. It is valid for 5 minutes. Do not share this code with anyone."}}
+[2025-11-02 13:11:03] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 13:11:56] {"status":"success","message":"OTP sent successfully","data":{"otp_code":"824276","otp_code_expires_at":"2025-11-02T20:16:56.790+08:00","otp_code_confirmed":false,"phone_number":"2147483647","message":"Your OTP code is 824276. It is valid for 5 minutes. Do not share this code with anyone."}}
+[2025-11-02 13:14:00] {"status":"success","message":"OTP sent successfully","data":{"otp_code":"170848","otp_code_expires_at":"2025-11-02T20:19:00.509+08:00","otp_code_confirmed":false,"phone_number":"2147483647","message":"Your OTP code is 170848. It is valid for 5 minutes. Do not share this code with anyone."}}
+[2025-11-02 13:14:51] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 13:14:53] {"status":"success","message":"OTP verified successfully"}
