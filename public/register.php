@@ -88,7 +88,7 @@
           <div id="message"></div>
 
           <div class="signup">
-            Already have an account? <a href="index.html">Login here</a>
+            Already have an account? <a href="login.php">Login here</a>
           </div>
         </form>
       </div>

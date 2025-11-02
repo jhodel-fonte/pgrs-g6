@@ -6,7 +6,7 @@ if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isVali
   $user = $_SESSION['user']['userprofile'];
   // var_dump($user);
 } else {
-  header("Location: error.html");
+  header("Location: login.php");
   exit;
 }
 

@@ -21,7 +21,7 @@ if (isset($_GET['login']) && $_GET['login'] == 1) {
             $_SESSION['number'] = $user['userprofile']['mobileNum'];
             
             //send otp
-           if (sendOtpToNumber($_SESSION['userNum'])) {
+           if (sendOtpToNumber($_SESSION['number'])) {
                     $_SESSION['otp_sent_at'] = time();
                     header("Location: ../public/otp.php");
                 }

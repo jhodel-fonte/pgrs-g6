@@ -1,6 +1,22 @@
 <?php
 session_start();
 
+foreach ($_SESSION as $key => $val) {
+    // make the value readable
+    if (is_array($val) || is_object($val)) {
+        $readable = print_r($val, true); // readable multi-line representation
+    } else {
+        $readable = (string) $val;
+    }
+
+    // escape for HTML and convert newlines to <br>
+    $safe = nl2br(htmlspecialchars($readable, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'));
+
+    // output with a label and a separator for clarity
+    echo "<strong>" . htmlspecialchars($key, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . ":</strong> " . $safe . "<br>\n";
+}
+
+
 // if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isValid'] == 1 ) {
 //     //aready login so it will redirect to main
 //     header("Location: ../.php");
