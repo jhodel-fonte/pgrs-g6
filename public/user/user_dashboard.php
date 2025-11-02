@@ -1,10 +1,10 @@
 <?php
 session_start();
-require_once '../config/config.php';
+// require_once '../config/config.php';
 
 // Redirect if not logged in
 if (!isset($_SESSION['user'])) {
-    header("Location: ../login/login.php");
+    header("Location: ../login.php");
     exit;
 }
 

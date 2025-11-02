@@ -102,3 +102,9 @@
 [2025-11-02 10:32:06] {"status":"success","message":"OTP verified successfully"}
 [2025-11-02 10:33:10] {"status":"success","message":"OTP sent successfully","data":{"otp_code":"990408","otp_code_expires_at":"2025-11-02T17:38:10.396+08:00","otp_code_confirmed":false,"phone_number":"09949751617","message":"Your OTP code is 990408. It is valid for 5 minutes. Do not share this code with anyone."}}
 [2025-11-02 10:33:25] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 11:00:00] {"status":"success","message":"OTP sent successfully","data":{"otp_code":"249381","otp_code_expires_at":"2025-11-02T18:04:58.438+08:00","otp_code_confirmed":false,"phone_number":"2147483647","message":"Your OTP code is 249381. It is valid for 5 minutes. Do not share this code with anyone."}}
+[2025-11-02 11:00:15] {"status":"error","message":"Invalid or Expired OTP"}
+[2025-11-02 11:00:31] {"status":"error","message":"Invalid or Expired OTP"}
+[2025-11-02 11:00:38] {"status":"error","message":"Invalid or Expired OTP"}
+[2025-11-02 11:00:59] {"status":"success","message":"OTP sent successfully","data":{"otp_code":"856699","otp_code_expires_at":"2025-11-02T18:05:59.712+08:00","otp_code_confirmed":false,"phone_number":"2147483647","message":"Your OTP code is 856699. It is valid for 5 minutes. Do not share this code with anyone."}}
+[2025-11-02 11:01:11] {"status":"success","message":"OTP verified successfully"}
