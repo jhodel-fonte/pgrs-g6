@@ -3,7 +3,7 @@
 if (isset($_GET['logout'])){
     session_destroy();
     echo "<script>alert('Logging Out');</script>";
-    header("Location: ../view/login.php");
+    header("Location: ../public/login.php");
     exit;
 }
 

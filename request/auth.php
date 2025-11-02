@@ -5,31 +5,10 @@
 
 // $user = new User();
 
-/* require_once __DIR__ .'../../src/auth/loginAuth.php';
-
-
-if (isset($_GET['login']) && $_GET['login'] == 1) {
-    if (isset($_POST['username']) && isset($_POST['password'])) {
-        $user = login($_POST['username'], $_POST['password']);
-
-        if (isset($user['response']) && $user['response'] == 'success') {
-            var_dump($user);
-            
-            // exit;
-        } else {
-            
-            session_start();
-            $_SESSION['user'] = $user;
-            $_SESSION['isValid'] = 1; 
-            echo '11';
-            // header("Location: ../public/otp.php");
-            exit;
-        }
-    }
-} */
-
-
 require_once __DIR__ . '../../src/auth/loginAuth.php';
+require_once __DIR__ . '../../src/api/otp.php';
+
+// echo ;
 
 if (isset($_GET['login']) && $_GET['login'] == 1) {
     if (isset($_POST['username']) && isset($_POST['password'])) {
@@ -39,8 +18,15 @@ if (isset($_GET['login']) && $_GET['login'] == 1) {
             session_start();
             $_SESSION['user'] = $user;
             $_SESSION['isValid'] = 1;
-            echo "";
-            header("Location: ../public/otp.php");
+            $_SESSION['number'] = $user['userprofile']['mobileNum'];
+            
+            //send otp
+           if (sendOtpToNumber($_SESSION['userNum'])) {
+                    $_SESSION['otp_sent_at'] = time();
+                    header("Location: ../public/otp.php");
+                }
+                // current bug has no limit in sending so it possible to refresh then it resend new request
+            
             exit;
         } else {
             header("Location: ../public/login.php?error=" . urlencode($user['response'] ?? 'Login failed'));

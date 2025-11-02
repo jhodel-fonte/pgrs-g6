@@ -13,15 +13,16 @@
     <h3>Verify Your Account</h3>
     <p>Enter the 6-digit code sent to your phone number.</p>
 
-    <form id="verifyForm" >
+    <form id="verifyForm"> <!-- method="POST" action="../request/otpVerification.php"> -->
       <div class="otp-input">
-        <input type="text" maxlength="1" required>
-        <input type="text" maxlength="1" required>
-        <input type="text" maxlength="1" required>
-        <input type="text" maxlength="1" required>
-        <input type="text" maxlength="1" required>
-        <input type="text" maxlength="1" required>
+        <input type="text" maxlength="1" >
+        <input type="text" maxlength="1" >
+        <input type="text" maxlength="1" >
+        <input type="text" maxlength="1" >
+        <input type="text" maxlength="1" >
+        <input type="text" maxlength="1" >
       </div>
+      <!-- <input type="number" name="otp"> -->
       <button type="submit">Verify</button>
     </form>
 
@@ -97,10 +98,8 @@
 
         if (res.ok && data.success) {
           showMessage(data.message || 'OTP verified successfully.');
-          // optional: redirect after short delay
-          setTimeout(() => {
-            window.location.href = 'login.php';
-          }, 900);
+            window.location.href = 'landing.php';
+
         } else {
           showMessage(data.message || 'OTP verification failed.', true);
         }
@@ -114,8 +113,7 @@
     // placeholder for resend action
     resendBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      showMessage('Resend requested — functionality not implemented yet.');
-      // TODO: call server endpoint to resend OTP
+      showMessage('Resend requested — wala pa di ko pa maisip paano.');
     });
   })();
 

@@ -15,8 +15,9 @@ function login($uname, $password) {
             $isPassMatched = verifyPassword($password, $result['saltedPass']);
 
             if ($isUnameMatched && $isPassMatched) {
-                echo "Login Correct<br>";
-                echo "<br>";
+                // Log successful login
+                error_log("Login successful for user: " . $uname);
+
                 //return array details
                 $profile = new profileMng();
                 $userProfile = $profile->getProfileDetailsByID($result['accId']);
@@ -24,6 +25,8 @@ function login($uname, $password) {
                     'response' => 'success',
                     'userprofile' => $userProfile 
                 ];
+                
+                // var_dump($userProfile);
                 return $response;
 
             } else {

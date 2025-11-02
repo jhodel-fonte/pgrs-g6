@@ -59,7 +59,3 @@ class smsHandler {
     }
 
 }
-
-// Note: intentionally omitting PHP closing tag to avoid accidental output
-
-?>

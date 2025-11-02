@@ -1,6 +1,6 @@
 <?php
 
-// ob_start();
+ob_start();
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -10,7 +10,7 @@ require_once __DIR__ .'../../src/auth/registerAuth.php';
 require_once __DIR__ .'../../src/api/otp.php';
 
 foreach ($_POST as $key => $value) {  /////comment this when debbugging
-    echo "$key: $value<br>";
+    // echo "$key: $value<br>";
     $requiredFields[] = $key;
 }
 
@@ -57,16 +57,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (!sendOtpToNumber($userReg['number'])) {
                     throw new Exception('Server Error');
                 }
-                echo "<script>alert('Registered Success! OTP Verification Sent');  </script>";
+                echo "<script>alert('Registered Success! OTP Verification Sent');</script>";
                 header('Location: ../public/otp.php');
             }   else {
                 throw new Exception($set['message']);
             }
   
         } catch (Exception $e) {
-            echo "<script>alert('Error: " . htmlspecialchars($e->getMessage()) . "');</script>";
-            // echo "<script>alert('Error: " . htmlspecialchars($e->getMessage()) . "'); window.location.href = '../public/register.php';</script>";
-            // ob_clean(); //this to only send ung tamang response
+            // echo "<script>alert('Error: " . htmlspecialchars($e->getMessage()) . "');</script>";
+            echo "<script>alert('Error: " . htmlspecialchars($e->getMessage()) . "'); window.location.href = '../public/register.php';</script>";
+            ob_clean(); //this to only send ung tamang response
 
             // header('Content-Type: application/json');
             // echo json_encode(['message' => $e->getMessage(), 'status' => 'error']);

@@ -1,6 +1,6 @@
 <?php
 
-$addressList = ["add1", "add1", "add1","add1","add1","add1","add1","add1","add1"];
+// $addressList = ["add1", "add1", "add1","add1","add1","add1","add1","add1","add1"];
 
 
 ?>
@@ -14,13 +14,13 @@ $addressList = ["add1", "add1", "add1","add1","add1","add1","add1","add1","add1"
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Unity Register</title>
-  <!-- <link rel="stylesheet" href="assets/style.css"> -->
+  <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <!-- <img src="assets/logo.png" alt="Unity logo"> -->
+      <img src="assets/logo.png" alt="Unity logo">
     </div>
 
         <div class="form-section">
@@ -58,7 +58,7 @@ $addressList = ["add1", "add1", "add1","add1","add1","add1","add1","add1","add1"
             <input type="date" id="dob" name="dob" required><br><br>
 
             <label for="address">Address:</label>
-            <textarea id="address" name="address" rows="1" cols="30"></textarea>
+            <textarea id="address" name="address" rows="2" cols="30"></textarea>
 
             <!-- <label for="gender">A</label>
             <select name="address">

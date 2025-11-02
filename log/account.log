@@ -1,13 +1,49 @@
-[2025-11-01 03:58:08] Duplicate entry 'user22' for key 'username'
-[2025-11-01 03:58:12] Duplicate entry 'user22' for key 'username'
-[2025-11-01 03:59:27] Already Have Username
-[2025-11-01 04:14:36] Already Have Username
-[2025-11-01 04:15:01] Already Have Username
-[2025-11-01 04:15:45] Already Have Username
-[2025-11-01 04:15:55] Already Have Username
-[2025-11-01 04:15:56] Already Have Username
-[2025-11-01 04:23:09] Already Have Username
-[2025-11-01 04:23:36] Already Have Username
-[2025-11-01 04:23:41] Already Have Username
-[2025-11-01 04:23:44] Already Have Username
-[2025-11-01 04:23:58] Already Have Username
+[2025-11-02 01:38:17] {"status":"success","message":"OTP sent successfully","data":{"otp_code":"640903","otp_code_expires_at":"2025-11-02T08:43:17.411+08:00","otp_code_confirmed":false,"phone_number":"2147483647","message":"Your OTP code is 640903. It is valid for 5 minutes. Do not share this code with anyone."}}
+[2025-11-02 01:38:33] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 01:41:36] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 01:42:03] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 01:42:13] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 01:43:25] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 01:44:48] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 01:45:16] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 01:45:35] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 01:46:35] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 01:46:37] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 01:48:03] 
+[2025-11-02 01:48:04] 
+[2025-11-02 01:50:08] 
+[2025-11-02 01:51:22] 
+[2025-11-02 01:51:26] 
+[2025-11-02 01:52:05] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 01:52:24] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 01:52:43] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 01:52:50] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 01:52:59] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 01:53:05] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 01:54:08] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 02:03:01] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 02:06:13] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 02:06:31] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 02:08:06] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 02:08:14] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 02:08:34] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 02:08:47] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 02:09:08] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 02:10:38] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 02:11:06] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 02:11:56] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 02:12:17] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 02:12:45] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 02:13:07] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 02:14:52] {"status":"success","message":"OTP sent successfully","data":{"otp_code":"463909","otp_code_expires_at":"2025-11-02T09:19:52.209+08:00","otp_code_confirmed":false,"phone_number":null,"message":"Your OTP code is 463909. It is valid for 5 minutes. Do not share this code with anyone."}}
+[2025-11-02 02:14:56] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 02:19:02] {"status":"success","message":"OTP sent successfully","data":{"otp_code":"438135","otp_code_expires_at":"2025-11-02T09:24:02.280+08:00","otp_code_confirmed":false,"phone_number":"09949751617","message":"Your OTP code is 438135. It is valid for 5 minutes. Do not share this code with anyone."}}
+[2025-11-02 02:19:08] {"status":"error","message":"Invalid or Expired OTP"}
+[2025-11-02 02:19:31] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 02:26:08] {"status":"success","message":"OTP sent successfully","data":{"otp_code":"423231","otp_code_expires_at":"2025-11-02T09:31:07.947+08:00","otp_code_confirmed":false,"phone_number":null,"message":"Your OTP code is 423231. It is valid for 5 minutes. Do not share this code with anyone."}}
+[2025-11-02 02:26:14] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 02:30:13] {"status":"success","message":"OTP sent successfully","data":{"otp_code":"143231","otp_code_expires_at":"2025-11-02T09:35:12.970+08:00","otp_code_confirmed":false,"phone_number":null,"message":"Your OTP code is 143231. It is valid for 5 minutes. Do not share this code with anyone."}}
+[2025-11-02 02:30:29] {"status":"success","message":"OTP verified successfully"}
+[2025-11-02 02:30:47] {"status":"success","message":"OTP sent successfully","data":{"otp_code":"292600","otp_code_expires_at":"2025-11-02T09:35:47.713+08:00","otp_code_confirmed":false,"phone_number":null,"message":"Your OTP code is 292600. It is valid for 5 minutes. Do not share this code with anyone."}}
+[2025-11-02 02:31:19] {"status":"success","message":"OTP sent successfully","data":{"otp_code":"671391","otp_code_expires_at":"2025-11-02T09:36:19.175+08:00","otp_code_confirmed":false,"phone_number":null,"message":"Your OTP code is 671391. It is valid for 5 minutes. Do not share this code with anyone."}}
+[2025-11-02 02:31:29] {"status":"success","message":"OTP verified successfully"}
