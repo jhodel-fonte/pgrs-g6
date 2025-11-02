@@ -29,7 +29,7 @@ if (isset($_GET['login']) && $_GET['login'] == 1) {
             
             exit;
         } else {
-            header("Location: ../public/login.php?error=" . urlencode($user['response'] ?? 'Login failed'));
+            header("Location: ../public/login.php?error=" . urlencode($user['message'] ?? 'Login failed'));
             exit;
         }
     }

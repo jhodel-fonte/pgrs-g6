@@ -1,10 +1,13 @@
 <?php
 session_start();
+session_unset();
 
-foreach ($_SESSION as $key => $val) {
+//just checking the session data
+
+/* foreach ($_SESSION as $key => $val) {
     // make the value readable
     if (is_array($val) || is_object($val)) {
-        $readable = print_r($val, true); // readable multi-line representation
+        $readable = print_r($val, true);
     } else {
         $readable = (string) $val;
     }
@@ -14,14 +17,14 @@ foreach ($_SESSION as $key => $val) {
 
     // output with a label and a separator for clarity
     echo "<strong>" . htmlspecialchars($key, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . ":</strong> " . $safe . "<br>\n";
+} */
+
+
+if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isValid'] == 1 ) {
+    //aready login so it will redirect to main
+    header("Location: ../.php");
+    exit;
 }
-
-
-// if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isValid'] == 1 ) {
-//     //aready login so it will redirect to main
-//     header("Location: ../.php");
-//     exit;
-// }
 
 ?>
 
@@ -42,19 +45,18 @@ foreach ($_SESSION as $key => $val) {
             <img src="assets/logo.png" alt="Unity logo">
         </div>
 
-    <?php
+        <?php
 
-    if (isset($_GET['error'])) {
-        echo "
-            <div>
-                <p>Error : " .htmlspecialchars($_GET['error']) ."</p>
-            </div>
-        ";
-    }
+        if (isset($_GET['error'])) {//this is just showing some error and will fix by frontend
+            echo "
+                <div>
+                    <p>Error : " .htmlspecialchars($_GET['error']) ."</p>
+                </div>
+            ";
+        }
 
-    ?>
+        ?>
 
-        <!--Email-->
         <div class="form-section">
             <div class="card">
                 <h2>Login</h2>

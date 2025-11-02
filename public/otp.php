@@ -98,7 +98,7 @@
 
         if (res.ok && data.success) {
           showMessage(data.message || 'OTP verified successfully.');
-            window.location.href = 'landing.php';
+            window.location.href = 'user/user_dashboard.php';
 
         } else {
           showMessage(data.message || 'OTP verification failed.', true);
