@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +15,9 @@
 
   <div class="verify-container">
     <h3>Verify Your Account</h3>
+    <?php
+    echo "We Have Sent an OTP to " .$_SESSION['number'];
+    ?>
     <p>Enter the 6-digit code sent to your phone number.</p>
 
     <form id="verifyForm"> <!-- method="POST" action="../request/otpVerification.php"> -->
@@ -27,7 +34,7 @@
     </form>
 
     <div class="resend">
-      Didn't receive the code? <a href="#" id="resendBtn">Resend Code</a>
+      <!-- Didn't receive the code? <a href="#" id="resendBtn">Resend Code</a> -->
     </div>
   </div>
   <script src="view/js/main.js"></script>

@@ -1,8 +1,11 @@
 <?php
 session_start();
-// session_unset();
+
+// echo $_SESSION['user'];
 
 //just checking the session data
+
+// echo 
 
 /* foreach ($_SESSION as $key => $val) {
     // make the value readable
@@ -22,7 +25,8 @@ session_start();
 
 if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isValid'] == 1 ) {
     //aready login so it will redirect to main
-    header("Location: ../.php");
+    // var_dump($_SESSION['user']);
+    header("Location: ../public/user/user_dashboard.php");
     exit;
 }
 

@@ -8,7 +8,7 @@ function sendOtpToNumber($number) {
     $response = json_decode($res, true);
     error_log(date('[Y-m-d H:i:s] ') . $res . PHP_EOL, 3, __DIR__ . '../../../log/account.log');
     if ($response['status'] == 'success') {
-        $_SESSION['secretOTP'] = $response['data']['otp_code'];
+        $_SESSION['etcNUM'] = $number;
 
         return true;
     }

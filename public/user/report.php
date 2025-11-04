@@ -8,7 +8,7 @@ if (!isset($_SESSION['user'])) {
     exit;
 }
 
-var_dump($_SESSION['user']);
+// var_dump($_SESSION['user']);
 
 $userData = $_SESSION['user'];
 $message = '';

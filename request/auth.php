@@ -16,12 +16,14 @@ if (isset($_GET['login']) && $_GET['login'] == 1) {
 
         if (isset($user['response']) && $user['response'] == 'success') {
             session_start();
+            // var_dump($user);
             $_SESSION['user'] = $user;
             $_SESSION['isValid'] = 1;
             $_SESSION['number'] = $user['userprofile']['mobileNum'];
             
             //send otp
            if (sendOtpToNumber($_SESSION['number'])) {
+                    ob_clean();
                     $_SESSION['otp_sent_at'] = time();
                     header("Location: ../public/otp.php");
                 }

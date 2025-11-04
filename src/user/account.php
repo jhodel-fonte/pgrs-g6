@@ -66,7 +66,7 @@ class UserAcc {//this class communicates to database Account Table
             $num = sanitizeInput($mNumber);
 
             if ($this->isUsernameRegistered($username)) {
-                echo '11';
+                // echo '11';
                 throw new Exception('Already Have Username');
             }
 
@@ -74,7 +74,8 @@ class UserAcc {//this class communicates to database Account Table
             $defaultStatus = 4;
 
             $reg = $this->conn->prepare("Call CreateNewAccount(?, ?, ?, ?, ?, ?, ?)");
-            $reg->bind_param("ssiiiis", $username, $hashedPass, $num, $defaultRole, $defaultStatus, $pgCode, $email);
+            // var_dump($num);
+            $reg->bind_param("sssiiis", $username, $hashedPass, $num, $defaultRole, $defaultStatus, $pgCode, $email);
             
             if (!$reg->execute()){
                 throw new Exception($reg->error);
@@ -85,6 +86,7 @@ class UserAcc {//this class communicates to database Account Table
         } catch (Exception $errs) {
             echo "<script>console.log('Account Update Error! Check Log For details')</script>";
             error_log(date('[Y-m-d H:i:s] ') . $errs->getMessage() . PHP_EOL, 3, __DIR__ . '../../../log/account.log');
+            return ['status' => 'error'];
             exit();
         }
     }
