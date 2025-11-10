@@ -23,12 +23,12 @@ session_start();
 } */
 
 
-if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isValid'] == 1 ) {
-    //aready login so it will redirect to main
-    // var_dump($_SESSION['user']);
-    header("Location: ../public/user/user_dashboard.php");
-    exit;
-}
+// if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isValid'] == 1 ) {
+//     //aready login so it will redirect to main
+//     // var_dump($_SESSION['user']);
+//     header("Location: ../public/user/user_dashboard.php");
+//     exit;
+// }
 
 ?>
 

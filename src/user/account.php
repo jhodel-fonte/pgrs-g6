@@ -156,7 +156,7 @@ class UserAcc {//this class communicates to database Account Table
 }
 
 // $temp = new UserAcc();
-// $data = $temp->getAccById(1);
+// $data = $temp->getAccById("admin'");
 // echo $data;
 // var_dump($data);
 

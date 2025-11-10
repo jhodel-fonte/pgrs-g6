@@ -16,7 +16,7 @@ $error = '';
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $user_id = $_SESSION['user_id'];
+    $user_id = $userData['userprofile']['username'];
     $name = trim($_POST['name']);
     $report_type = trim($_POST['report_type']);
     $description = trim($_POST['description']);
@@ -180,10 +180,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <aside class="sidebar">
     <h2>Unity Padre Garcia</h2>
     <ul>
-        <li><a href="user_dashboard.php" class="active">Dashboard</a></li>
-        <li><a href="../user/report.php">Submit Report</a></li>
+        <li><a href="user_dashboard.php">Dashboard</a></li>
+        <li><a href="../user/report.php" class="active">Submit Report</a></li>
         <li><a href="../user/view.php">My Reports</a></li>
-        <li><a href="../login/logout.php">Logout</a></li>
+        <li><a href="../../request/logout.php?logout=1">Logout</a></li>
     </ul>
 </aside>
 

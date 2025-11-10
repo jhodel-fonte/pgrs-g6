@@ -209,7 +209,7 @@ try {
             <li><a href="user_dashboard.php">Dashboard</a></li>
             <li><a href="../user/report.php">Submit Report</a></li>
             <li><a href="../user/view_reports.php" class="active">My Reports</a></li>
-            <li><a href="../login/logout.php">Logout</a></li>
+            <li><a href="../../request/logout.php?logout=1">Logout</a></li>
         </ul>
     </aside>
 
