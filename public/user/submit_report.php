@@ -1,5 +1,6 @@
 <?php
-require_once '../config/config.php'; // PDO connection
+// require_once '../config/config.php'; // PDO connection
+require_once __DIR__ .'../../../src/data/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name']);

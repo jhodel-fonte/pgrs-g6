@@ -1,19 +1,22 @@
 <?php 
 session_start();
-// require_once __DIR__ .'../../../src/user/';
+require_once __DIR__ .'../../../src/data/config.php';
 
 // Redirect if not logged in
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user'])) {
     header("Location: ../login.php");
     exit;
 }
 
+// var_dump($_SESSION['user']);
+
+$userData = $_SESSION['user'];
 $message = '';
 $error = '';
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $user_id = $_SESSION['user_id'];
+    $user_id = $userData['userprofile']['username'];
     $name = trim($_POST['name']);
     $report_type = trim($_POST['report_type']);
     $description = trim($_POST['description']);
@@ -177,10 +180,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <aside class="sidebar">
     <h2>Unity Padre Garcia</h2>
     <ul>
-        <li><a href="user_dashboard.php" class="active">Dashboard</a></li>
-        <li><a href="../user/report.php">Submit Report</a></li>
+        <li><a href="user_dashboard.php">Dashboard</a></li>
+        <li><a href="../user/report.php" class="active">Submit Report</a></li>
         <li><a href="../user/view.php">My Reports</a></li>
-        <li><a href="../login/logout.php">Logout</a></li>
+        <li><a href="../../request/logout.php?logout=1">Logout</a></li>
     </ul>
 </aside>
 
@@ -193,7 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <form method="POST" enctype="multipart/form-data">
     <div class="form-group">
         <label for="name">Name:</label>
-        <input type="text" name="name" id="name" value="<?= htmlspecialchars($_SESSION['name']); ?>" readonly>
+        <input type="text" name="name" id="name" value="<?= (isset($userData['userprofile']['username'])) ? $userData['userprofile']['username'] : 'Error Name'  ?>" readonly>
     </div>
 
     <div class="form-group">

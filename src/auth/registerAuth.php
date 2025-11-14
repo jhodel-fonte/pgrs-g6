@@ -17,24 +17,25 @@ function CreateNewUserAccount($arrayInfo) {
         $pass = sanitizeInput($arrayInfo['pass']);
 
         // Check if username is already registered
-        // if ($userAcc->isUsernameRegistered($username)) {
-        //     throw new Exception('Username already exists');
-        // }
 
         if ($userAcc->isUsernameRegistered($username)) {
             // echo 'Yes';
             throw new Exception('Already Have Username');
         }
 
+        //attempt to create a profile
+        
+
+
         $profileResult = $userProfile->addProfile($firstName, $lastName, $gender, $dob);
         if (isset($profileResult['error'])) {
             throw new Exception('Profile creation failed: ' . $profileResult['error']);
         }
         $pgCode = $profileResult['pgID']; 
-
+        // var_dump($number);
         $regResult = $userAcc->register($username, $pass, $number, $pgCode, $email);
-        if (!$regResult) {
-            throw new Exception('Account registration failed');
+        if ($regResult['status'] == 'error') {
+            throw new Exception('Account registration failed ') ;
         }
 
         return [

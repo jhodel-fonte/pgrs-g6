@@ -1,28 +1,19 @@
 <?php
 session_start();
-session_unset();
 
-//just checking the session data
-
-/* foreach ($_SESSION as $key => $val) {
-    // make the value readable
-    if (is_array($val) || is_object($val)) {
-        $readable = print_r($val, true);
-    } else {
-        $readable = (string) $val;
-    }
-
-    // escape for HTML and convert newlines to <br>
-    $safe = nl2br(htmlspecialchars($readable, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'));
-
-    // output with a label and a separator for clarity
-    echo "<strong>" . htmlspecialchars($key, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . ":</strong> " . $safe . "<br>\n";
-} */
-
-
-if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isValid'] == 1 ) {
+// var_dump($_SESSION['user']) ;
+// var_dump($_SESSION['isOtpVerified']) ;
+// echo '1';
+if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isValid'] === 1 && isset($_SESSION['isOtpVerified']) && $_SESSION['isOtpVerified'] === 1) {
     //aready login so it will redirect to main
-    header("Location: ../.php");
+    header("Location: ../public/user/user_dashboard.php");
+    exit;
+}
+
+if (isset($_SESSION['user']) && (!isset($_SESSION['isOtpVerified']) || $_SESSION['isOtpVerified'] === 0)) {
+    //redirect to otp if not verified
+    echo 'Must not trigger Beacuse it is for manual inster of link';
+    // header("Location: ../public/otp.php");
     exit;
 }
 
@@ -37,6 +28,9 @@ if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isVali
     <title>Unity Login</title>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     
 </head>
 <body>
@@ -44,18 +38,6 @@ if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isVali
         <div class="header">
             <img src="assets/logo.png" alt="Unity logo">
         </div>
-
-        <?php
-
-        if (isset($_GET['error'])) {//this is just showing some error and will fix by frontend
-            echo "
-                <div>
-                    <p>Error : " .htmlspecialchars($_GET['error']) ."</p>
-                </div>
-            ";
-        }
-
-        ?>
 
         <div class="form-section">
             <div class="card">
@@ -94,6 +76,65 @@ if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isVali
             window.location.href = "login.php";
         }     
     </script>
+
+    <!--     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('loginForm');
+            const errorMessageDiv = document.getElementById('error-message');
+
+            loginForm.addEventListener('submit', async (event) => {
+                event.preventDefault();//prevent reload
+                // errorMessageDiv.textContent = '';//handle previous message
+
+                try {
+                    //get the data
+                    const response = await fetch('../request/auth.php?login=1', {
+                        method: 'POST',
+                        body: new FormData(loginForm)
+                    });
+
+                    const data = await response.json();//get response to js
+
+                    //process 
+                    if (data.response === 'error') {
+                        // errorMessageDiv.textContent = `Login Error: ${data.message}`;
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Server Error',
+                            text: `HTTP Error: ${response.status}`,
+                        });
+                        // return;
+                    } else {
+                        console.log('Login successful, processing...'); //in our case the auth.php redirects but in case i leave it here
+                    }
+
+                } catch (error) {
+                    //other error handling
+                    console.error('Fetch error:', error);
+                    errorMessageDiv.textContent = 'A network error occurred. Please try again.';
+                }
+            });
+        });
+    </script> -->
+
+    <?php 
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['error'])){
+
+            echo "<script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Login Error',
+                    text: `" . htmlspecialchars($_GET['error']) . "`, 
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.history.pushState(null, '', 'login.php');
+                    }
+                });
+            </script>";
+
+        };
+    ?>
+
     
 </body>
 </html>

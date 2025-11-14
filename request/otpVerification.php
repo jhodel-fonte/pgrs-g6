@@ -42,10 +42,11 @@ try {
     $number = $_SESSION['number'];
 
     if (verifyOtpForNumber($number, $otp)) {
+        $_SESSION['isValid'] = 1;
+        $_SESSION['isOtpVerified'] = 1;
         $msg = json_encode(['success' => true, 'message' => 'OTP verified Successfully']);
         echo $msg;
-        // error_log(date('[Y-m-d H:i:s] ') . $msg . PHP_EOL, 3, __DIR__ . '/request/test.log');
-        // session_unset($_SESSION['number']);
+        error_log(date('[Y-m-d H:i:s] ') . $msg . PHP_EOL, 3, __DIR__ . '/request/test.log');
         exit;
     }
 

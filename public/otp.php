@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+// exit;
+// var_dump($_SESSION['otp_sent_time']);
+// $readable_time = date('Y-m-d H:i:s', $_SESSION['otp_sent_time'] ?? 0); 
+// echo "OTP Time Sent (Local): " . $readable_time;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +18,24 @@
 </head>
 <body>
 
+  <?php 
+    if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['res'])) {
+      if ($_GET['res'] === '1') {
+        echo "<p>Resend Successfully. New OTP Sent</p>
+        ";
+      } else {
+        echo "<p>Error Resending</p>
+        ";
+      } 
+    }
+  
+  ?>
+
   <div class="verify-container">
     <h3>Verify Your Account</h3>
+    <?php
+    echo "We Have Sent an OTP to " .$_SESSION['number'];
+    ?>
     <p>Enter the 6-digit code sent to your phone number.</p>
 
     <form id="verifyForm"> <!-- method="POST" action="../request/otpVerification.php"> -->
@@ -27,95 +52,147 @@
     </form>
 
     <div class="resend">
-      Didn't receive the code? <a href="#" id="resendBtn">Resend Code</a>
+      Didn't receive the code? <a href="../request/resend.php?resend=1" id="resendBtn" class="resendButton" disabled>Resend Code</a>
+      <p>Time remaining to wait: <span id="countdown"></span></p>
+    </div>
+
+    <div class="Log-Out">
+      <a href="../request/logout.php?logout=1">Logout</a>
     </div>
   </div>
-  <script src="view/js/main.js"></script>
-    <!-- ajax response to request/otp.php -->
-  <script>
-  (function () {
-    const form = document.getElementById('verifyForm');
-    const inputs = document.querySelectorAll('.otp-input input');
-    const resendBtn = document.getElementById('resendBtn');
 
-    function showMessage(text, isError = false) {
-      let el = document.getElementById('otpMessage');
-      if (!el) {
-        el = document.createElement('div');
-        el.id = 'otpMessage';
-        el.style.marginTop = '1rem';
-        form.parentNode.insertBefore(el, form.nextSibling);
-      }
-      el.textContent = text;
-      el.style.color = isError ? 'red' : 'green';
-    }
+  <script> //time countdown script
+    const expirationTimestamp = <?php echo $_SESSION['otp_sent_time'] ?? 0; ?>; //get time expiration
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        let timerInterval = null; 
 
-    // auto move focus and allow backspace
-    inputs.forEach((input, idx) => {
-      input.addEventListener('input', (e) => {
-        const val = e.target.value;
-        if (val.length > 1) {
-          // keep only last char
-          e.target.value = val.slice(-1);
-        }
-        if (e.target.value && idx < inputs.length - 1) {
-          inputs[idx + 1].focus();
-        }
-      });
+        const countdownElement = document.getElementById('countdown');
+        const expirationTimeMs = expirationTimestamp * 1000; 
+        const resendButton = document.getElementById('resendBtn');
 
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Backspace' && !e.target.value && idx > 0) {
-          inputs[idx - 1].focus();
+        //stop if no set or error
+        if (expirationTimeMs <= 0) {
+            countdownElement.textContent = "Cooldown not active.";
+            return;
         }
-      });
+
+        resendButton.setAttribute('disabled', 'disabled');
+
+        function updateCountdown() {
+            const nowMs = new Date().getTime(); 
+            
+            //time difference remaining
+            const distanceMs = expirationTimeMs - nowMs; 
+
+            if (distanceMs <= 0) {
+                clearInterval(timerInterval); 
+                countdownElement.textContent = "You can resend the OTP now.";
+                resendButton.removeAttribute('disabled');
+                return;
+            }
+
+            //milliseconds to seconds
+            const seconds = Math.floor(distanceMs / 1000);
+            
+            // display tine
+            countdownElement.textContent = `${seconds} seconds`;
+        }
+
+        updateCountdown();
+        timerInterval = setInterval(updateCountdown, 1000);
     });
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    //otp input
+    (function () {
+      const form = document.getElementById('verifyForm');
+      const inputs = document.querySelectorAll('.otp-input input');
+      const resendBtn = document.getElementById('resendBtn');
 
-      const otp = Array.from(inputs).map(i => i.value.trim()).join('');
-      if (otp.length !== 6 || !/^\d{6}$/.test(otp)) {
-        showMessage('Please enter a 6-digit code.', true);
-        return;
+      function showMessage(text, isError = false) {
+        let el = document.getElementById('otpMessage');
+        if (!el) {
+          el = document.createElement('div');
+          el.id = 'otpMessage';
+          el.style.marginTop = '1rem';
+          form.parentNode.insertBefore(el, form.nextSibling);
+        }
+        el.textContent = text;
+        el.style.color = isError ? 'red' : 'green';
       }
 
-      showMessage('Verifying...');
-
-      try {
-        const body = new URLSearchParams();
-        body.append('otp', otp);
-
-        const res = await fetch('../request/otpVerification.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: body.toString()
+      // auto move focus and allow backspace
+      inputs.forEach((input, idx) => {
+        input.addEventListener('input', (e) => {
+          const val = e.target.value;
+          if (val.length > 1) {
+            // keep only last char
+            e.target.value = val.slice(-1);
+          }
+          if (e.target.value && idx < inputs.length - 1) {
+            inputs[idx + 1].focus();
+          }
         });
 
-        // Expect JSON response from the server
-        const data = await res.json();
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Backspace' && !e.target.value && idx > 0) {
+            inputs[idx - 1].focus();
+          }
+        });
+      });
 
-        if (res.ok && data.success) {
-          showMessage(data.message || 'OTP verified successfully.');
-            window.location.href = 'user/user_dashboard.php';
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-        } else {
-          showMessage(data.message || 'OTP verification failed.', true);
+        const otp = Array.from(inputs).map(i => i.value.trim()).join('');
+        if (otp.length !== 6 || !/^\d{6}$/.test(otp)) {
+          showMessage('Please enter a 6-digit code.', true);
+          return;
         }
 
-      } catch (err) {
-        showMessage('Network error. Please try again.', true);
-        console.error(err);
-      }
-    });
+        showMessage('Verifying...');
 
-    // placeholder for resend action
-    resendBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      showMessage('Resend requested — wala pa di ko pa maisip paano.');
-    });
-  })();
+        try {
+          const body = new URLSearchParams();
+          body.append('otp', otp);
+
+          const res = await fetch('../request/otpVerification.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: body.toString()
+          });
+
+          // Expect JSON response from the server
+          const data = await res.json();
+
+          if (res.ok && data.success) {
+            showMessage(data.message || 'OTP verified successfully.');
+              window.location.href = 'user/user_dashboard.php';
+
+          } else {
+            showMessage(data.message || 'OTP verification failed.', true);
+          }
+
+        } catch (err) {
+          showMessage('Network error. Please try again.', true);
+          console.error(err);
+        }
+      });
+
+      // placeholder for resend action
+      resendBtn.addEventListener('click', (e) => {
+        if (resendBtn.hasAttribute('disabled')) {
+          e.preventDefault();
+          return;
+        }
+        e.preventDefault();
+        showMessage('Resending OTP.');
+        window.location.href = '../request/resendOtp.php?resend=1';
+        
+      });
+    })();
 
   </script>
 

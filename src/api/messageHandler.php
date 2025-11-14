@@ -1,11 +1,14 @@
 <?php
 
+//this class is the main for sms api
+
 class smsHandler {
     private $smsUrl = 'https://sms.iprogtech.com/api/v1/sms_messages';
     private $otpUrl = 'https://sms.iprogtech.com/api/v1/otp/send_otp';
-    private $apiToken = '92b811ed5d06c8640a7122f69ac1eac583b41b55';
+    // private $apiToken = '92b811ed5d06c8640a7122f69ac1eac583b41b55'; //prod api
+    private $apiToken = '9cc11e308a4be7928384edea53822586b90f7526'; //test api $test_api_token
 
-    public function sendSms($dataArray) {
+    public function sendSms($dataArray) {//message phone number
         $data = [
             'api_token' => $this->apiToken,
             'message' => isset($dataArray['message']) ? $dataArray['message'] : '',
