@@ -28,11 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['resend'] === '1') {
         exit;
     }  
 
-    if (!isset($_SESSION['otp_expiration']) && ($_SESSION['otp_expiration'] < time()) ) {
-        header("Location: ../public/login.php");
-        exit;
-    }
-
     if (sendOtpToNumber($_SESSION['number'])) {
         header("Location: ../public/otp.php?res=1");
         exit;
@@ -40,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['resend'] === '1') {
         header("Location: ../public/otp.php?res=2");
         exit;
     }
-    
+
 
 }
 
