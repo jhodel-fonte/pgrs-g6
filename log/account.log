@@ -19,3 +19,7 @@
 [2025-11-05 06:14:11] {"status":"success","message":"OTP verified successfully"}
 [2025-11-05 06:14:29] {"status":"success","message":"OTP sent successfully","data":{"otp_code":"878715","otp_code_expires_at":"2025-11-05T13:19:29.731+08:00","otp_code_confirmed":false,"phone_number":"09362738173","message":"Your OTP code is 878715. It is valid for 5 minutes. Do not share this code with anyone."}}
 [2025-11-05 06:14:44] {"status":"success","message":"OTP verified successfully"}
+[2025-11-11 02:35:08] [**log**] Message: "TestLog" in file: C:\xampp\htdocs\pgrs-g6\src\utillities
+[2025-11-11 02:36:52] [**log**] Message: "TestLog" in file: C:\xampp\htdocs\pgrs-g6\src\utillities
+[2025-11-11 16:40:34] Duplicate entry '09362738173' for key 'mobileNum'
+[2025-11-14 04:08:32] Duplicate entry '09362738173' for key 'mobileNum'
