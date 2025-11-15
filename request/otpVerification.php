@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../src/api/otp.php';
 require_once __DIR__ . '/../src/utillities/common.php';
+require_once __DIR__ . '/../src/utillities/log.php';
 
 // unset($_SESSION['']);
 
@@ -40,13 +41,15 @@ try {
     }
 
     $number = $_SESSION['number'];
+    // $number = $_SESSION['number'];
 
     if (verifyOtpForNumber($number, $otp)) {
         $_SESSION['isValid'] = 1;
         $_SESSION['isOtpVerified'] = 1;
         $msg = json_encode(['success' => true, 'message' => 'OTP verified Successfully']);
+        containlog('Log', $msg, __DIR__, 'verifyOtp.txt');
         echo $msg;
-        error_log(date('[Y-m-d H:i:s] ') . $msg . PHP_EOL, 3, __DIR__ . '/request/test.log');
+        
         exit;
     }
 

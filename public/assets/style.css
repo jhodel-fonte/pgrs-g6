@@ -6,9 +6,10 @@
 }
 
 body, html {
+  background: url('pgsrsBG.jpg') no-repeat center center fixed;
+  background-size: cover;
   height: 100%;
   width: 100%;
-  background: #f9f9f9;
 }
 
 .container {
@@ -24,6 +25,7 @@ body, html {
   justify-content: center;
   align-items: center;
   background: linear-gradient(180deg, #246BFD, #573cff);
+  /* height: 10px; */
 }
 
 .header img {
@@ -38,7 +40,7 @@ body, html {
   align-items: center;
   justify-content: flex-start;
   padding: 30px 20px;
-  background: #fff;
+  /* background: #fff; */
   border: 2px solid #246BFD;
 }
 

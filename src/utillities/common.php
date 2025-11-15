@@ -10,7 +10,7 @@ function sanitizeInput($input) {//remove whitespace
 
 function securePassword($pass) {//returns a encrypted password
     $temp = sanitizeInput($pass);
-    $saltedPassword = hash("sha256", $temp);  
+    $saltedPassword = password_hash($temp, PASSWORD_DEFAULT);
     return $saltedPassword;
 }
 

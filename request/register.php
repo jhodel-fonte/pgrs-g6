@@ -55,9 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($set['response'] == 'success'){
                 if (!sendOtpToNumber($userReg['number'])) {
-                    // throw new Exception('Server Error');
+                    throw new Exception('Server Error');
                 }
-                echo "<script>alert('Registered Success! OTP Verification Sent');</script>";
+                // echo "<script>alert('Registered Success! OTP Verification Sent');</script>";
                 header('Location: ../public/otp.php');
             }   else {
                 throw new Exception($set['message']);

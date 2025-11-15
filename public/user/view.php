@@ -1,15 +1,19 @@
 <?php
-// require_once '../config/config.php'; // PDO connection
 require_once __DIR__ .'../../../src/data/config.php';
 
+session_start();
+
 // Fetch reports ordered by latest first
+// must fix this and dont place the query here
 try {
-    $stmt = $pdo->query("SELECT * FROM reports ORDER BY created_at DESC");
+    $userId = $_SESSION['user']['userprofile']['pgCode'];
+    $stmt = $pdo->query("SELECT * FROM reports WHERE `user_id` = " .$userId  ." ORDER BY created_at DESC");
     $reports = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("Query failed: " . $e->getMessage());
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,9 +25,11 @@ try {
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
         body {
+            background: url('../assets/pgsrsBG.jpg') no-repeat center center fixed;
+            background-size: cover;
             margin: 0;
             font-family: "Open Sans", sans-serif;
-            background-color: #f5f9ff;
+            background-color: #f5f9ffa8;
         }
         .container {
             display: flex;
@@ -83,7 +89,7 @@ try {
             gap: 20px;
         }
         .report-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.75);
             border-radius: 15px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.08);
             padding: 20px;
@@ -97,7 +103,7 @@ try {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #f0f0f0;
+            border-bottom: 2px solid #f0f0f085;
             padding-bottom: 10px;
             margin-bottom: 15px;
         }

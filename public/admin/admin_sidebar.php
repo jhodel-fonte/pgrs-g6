@@ -29,6 +29,6 @@ if (!isset($_SESSION['role']) || strtolower($_SESSION['role']) !== 'admin') {
        Manage Reports
     </a>
 
-    <a href="../logout.php">Logout</a>
+    <a href="../../request/logout.php?logout=1">Logout</a>
 </div>
 

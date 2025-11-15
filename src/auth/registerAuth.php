@@ -25,8 +25,6 @@ function CreateNewUserAccount($arrayInfo) {
 
         //attempt to create a profile
         
-
-
         $profileResult = $userProfile->addProfile($firstName, $lastName, $gender, $dob);
         if (isset($profileResult['error'])) {
             throw new Exception('Profile creation failed: ' . $profileResult['error']);
@@ -35,6 +33,7 @@ function CreateNewUserAccount($arrayInfo) {
         // var_dump($number);
         $regResult = $userAcc->register($username, $pass, $number, $pgCode, $email);
         if ($regResult['status'] == 'error') {
+            $userProfile->deleteUser($pgCode);
             throw new Exception('Account registration failed ') ;
         }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 02, 2025 at 01:12 PM
+-- Generation Time: Nov 15, 2025 at 01:22 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -25,7 +25,7 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateNewAccount` (IN `uname` VARCHAR(50), IN `pass` VARCHAR(60), IN `num` INT(11), IN `role` INT, IN `status` INT, IN `code` INT, IN `email` VARCHAR(60))   INSERT INTO `account`(`username`, `saltedPass`, `mobileNum`, `roleId`, `statusId`, `pgCode`, `email`) 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateNewAccount` (IN `uname` VARCHAR(50), IN `pass` VARCHAR(60), IN `num` VARCHAR(11), IN `role` INT, IN `status` INT, IN `code` INT, IN `email` VARCHAR(60))   INSERT INTO `account`(`username`, `saltedPass`, `mobileNum`, `roleId`, `statusId`, `pgCode`, `email`) 
 VALUES (uname, pass, num, role, status, code, email)$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateNewAddress` (IN `profileID` INT, IN `street` VARCHAR(100), IN `city` VARCHAR(50), IN `province` VARCHAR(50), IN `postalCode` VARCHAR(5), IN `country` VARCHAR(50))   INSERT INTO `address`(`userId`, `street`, `city`, `province`, `postalCode`, `country`) 
@@ -95,8 +95,9 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`accId`, `username`, `saltedPass`, `mobileNum`, `roleId`, `statusId`, `pgCode`, `email`) VALUES
-(128, 'user11', '$2y$10$noNNWE8T3GN5TTvu/NSJGejjsdNMgdkWPtRFLDqfYs78bUcZBgmzK', '2147483647', 4, 4, 250249, 'sample@gmail.com'),
-(129, 'use1', '$2y$10$8WLHLmwIL.8jLha6kvJZH.9nklepXdJIfw3xnUDr.KsJhw5CZ8Hbm', '2147483647', 4, 4, 250250, 'sample@gmail.com');
+(56, '111', '$2y$10$dQrdUq0QJyzueQ2X0geShOoMh1q2A2DOoB4l.lmpS/1tYlEqwEgum', '111', 4, 4, 250315, '11@11.com'),
+(57, 'test11', '$2y$10$r8cly18qGTS19oMxMRpm6ewFv88LF1xrsfQEzvPxEGELIzt7NtOPS', '123123123', 4, 4, 250316, '1212@1.com'),
+(59, 'w123', '$2y$10$VeGr6mxDbWIgLYgYhEysf.lUY02Yp7zWdw/NyP1WbFbs7T.qFKluu', '12345123', 4, 4, 250318, '12@m.com');
 
 -- --------------------------------------------------------
 
@@ -133,34 +134,43 @@ CREATE TABLE `profile` (
 --
 
 INSERT INTO `profile` (`userId`, `firstName`, `lastName`, `gender`, `dateOfBirth`) VALUES
-(250223, 'ms', 'meow', 'male', '2025-11-12'),
-(250224, 'ms', 'meow', 'male', '2025-11-12'),
-(250225, 'jhojho88', 'meow', 'male', '2025-11-27'),
-(250226, 'jhojho81', 'meow', 'male', '2025-11-11'),
-(250227, 'jhojho88', 'meow', 'male', '2025-11-27'),
-(250228, 'jhojho88', 'meow', 'male', '2025-11-27'),
-(250229, 'jhojho88', 'meow', 'male', '2025-11-27'),
-(250230, 'jhojho88', 'meow', 'male', '2025-11-27'),
-(250231, 'jhojho88', 'meow', 'male', '2025-11-27'),
-(250232, 'jhojho88', 'meow', 'male', '2025-11-26'),
-(250233, 'jhojho88', 'meow', 'male', '2025-11-26'),
-(250234, 'jhojho88', 'meow', 'male', '2025-11-26'),
-(250235, 'jhojho88', 'meow', 'male', '2025-11-26'),
-(250236, 'jhojho88', 'meow', 'male', '2025-11-26'),
-(250237, 'ms', 'meow', 'male', '2025-10-29'),
-(250238, 'ms', 'meow', 'male', '2025-10-29'),
-(250239, 'ms', 'meow', 'male', '2025-11-05'),
-(250240, 'ms', 'meow', 'male', '2025-11-05'),
-(250241, 'ms', 'meow', 'male', '2025-11-05'),
-(250242, 'ms', 'meow', 'male', '2025-11-05'),
-(250243, 'ms', 'meow', 'male', '2025-11-05'),
-(250244, 'ms', 'meow', 'male', '2025-11-05'),
-(250245, 'jhojho88', 'meow', 'male', '2025-10-29'),
-(250246, 'jhojho88', 'meow', 'male', '2025-11-11'),
-(250247, 'jhojho88', 'meow', 'female', '2025-11-04'),
-(250248, 'jhojho88', 'meow', 'female', '2025-11-04'),
-(250249, 'jhojho88', 'meow', 'male', '2025-11-12'),
-(250250, 'jhojho88', 'meow', 'male', '2025-11-11');
+(250315, '111', '111', 'male', '2025-11-04'),
+(250316, 'test11', '111', 'female', '2025-11-03'),
+(250318, 'qwq', 'q1q', 'female', '2025-10-27');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reports`
+--
+
+CREATE TABLE `reports` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `report_type` varchar(100) NOT NULL,
+  `description` text NOT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `location` varchar(255) NOT NULL,
+  `latitude` varchar(50) NOT NULL,
+  `longitude` varchar(50) NOT NULL,
+  `status` enum('Pending','Resolved') DEFAULT 'Pending',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `summary` text DEFAULT NULL,
+  `delay_status` varchar(20) DEFAULT NULL,
+  `legit_status` varchar(20) DEFAULT NULL,
+  `ml_category` varchar(100) DEFAULT NULL,
+  `ml_summary` text DEFAULT NULL,
+  `ml_legit` tinyint(1) DEFAULT 1,
+  `ml_delay` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reports`
+--
+
+INSERT INTO `reports` (`id`, `user_id`, `name`, `report_type`, `description`, `photo`, `location`, `latitude`, `longitude`, `status`, `created_at`, `summary`, `delay_status`, `legit_status`, `ml_category`, `ml_summary`, `ml_legit`, `ml_delay`) VALUES
+(25, 250318, 'w123', 'Fire', '<script>alert(\'XSS Attack!\');</script>', NULL, 'Lat: 13.99804, Lng: 121.10384', '13.998036539606128', '121.10383987426759', 'Pending', '2025-11-14 19:02:32', NULL, NULL, NULL, 'Fire', '', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -218,6 +228,7 @@ ALTER TABLE `account`
   ADD UNIQUE KEY `profileId` (`pgCode`),
   ADD UNIQUE KEY `pgCode` (`pgCode`),
   ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `mobileNum` (`mobileNum`),
   ADD KEY `account_ibfk_1` (`statusId`),
   ADD KEY `roleId` (`roleId`);
 
@@ -233,6 +244,13 @@ ALTER TABLE `address`
 --
 ALTER TABLE `profile`
   ADD PRIMARY KEY (`userId`);
+
+--
+-- Indexes for table `reports`
+--
+ALTER TABLE `reports`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `reports_ibfk_1` (`user_id`);
 
 --
 -- Indexes for table `roles`
@@ -254,7 +272,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `accId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `accId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `address`
@@ -266,7 +284,13 @@ ALTER TABLE `address`
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=250251;
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=250319;
+
+--
+-- AUTO_INCREMENT for table `reports`
+--
+ALTER TABLE `reports`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -297,6 +321,12 @@ ALTER TABLE `account`
 --
 ALTER TABLE `address`
   ADD CONSTRAINT `address_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `profile` (`userId`);
+
+--
+-- Constraints for table `reports`
+--
+ALTER TABLE `reports`
+  ADD CONSTRAINT `reports_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `profile` (`userId`) ON DELETE CASCADE ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

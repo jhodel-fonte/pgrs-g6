@@ -1,7 +1,7 @@
 <?php
 // config/config.php
 $host = 'localhost';
-$dbname = 'padre_garcia_reports';
+$dbname = 'unity_pgsys_db';
 $username = 'root'; // default for XAMPP
 $password = '';     // leave blank unless you set one
 

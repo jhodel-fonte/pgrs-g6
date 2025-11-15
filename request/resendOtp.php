@@ -4,20 +4,20 @@ require_once __DIR__ .'../../src/api/otp.php';
 
 session_start();
 
-/* if (!empty($_SESSION)) {
-    foreach ($_SESSION as $key => $value) {
-        echo "<p>Variable: " . htmlspecialchars($key) . "</p>";
+// if (!empty($_SESSION)) {
+//     foreach ($_SESSION as $key => $value) {
+//         echo "<p>Variable: " . htmlspecialchars($key) . "</p>";
 
-        if (is_array($value)) {
-            echo "<p>Value: (Array)</p>\n";
-            echo "<pre>" . htmlspecialchars(print_r($value, true)) . "</pre>\n";
-        } else {
-            echo "<p>Value: " . htmlspecialchars($value) . "</p>\n";
-        }
-    }
-} else {
-    echo "<p>No session variables are currently set.</p>\n";
-} */
+//         if (is_array($value)) {
+//             echo "<p>Value: (Array)</p>\n";
+//             echo "<pre>" . htmlspecialchars(print_r($value, true)) . "</pre>\n";
+//         } else {
+//             echo "<p>Value: " . htmlspecialchars($value) . "</p>\n";
+//         }
+//     }
+// } else {
+//     echo "<p>No session variables are currently set.</p>\n";
+// }
 
 //this one just call get the otp stored in the session then resend it
 

@@ -8,7 +8,7 @@
 <!-- External Assets -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<link rel="stylesheet" href="../assets/css/admin.css">
+<link rel="stylesheet" href="assets/css/admin.css">
 </head>
 
 <body>
@@ -56,7 +56,7 @@ let chartMonths = <?= json_encode($months) ?>;
 let chartTotals = <?= json_encode($totals) ?>;
 </script>
 
-<script src="../assets/js/admin.js"></script>
+<script src="assets/js/admin.js"></script>
 
 </body>
 </html>

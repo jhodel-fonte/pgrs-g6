@@ -3,6 +3,7 @@
 require_once __DIR__ .'../../../src/data/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $user_id = trim($_SESSION['user']['pgCode']);
     $name = trim($_POST['name']);
     $report_type = trim($_POST['report_type']);
     $description = trim($_POST['description']);
@@ -43,9 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        $stmt = $pdo->prepare("INSERT INTO reports (name, report_type, description, location, latitude, longitude, status, photo) 
-                               VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$name, $report_type, $description, $location, $latitude, $longitude, $status, $photoPath]);
+        $stmt = $pdo->prepare("INSERT INTO reports (user_id, name, report_type, description, location, latitude, longitude, status, photo) 
+                               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$user_id, $name, $report_type, $description, $location, $latitude, $longitude, $status, $photoPath]);
 
         header("Location: report.php?msg=success");
         exit;

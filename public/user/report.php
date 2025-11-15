@@ -16,7 +16,7 @@ $error = '';
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $user_id = $userData['userprofile']['username'];
+    $user_id = $userData['userprofile']['pgCode'];
     $name = trim($_POST['name']);
     $report_type = trim($_POST['report_type']);
     $description = trim($_POST['description']);
@@ -92,7 +92,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
- * {
+        body {
+            background: url('../assets/pgsrsBG.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -153,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .alert.error { background: #f8d7da; color: #721c24; }
 
         .form-box {
-            background: white; padding: 25px; border-radius: 10px;
+            background: #f7f7f7e5; padding: 25px; border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1); max-width: 700px;
         }
         .form-group { margin-bottom: 15px; }

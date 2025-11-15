@@ -85,6 +85,25 @@ class profileMng {  //Profile functions for user
         }
     }
 
+    function deleteUser($id) {
+        $id = sanitizeInput($id);
+    
+        try {
+            $stmt_profile = $this->conn->prepare("DELETE FROM profile WHERE `userId` = ?");
+            $stmt_profile->bind_param("i", $id);
+
+            if (!$stmt_profile->execute()) {
+                throw new Exception("Error deleting profile: " . $stmt_profile->error);
+            }
+            $stmt_profile->close();
+            return true;
+
+        } catch (Exception $e) {
+            throw new Exception("Failed to delete user with ID $id: " . $e->getMessage());
+            return false;
+        }
+    }
+
     
 
     function updateUser(){//still not sure how to update by certain object

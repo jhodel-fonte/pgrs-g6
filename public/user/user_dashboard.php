@@ -8,11 +8,13 @@ if (!isset($_SESSION['user'])) {
     exit;
 }
 
+$userId = $_SESSION['user']['userprofile']['pgCode'];
+
 // Fetch counts from reports table
 try {
-    $total = $pdo->query("SELECT COUNT(*) FROM reports")->fetchColumn();
-    $pending = $pdo->query("SELECT COUNT(*) FROM reports WHERE status = 'Pending'")->fetchColumn();
-    $resolved = $pdo->query("SELECT COUNT(*) FROM reports WHERE status = 'Resolved'")->fetchColumn();
+    $total = $pdo->query("SELECT COUNT(*) FROM reports where user_id = " .$userId)->fetchColumn();
+    $pending = $pdo->query("SELECT COUNT(*) FROM reports WHERE status = 'Pending' and user_id = " .$userId)->fetchColumn();
+    $resolved = $pdo->query("SELECT COUNT(*) FROM reports WHERE status = 'Resolved' and user_id = " .$userId)->fetchColumn();
 } catch (PDOException $e) {
     die("Query failed: " . $e->getMessage());
 }
@@ -24,7 +26,13 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard | Unity Padre Garcia Report System</title>
     <style>
+        body {
+            background: url('../assets/pgsrsBG.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
         * {
+            
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -77,7 +85,6 @@ try {
         .main-content {
             flex: 1;
             padding: 40px;
-            background: #f9f9f9;
         }
 
         .main-content header {
