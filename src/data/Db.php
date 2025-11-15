@@ -5,6 +5,11 @@ class Database { //Database Connection
     private $username = "pgsys_admin";
     private $password = "test";
     private $database = "unity_pgsys_db";
+
+    // private $servername = "sql213.infinityfree.com";
+    // private $username = "if0_40422080";
+    // private $password = "rrLrWJCO9rp";
+    // private $database = "if0_40422080_unity_pgsys_db";
     private $conn;
 
     function __construct() {//test connection
@@ -14,7 +19,7 @@ class Database { //Database Connection
             if (!$this->conn) {
                 throw new Exception("Connection failed: " . mysqli_connect_error());
             }
-            echo "<script>console.log('Connected Database!')</script>";
+            // echo "<script>console.log('Connected Database!')</script>";
          
         } catch (Exception $error) {
             error_log(date('[Y-m-d H:i:s] ') . $error->getMessage() . PHP_EOL, 3, __DIR__ . '/../log/database.log');

@@ -15,7 +15,8 @@ class profileMng {  //Profile functions for user
     
     function getProfile($id) {
         try {
-            $query = $this->conn->prepare("Call GetProfileById(?)");
+            // $query = $this->conn->prepare("Call GetProfileById(?)");
+            $query = $this->conn->prepare("SELECT * FROM `profile` WHERE `userId` = ? LIMIT 1");
             $id = sanitizeInput($id);
             $query->bind_param("i", $id);
             $query->execute();
@@ -36,6 +37,24 @@ class profileMng {  //Profile functions for user
         function getProfileDetailsByID($id) {
         try {
             $query = $this->conn->prepare("Call GetConfirnedUserAcc(?)");
+            $query = $this->conn->prepare("SELECT 
+                                                a.accId,
+                                                p.userId as pgCode,
+                                                a.username,
+                                                a.email,
+                                                a.mobileNum,
+                                                a.roleId,
+                                                a.statusId,
+                                                p.firstName,
+                                                p.lastName,
+                                                p.gender,
+                                                p.dateOfBirth
+                                            FROM 
+                                                account AS a
+                                            INNER JOIN 
+                                                profile AS p ON a.pgCode = p.userId
+                                            WHERE a.accId = ?
+                                            LIMIT 1");
             $id = sanitizeInput($id);
             $query->bind_param("i", $id);
             $query->execute();
@@ -60,23 +79,24 @@ class profileMng {  //Profile functions for user
             $Gnder = sanitizeInput($Gnder);
             $DOB = sanitizeInput($DOB);
 
-            $reg = $this->conn->prepare("Call CreateNewProfile(?, ?, ?, ?)");
+            // $reg = $this->conn->prepare("Call CreateNewProfile(?, ?, ?, ?)");
+            $reg = $this->conn->prepare("INSERT INTO `profile`(`firstName`, `lastName`, `gender`, `dateOfBirth`) 
+                                            VALUES (?, ?, ?, ?);");
             $reg->bind_param("ssss", $fName, $lName, $Gnder, $DOB);
+
+            // $reg = $this->conn->("");
 
             if (!$reg->execute()){
                 throw new Exception($reg->error);
             };
 
-            $result = $reg->get_result();
-            if ($result && $row = $result->fetch_assoc()) {
-                $newId = $row['pgId'];
-                if ($newId == null){
-                    throw new Exception('No changes found');
-                }
-                return ["pgID" => $newId];
+            $newId = $this->conn->insert_id;
+
+            if ($newId === 0 || $newId === null) {
+                throw new Exception('No new ID was generated, insertion may have failed.');
             }
 
-            // return true;
+            return ["pgID" => $newId];
 
         } catch (Exception $errs) {
             echo "<script>console.log('Account Update Error! Check Log For details')</script>";

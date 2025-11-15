@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Only allow if admin is logged in
-if (!isset($_SESSION['role']) || strtolower($_SESSION['role']) !== 'admin') {
+if ($_SESSION['user']['userprofile']['roleId'] !== 1) {
     header("Location: ../login.php"); // Adjust path based on your folder structure
     exit;
 }

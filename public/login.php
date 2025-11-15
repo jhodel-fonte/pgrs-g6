@@ -6,6 +6,9 @@ session_start();
 // echo '1';
 if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isValid'] === 1 && isset($_SESSION['isOtpVerified']) && $_SESSION['isOtpVerified'] === 1) {
     //aready login so it will redirect to main
+
+
+
     header("Location: ../public/user/user_dashboard.php");
     exit;
 }

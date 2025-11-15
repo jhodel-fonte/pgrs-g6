@@ -17,6 +17,8 @@ function getTableRows($dbConn, $table) {
     return $temp;
 }
 
+
+
 // $db = new Database();
 
 // var_dump(getTableRows($db->getConn(), "account"));

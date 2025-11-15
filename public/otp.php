@@ -58,9 +58,18 @@ session_start();
       <p>Time remaining to wait: <span id="countdown"></span></p>
     </div>
 
-    <div class="Log-Out">
-      <a href="../request/logout.php?logout=1">Logout</a>
-    </div>
+    <?php
+      if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['reg']) && $_GET['reg'] == '1') {
+        echo "<p>Verify Your Identity</p>";
+      } else {
+          echo "<div class='Log-Out'>
+                <a href='../request/logout.php?logout=1'>Logout</a>
+              </div>";
+      }
+    
+    ?>
+  
+    
   </div>
 
   <script> //time countdown script
@@ -171,7 +180,7 @@ session_start();
 
           if (res.ok && data.success) {
             showMessage(data.message || 'OTP verified successfully.');
-              window.location.href = 'user/user_dashboard.php';
+              window.location.href = '../request/redirecting.php';
 
           } else {
             showMessage(data.message || 'OTP verification failed.', true);

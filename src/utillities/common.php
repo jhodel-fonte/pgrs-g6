@@ -1,6 +1,7 @@
 <?php
 //this file to help some functions like input sanitation hashing
 //tito yung helpers
+require_once __DIR__ .'../../user/profile.php';
 
 function sanitizeInput($input) {//remove whitespace
     // $var = gettype($input);
@@ -17,6 +18,16 @@ function securePassword($pass) {//returns a encrypted password
 function verifyPassword($inputPass, $hashedPass) { //return bool result
     $temp = sanitizeInput($inputPass);
     return password_verify($temp, $hashedPass);
+}
+
+
+function updateSession($id) {
+    $temp = new profileMng;
+    $user = $temp->getProfileDetailsByID($id);
+    $_SESSION['user'] = [
+                    'response' => 'success',
+                    'userprofile' => $user
+                ];
 }
 
 // $tempas = securePassword("test");

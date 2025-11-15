@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once __DIR__ .'../../../src/data/config.php';
+require_once __DIR__ .'../../../src/utillities/common.php';
 
 // Redirect if not logged in
 if (!isset($_SESSION['user'])) {
@@ -8,7 +9,18 @@ if (!isset($_SESSION['user'])) {
     exit;
 }
 
+// if ($_SESSION['user']['userprofile']['roleId'] == '1') {
+//     header("Location: ../admin/dashboard.php"); // Adjust path based on your folder structure
+//     exit;
+// }
+
 $userId = $_SESSION['user']['userprofile']['pgCode'];
+var_dump($_SESSION['user']);
+
+if (isset($_SESSION['user'])){
+    //update data 
+    // updateSession($userId);
+}
 
 // Fetch counts from reports table
 try {

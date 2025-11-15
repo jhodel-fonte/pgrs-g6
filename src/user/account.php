@@ -13,12 +13,6 @@ require_once __DIR__ ."../../utillities/dbUpdate.php";
 
 class UserAcc {//this class communicates to database Account Table
     private $conn;
-    private $userList;
-    private $accId;
-    private $name;  // still not sure if i use this variables
-    private $username;
-    private $passHash;//always salt the password the time it enter the server
-    private $auth; //not sure for this variable but mostly it is for role i guess
 
     //get database
     function __construct(){
@@ -29,7 +23,8 @@ class UserAcc {//this class communicates to database Account Table
     //arrau returns an array all results based on Id
     function getAccById($id) {
         try {
-            $query = $this->conn->prepare("Call SelectUserAccById(?)");
+            // $query = $this->conn->prepare("Call SelectUserAccById(?)");
+            $query = $this->conn->prepare("SELECT * FROM account WHERE account.accId = ?");
             $id = sanitizeInput($id);
             $query->bind_param("i", $id);
             $query->execute();
@@ -73,7 +68,9 @@ class UserAcc {//this class communicates to database Account Table
             $defaultRole = 4;
             $defaultStatus = 4;
 
-            $reg = $this->conn->prepare("Call CreateNewAccount(?, ?, ?, ?, ?, ?, ?)");
+            // $reg = $this->conn->prepare("Call CreateNewAccount(?, ?, ?, ?, ?, ?, ?)");
+            $reg = $this->conn->prepare("INSERT INTO `account`(`username`, `saltedPass`, `mobileNum`, `roleId`, `statusId`, `pgCode`, `email`) 
+                                            VALUES (?, ?, ?, ?, ?, ?, ?)");
             // var_dump($num);
             $reg->bind_param("sssiiis", $username, $hashedPass, $num, $defaultRole, $defaultStatus, $pgCode, $email);
             
@@ -111,8 +108,9 @@ class UserAcc {//this class communicates to database Account Table
                 throw new Exception("Exception : Fail to Update Data! Unauthorize Account Table Row Key : " .$key);
             } */
 
-            $update = $this->conn->prepare("CALL `UpdateAccById`(?, ?, ?)");
-            $update->bind_param("iss", $id, $key, $value);
+            // $update = $this->conn->prepare("CALL `UpdateAccById`(?, ?, ?)");
+            $update = $this->conn->prepare("UPDATE account SET" .$key ." = ? WHERE accId = ?");
+            $update->bind_param("iss", $id, $value);
             
             if (!$update->execute()){
                 throw new Exception($update->error);
@@ -134,7 +132,8 @@ class UserAcc {//this class communicates to database Account Table
 
     function getAccByUsername($userN) {
         try {
-            $query = $this->conn->prepare("Call SelectUserAccByUname(?)");
+            // $query = $this->conn->prepare("Call SelectUserAccByUname(?)");
+            $query = $this->conn->prepare("SELECT * FROM `account` WHERE `username` = ? LIMIT 1");
             // echo $userN;
             $id = sanitizeInput($userN);
             $query->bind_param("s", $id);
