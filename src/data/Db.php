@@ -1,15 +1,15 @@
 <?php
 
 class Database { //Database Connection
-    private $servername = "localhost";
-    private $username = "pgsys_admin";
-    private $password = "test";
-    private $database = "unity_pgsys_db";
+    // private $servername = "localhost";
+    // private $username = "pgsys_admin";
+    // private $password = "test";
+    // private $database = "unity_pgsys_db";
 
-    // private $servername = "sql213.infinityfree.com";
-    // private $username = "if0_40422080";
-    // private $password = "rrLrWJCO9rp";
-    // private $database = "if0_40422080_unity_pgsys_db";
+    private $servername = "sql213.infinityfree.com";
+    private $username = "if0_40422080";
+    private $password = "rrLrWJCO9rp";
+    private $database = "if0_40422080_unity_pgsys_db";
     private $conn;
 
     function __construct() {//test connection
