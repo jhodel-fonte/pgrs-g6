@@ -9,13 +9,19 @@ if (!isset($_SESSION['user'])) {
     exit;
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['action'])){
+    if ($_GET['action'] == 'success') {
+        echo "Sweet Alert Sucess Message";
+    }
+}
+
 // if ($_SESSION['user']['userprofile']['roleId'] == '1') {
 //     header("Location: ../admin/dashboard.php"); // Adjust path based on your folder structure
 //     exit;
 // }
 
 $userId = $_SESSION['user']['userprofile']['pgCode'];
-var_dump($_SESSION['user']);
+// var_dump($_SESSION['user']);
 
 if (isset($_SESSION['user'])){
     //update data 

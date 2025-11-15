@@ -16,7 +16,7 @@ function sendOtpToNumber($number) {
     if ($response['status'] == 'success') {//eval the data 
         $_SESSION['otp_sent_time'] = time() + 60;//this is time to limit a resending or refreshing
         $_SESSION['otp_expiration'] = time() + 300;//main otp expiration //currently it has no handles
-        // $_SESSION['secretOtp'] = $response['data']['message'];
+        $_SESSION['secretOtp'] = $response['data']['message'];
 
         return true;
     }

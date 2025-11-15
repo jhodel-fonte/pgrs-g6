@@ -1,5 +1,6 @@
 <?php
 session_start();
+var_dump($_SESSION['secretOtp']) ."<br>" ."Remove This One after testing";
 
 // require __DIR__ .'../../src/utillities/sessionRouting.php';
 

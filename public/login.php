@@ -13,12 +13,12 @@ if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isVali
     exit;
 }
 
-if (isset($_SESSION['user']) && (!isset($_SESSION['isOtpVerified']) || $_SESSION['isOtpVerified'] === 0)) {
+/* if (isset($_SESSION['user']) && (!isset($_SESSION['isOtpVerified']) || $_SESSION['isOtpVerified'] === 0)) {
     //redirect to otp if not verified
     echo 'Must not trigger Beacuse it is for manual inster of link';
-    // header("Location: ../public/otp.php");
+    header("Location: ../public/otp.php");
     exit;
-}
+} */
 
 ?>
 
@@ -67,6 +67,9 @@ if (isset($_SESSION['user']) && (!isset($_SESSION['isOtpVerified']) || $_SESSION
                         New User? <a href="register.php">Sign up here</a>
                     </div>
                 </form>
+                <div>
+                    <p>Testing account: Username = test11 || pass: 123</p>
+                </div>
             </div>
         </div>
     </div>

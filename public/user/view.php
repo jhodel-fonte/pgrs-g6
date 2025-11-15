@@ -3,6 +3,12 @@ require_once __DIR__ .'../../../src/data/config.php';
 
 session_start();
 
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['action'])){
+    if ($_GET['action'] == 'success') {
+        $message = 'Action Success';
+        echo "<script>alert('Deleted Sucessfully')</script>";
+    }
+}
 // Fetch reports ordered by latest first
 // must fix this and dont place the query here
 try {
@@ -205,6 +211,11 @@ try {
             color: #333;
             font-weight: 600;
         }
+        .alert {
+            margin-bottom: 15px; padding: 10px; border-radius: 6px; text-align: center;
+        }
+        .alert.success { background: #d4edda; color: #155724; }
+        .alert.error { background: #f8d7da; color: #721c24; }
     </style>
 </head>
 <body>
@@ -223,7 +234,11 @@ try {
         <header class="page-header">
             <h1>My Reports</h1>
             <p>Track the progress and approval status of your submitted reports</p>
+            <p>You Cannot Edit Once The report is made.</p>
         </header>
+
+        <?php if (isset($message)): ?><div class="alert success"><?= htmlspecialchars($message) ?></div><?php endif; ?>
+        <?php if (isset($error)): ?><div class="alert error"><?= htmlspecialchars($error) ?></div><?php endif; ?>
 
         <div class="report-list">
             <?php if (empty($reports)): ?>
@@ -281,6 +296,11 @@ try {
                                 <i class="fa-solid fa-circle-check"></i>
                                 <p>Resolved</p>
                             </div>
+                        </div>
+
+                        <div>Action
+                                <button type="button" id="btn"><a href="../../request/reportAction.php?request=delete&id=<?= $row['id'] ?>">Delete</a></button>
+
                         </div>
                     </div>
                 <?php endforeach; ?>

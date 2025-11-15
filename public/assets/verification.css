@@ -1,4 +1,8 @@
 /* verification */
+body {
+  background-image: url('../assets/pgsrsBG.jpg');
+}
+
 .verify-container {
       max-width: 400px;
       margin: 100px auto;
