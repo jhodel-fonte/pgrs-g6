@@ -10,7 +10,7 @@ if (!isset($_SESSION['role']) || strtolower($_SESSION['role']) !== 'admin') {
 }
 // 2. FETCH DASHBOARD COUNTS
 $userCount = $pdo->query("SELECT COUNT(*) FROM users WHERE role = 'user' AND status = 'Approved'")->fetchColumn();
-$teamCount = $pdo->query("SELECT COUNT(*) FROM users WHERE role = 'response'")->fetchColumn();
+$teamCount = $pdo->query("SELECT COUNT(*) FROM users WHERE role = 'response_team'")->fetchColumn();
 $finishedCount = $pdo->query("SELECT COUNT(*) FROM reports WHERE status = 'finished'")->fetchColumn();
 
 
