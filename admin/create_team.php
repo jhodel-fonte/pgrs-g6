@@ -26,27 +26,51 @@ $alertClass = '';
 // ✅ Handle Team Account Creation
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $firstname = trim($_POST['firstname']);
-    $lastname = trim($_POST['lastname']);
-    $username = trim($_POST['username']);
-    $mobile = trim($_POST['mobile_number']);
-    $email = trim($_POST['email']);
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $role = "Response Team";
+    $lastname  = trim($_POST['lastname']);
+    $username  = trim($_POST['username']);
+    $mobile    = trim($_POST['mobile_number']);
+    $email     = trim($_POST['email']);
+    $password  = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+    // 🔥 Correct role for your database
+    $role = "response_team";
+
+    // 🔧 Default values for required columns not in the form
+    $gender  = "Not Specified";
+    $dob     = "2000-01-01";
+    $address = "Response Team Office";
 
     // Check duplicate username or email
     $check = $pdo->prepare("SELECT * FROM users WHERE username = ? OR email = ?");
     $check->execute([$username, $email]);
+
     if ($check->rowCount() > 0) {
         $message = "❌ Username or Email already exists!";
         $alertClass = "alert-danger";
     } else {
-        $stmt = $pdo->prepare("INSERT INTO users (firstname, lastname, username, mobile_number, email, password, role, status, is_approved)
-                               VALUES (?, ?, ?, ?, ?, ?, ?, 'Approved', 1)");
-        $stmt->execute([$firstname, $lastname, $username, $mobile, $email, $password, $role]);
+
+        $stmt = $pdo->prepare("
+            INSERT INTO users 
+            (firstname, lastname, username, mobile_number, email, password, gender, dob, address, role, status, is_approved)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Approved', 1)
+        ");
+
+        $stmt->execute([
+            $firstname,
+            $lastname,
+            $username,
+            $mobile,
+            $email,
+            $password,
+            $gender,
+            $dob,
+            $address,
+            $role
+        ]);
 
         // Send SMS notification
         sendSMS($mobile, 
-            "Welcome {$firstname}! Your Response Team account for Padre Garcia Reporting has been successfully created. You can now log in and assist in community emergencies."
+            "Welcome {$firstname}! Your Response Team account for Padre Garcia Service Report System has been successfully created. You can now log in and assist in community emergencies."
         );
 
         header("Location: manage_users.php?created=1");
@@ -54,7 +78,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="alert <?= $alertClass; ?>"><?= $message; ?></div>
             <?php endif; ?>
 
-            <form method="POST" class="needs-validation" novalidate>
+            <form method="POST" novalidate>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label>First Name</label>
@@ -113,7 +136,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100 mt-3 py-2">Create Response Team Account</button>
+                <button type="submit" class="btn btn-primary w-100 mt-3 py-2">
+                    Create Response Team Account
+                </button>
             </form>
         </div>
      </div>

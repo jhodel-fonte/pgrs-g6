@@ -32,88 +32,8 @@ while ($row = $report_stmt->fetch(PDO::FETCH_ASSOC)) {
 <meta charset="UTF-8">
 <title>User Dashboard | Padre Garcia Reporting</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="../assets/css/style.css" rel="stylesheet">
+<link href="../assets/css/user.css" rel="stylesheet">
 
-<style>
-body {
-    background: linear-gradient(135deg, #050505, #0b0b0b);
-    color: #fff;
-    min-height: 100vh;
-}
-.text-neon {
-    color: #00ffff;
-}
-.border-neon {
-    border: 1px solid rgba(0, 255, 255, 0.4) !important;
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-}
-.card {
-    border-radius: 15px;
-    transition: 0.3s ease;
-}
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
-}
-.card.bg-secondary {
-    background: rgba(60, 60, 60, 0.8);
-}
-.card.bg-dark {
-    background: rgba(20, 20, 20, 0.85);
-}
-.btn-primary {
-    background-color: #f0f2f2ff;
-    color: #000;
-    border: none;
-    font-weight: bold;
-    transition: 0.3s;
-}
-.btn-primary:hover {
-    background-color: #00cccc;
-    color: #000;
-    transform: scale(1.05);
-}
-.btn-outline-info {
-    background-color: #f0f2f2ff;
-    border: none;
-    color: #000;
-    font-weight: bold;
-    transition: 0.3s;
-}
-.btn-outline-info:hover {
-    background-color: #00ffff;
-    color: #000;
-    transform: scale(1.05);
-}
-.btn-danger.btn-sm {
-    background-color: #ff3b3b;
-    border: none;
-}
-.btn-danger.btn-sm:hover {
-    background-color: #ff6666;
-    transform: scale(1.05);
-}
-.rounded-circle {
-    border: 3px solid #00ffff;
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-}
-.report-stat {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    padding: 15px;
-    text-align: center;
-    color: #fff;
-    transition: 0.3s;
-}
-.report-stat:hover {
-    transform: scale(1.05);
-    background: rgba(0, 255, 255, 0.1);
-}
-.report-stat h3 {
-    color: #00ffff;
-    text-shadow: 0 0 10px #00ffff;
-}
-</style>
 </head>
 <body>
 

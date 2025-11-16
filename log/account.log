@@ -33,3 +33,13 @@
 [2025-11-15 13:11:24] Login attempt: username=admin2, status=failed, user_id=6, IP=::1, agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0
 [2025-11-15 13:11:37] Login attempt: username=admin2, status=failed, user_id=6, IP=::1, agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0
 [2025-11-15 13:12:48] Login attempt: username=admin2, status=success, user_id=6, IP=::1, agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0
+[2025-11-16 11:30:03] Login attempt: username=admin2, status=success, user_id=6, IP=::1, agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0
+[2025-11-16 12:09:17] Login attempt: username=admin2, status=success, user_id=6, IP=::1, agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
+[2025-11-16 12:27:42] Login attempt: username=neil, status=success, user_id=25, IP=::1, agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
+[2025-11-16 12:27:49] Login attempt: username=neil, status=success, user_id=25, IP=::1, agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
+[2025-11-16 12:27:57] Login attempt: username=admin2, status=success, user_id=6, IP=::1, agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
+[2025-11-16 12:29:21] Login attempt: username=neil, status=success, user_id=25, IP=::1, agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
+[2025-11-16 12:30:13] Login attempt: username=admin2, status=success, user_id=6, IP=::1, agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
+[2025-11-16 12:31:19] Login attempt: username=neil, status=success, user_id=25, IP=::1, agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
+[2025-11-16 12:35:08] Login attempt: username=neil, status=success, user_id=25, IP=::1, agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
+[2025-11-16 12:53:39] Login attempt: username=Karma, status=success, user_id=11, IP=::1, agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
