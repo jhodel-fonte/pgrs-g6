@@ -1,79 +1,55 @@
 <?php
+// ----------------------------
+// SAMPLE USERS DATA
+// ----------------------------
+$users = [
+    [
+        "id" => 1,
+        "firstname" => "Jay Mark",
+        "lastname" => "Rocero",
+        "email" => "jay@example.com",
+        "mobile_number" => "09171234567",
+        "status" => "Pending",
+        "gender" => "Male",
+        "address" => "123 Main St, Barangay 1",
+        "dob" => "1990-05-15",
+        "profile_pic" => "profile1.jpg",
+        "id_doc" => "id1.jpg"
+    ],
+    [
+        "id" => 2,
+        "firstname" => "Tomoc",
+        "lastname" => "Neil",
+        "email" => "Tomne@example.com",
+        "mobile_number" => "09181234567",
+        "status" => "Approved",
+        "gender" => "Female",
+        "address" => "456 Riverside Rd",
+        "dob" => "1992-08-20",
+        "profile_pic" => "profile2.jpg",
+        "id_doc" => "id2.jpg"
+    ],
+    [
+        "id" => 3,
+        "firstname" => "Mhiel",
+        "lastname" => "Bisa",
+        "email" => "Sakol@example.com",
+        "mobile_number" => "09191234567",
+        "status" => "Pending",
+        "gender" => "Male",
+        "address" => "789 Barangay Street",
+        "dob" => "1988-12-02",
+        "profile_pic" => "",
+        "id_doc" => ""
+    ]
+];
+
+// ----------------------------
+// FLASH MESSAGE SIMULATION
+// ----------------------------
 session_start();
-require '../config/db.php';
-require '../config/smsHandler.php';
-
-// Only allow admin access
-if (!isset($_SESSION['role']) || strtolower($_SESSION['role']) !== 'admin') {
-    header("Location: ../login.php");
-    exit;
-}
-
-// ----------------------------
-// APPROVE USER
-// ----------------------------
-if (isset($_GET['approve'])) {
-    $userId = intval($_GET['approve']);
-
-    $stmt = $pdo->prepare("UPDATE users SET status = 'Approved', is_approved = 1 WHERE id = ?");
-    $stmt->execute([$userId]);
-
-    $stmtUser = $pdo->prepare("SELECT firstname, mobile_number FROM users WHERE id = ?");
-    $stmtUser->execute([$userId]);
-    $user = $stmtUser->fetch(PDO::FETCH_ASSOC);
-
-    $sms = new smsHandler($pdo);
-    $sms->sendSms([
-        'user_id' => $userId,
-        'phoneNumber' => $user['mobile_number'],
-        'message' => "Hello {$user['firstname']}, your Padre Garcia Service Report System account has been approved. You can now log in."
-    ]);
-
-    // ✅ Flash message
-    $_SESSION['message'] = ['type' => 'success', 'text' => 'User approved and SMS sent!'];
-
-    header("Location: manage_users.php");
-    exit;
-}
-
-// ----------------------------
-// REJECT USER
-// ----------------------------
-if (isset($_GET['reject'])) {
-    $userId = intval($_GET['reject']);
-
-    $stmtUser = $pdo->prepare("SELECT firstname, mobile_number FROM users WHERE id = ?");
-    $stmtUser->execute([$userId]);
-    $user = $stmtUser->fetch(PDO::FETCH_ASSOC);
-
-    $sms = new smsHandler($pdo);
-    $sms->sendSms([
-        'user_id' => $userId,
-        'phoneNumber' => $user['mobile_number'],
-        'message' => "Hello {$user['firstname']}, your Padre Garcia Service Report System registration has been rejected."
-    ]);
-
-    $pdo->prepare("DELETE FROM users WHERE id = ?")->execute([$userId]);
-
-    // ❌ Flash message
-    $_SESSION['message'] = ['type' => 'danger', 'text' => 'User rejected and deleted.'];
-
-    header("Location: manage_users.php");
-    exit;
-}
-
-// ----------------------------
-// FETCH USERS
-// ----------------------------
-$stmt = $pdo->query("
-    SELECT * FROM users
-    WHERE role = 'user'
-    ORDER BY 
-        CASE WHEN status = 'Pending' THEN 1 ELSE 2 END,
-        id DESC
-");
-$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$current_page = basename($_SERVER['PHP_SELF']);
+$message = $_SESSION['message'] ?? null;
+unset($_SESSION['message']);
 ?>
 
 <!DOCTYPE html>
@@ -94,20 +70,25 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <div class="container mt-4">
         <div class="card-custom p-4">
 
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h3 class="text">Manage User Requests</h3>
-                <a href="create_team.php" class="btn btn-outline-info">➕ Create Response Team</a>
+            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+                <h3 class="text-neon">Manage User Requests</h3>
+                <a href="create_team.php" class="btn btn-outline-info mt-2 mt-md-0">➕ Create Response Team</a>
             </div>
 
             <!-- FLASH MESSAGE -->
-            <?php if(isset($_SESSION['message'])): ?>
-                <div class="alert alert-<?= $_SESSION['message']['type']; ?> alert-dismissible fade show" role="alert">
-                    <?= $_SESSION['message']['text']; ?>
+            <?php if($message): ?>
+                <div class="alert alert-<?= $message['type']; ?> alert-dismissible fade show" role="alert">
+                    <?= $message['text']; ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
-                <?php unset($_SESSION['message']); ?>
             <?php endif; ?>
 
+             <!-- Search box -->
+            <div class="mb-3 d-flex justify-content-center">
+                <input type="text" id="userSearch" class="form w-50" placeholder="Search reports by user name, email, or mobile number...">
+            </div>
+
+            <div class="table-responsive">
             <table class="table table-dark table-hover text-center align-middle">
                 <thead>
                     <tr>
@@ -130,13 +111,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                         <td><?= htmlspecialchars($u['mobile_number']); ?></td>
                         <td><?= htmlspecialchars($u['email']); ?></td>
                         <td>
-                            <?php if($u['status'] === 'Approved'): ?>
-                                <span class="badge bg-success">Approved</span>
-                            <?php elseif($u['status'] === 'Pending'): ?>
-                                <span class="badge bg-warning text-dark">Pending</span>
-                            <?php else: ?>
-                                <span class="badge bg-secondary"><?= htmlspecialchars($u['status']); ?></span>
-                            <?php endif; ?>
+                            <span class="badge bg-<?= $u['status'] === 'Approved' ? 'success' : 'warning text-dark' ?>"><?= $u['status'] ?></span>
                         </td>
 
                         <!-- VIEW BUTTON -->
@@ -150,8 +125,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
                         <td>
                             <?php if($u['status'] === 'Pending'): ?>
-                                <a href="?approve=<?= $u['id']; ?>" class="btn btn-sm btn-success">Approve</a>
-                                <a href="?reject=<?= $u['id']; ?>" class="btn btn-sm btn-danger">Reject</a>
+                                <button class="btn btn-sm btn-success">Approve</button>
+                                <button class="btn btn-sm btn-danger">Reject</button>
                             <?php else: ?>
                                 <span>No Action</span>
                             <?php endif; ?>
@@ -160,17 +135,14 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <?php endforeach; endif; ?>
                 </tbody>
             </table>
-
+            </div>
         </div>
     </div>
 </div>
 
 </div>
 
-<!-- ====================================================== -->
-<!-- USER DETAILS MODALS WITH ID SHOWN INSIDE -->
-<!-- ====================================================== -->
-
+<!-- USER MODALS -->
 <?php foreach($users as $u): ?>
 <div class="modal fade" id="userModal<?= $u['id']; ?>" tabindex="-1">
     <div class="modal-dialog modal-lg">
@@ -183,7 +155,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
             <div class="modal-body">
                 <div class="row">
-                    <!-- Profile Picture -->
                     <div class="col-md-4 text-center">
                         <?php if ($u['profile_pic']): ?>
                             <img src="../uploads/profile/<?= $u['profile_pic']; ?>"
@@ -194,7 +165,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
                         <?php endif; ?>
                     </div>
 
-                    <!-- Info -->
                     <div class="col-md-8">
                         <p><strong>Name:</strong> <?= $u['firstname'].' '.$u['lastname']; ?></p>
                         <p><strong>Email:</strong> <?= $u['email']; ?></p>
@@ -229,7 +199,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
 </div>
 <?php endforeach; ?>
 
-<!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/admin.js"></script>
 </body>
