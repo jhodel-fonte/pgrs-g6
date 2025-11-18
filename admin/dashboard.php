@@ -1,35 +1,32 @@
 <?php
-session_start();
-require '../config/db.php';
+// alam mo na to
+$users = [
+    ["id" => 1, "name" => "John Doe"],
+    ["id" => 2, "name" => "Jane Smith"],
+    ["id" => 3, "name" => "Carlos Reyes"]
+];
+$userCount = count($users);
 
 
-// 1. ADMIN ACCESS CHECK
-if (!isset($_SESSION['role']) || strtolower($_SESSION['role']) !== 'admin') {
-    header("Location: ../login.php");
-    exit;
-}
-// 2. FETCH DASHBOARD COUNTS
-$userCount = $pdo->query("SELECT COUNT(*) FROM users WHERE role = 'user' AND status = 'Approved'")->fetchColumn();
-$teamCount = $pdo->query("SELECT COUNT(*) FROM users WHERE role = 'response_team'")->fetchColumn();
-$finishedCount = $pdo->query("SELECT COUNT(*) FROM reports WHERE status = 'finished'")->fetchColumn();
+$responseTeams = [
+    ["id" => 1, "name" => "Firefighter Team"],
+    ["id" => 2, "name" => "Police Team"]
+];
+$teamCount = count($responseTeams);
 
 
-// 3. MONTHLY REPORT STATISTICS
-$stmt = $pdo->query("
-    SELECT MONTH(date_submitted) AS month, COUNT(*) AS total
-    FROM reports
-    GROUP BY MONTH(date_submitted)
-    ORDER BY month
-");
+$finishedReports = [
+    ["id" => 1, "status" => "Completed"],
+    ["id" => 2, "status" => "Completed"],
+    ["id" => 3, "status" => "Completed"],
+    ["id" => 4, "status" => "Completed"]
+];
+$finishedCount = count($finishedReports);
 
-$monthlyData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$months = array_map(fn($r) => date("F", mktime(0, 0, 0, $r['month'], 1)), $monthlyData);
-$totals = array_column($monthlyData, 'total');
-
-// Required for active sidebar
-$current_page = basename($_SERVER['PHP_SELF']);
+$months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+$totals = [5, 8, 12, 20, 15, 9];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +34,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Dashboard | Padre Garcia Reporting</title>
 
-<!-- External Assets -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link rel="stylesheet" href="../assets/css/admin.css">

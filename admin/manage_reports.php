@@ -1,80 +1,59 @@
 <?php
-session_start();
-require '../config/db.php';
-require '../config/smsHandler.php';
+// ----------------------------
+// SAMPLE REPORTS DATA
+// ----------------------------
+$reports = [
+    [
+        "id" => 1,
+        "firstname" => "Jay Mark",
+        "lastname" => "Rocero",
+        "title" => "Fire in Barangay",
+        "category" => "Fire",
+        "status" => "Pending",
+        "date_submitted" => "2025-11-01",
+        "description" => "Fire reported near residential area",
+        "image" => "sample1.jpg",
+        "location" => "Barangay 1",
+        "latitude" => 13.7563,
+        "longitude" => 121.0583
+    ],
+    [
+        "id" => 2,
+        "firstname" => "Neil",
+        "lastname" => "Tomoc",
+        "title" => "Road Accident",
+        "category" => "Accident",
+        "status" => "Approved",
+        "date_submitted" => "2025-11-05",
+        "description" => "Car collision reported",
+        "image" => "sample2.jpg",
+        "location" => "Main St.",
+        "latitude" => 13.7580,
+        "longitude" => 121.0600
+    ],
+    [
+        "id" => 3,
+        "firstname" => "miel",
+        "lastname" => "Na Bisaya",
+        "title" => "Flooding",
+        "category" => "Natural Disaster",
+        "status" => "Ongoing",
+        "date_submitted" => "2025-11-10",
+        "description" => "Flooding reported in low-lying areas",
+        "image" => "sample3.jpg",
+        "location" => "Riverside",
+        "latitude" => 13.7550,
+        "longitude" => 121.0620
+    ]
+];
 
-// ✅ Check if admin is logged in
-if (!isset($_SESSION['role']) || strtolower($_SESSION['role']) !== 'admin') {
-    header("Location: ../login.php");
-    exit;
+// ----------------------------
+// FILTER STATUS (from query string)
+// ----------------------------
+$status = $_GET['status'] ?? 'All';
+if ($status !== 'All') {
+    $reports = array_filter($reports, fn($r) => $r['status'] === $status);
 }
-
-$sms = new smsHandler();
-
-// ✅ Handle Approve / Reject / Delete
-if (isset($_GET['action']) && isset($_GET['id'])) {
-    $action = $_GET['action'];
-    $reportId = intval($_GET['id']);
-
-    $stmt = $pdo->prepare("
-        SELECT r.*, u.firstname, u.lastname, u.mobile_number 
-        FROM reports r
-        JOIN users u ON r.user_id = u.id
-        WHERE r.id = ?
-    ");
-    $stmt->execute([$reportId]);
-    $report = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($report) {
-        $number = $report['mobile_number'];
-        $title = $report['title'];
-        $fname = $report['firstname'];
-
-        if ($action === 'approve') {
-            $pdo->prepare("UPDATE reports SET status = 'Approved' WHERE id = ?")->execute([$reportId]);
-            $sms->sendSms([
-                'phoneNumber' => $number,
-                'message' => "Hello $fname! Your report titled '$title' has been approved. The response team has been notified."
-            ]);
-        } elseif ($action === 'reject') {
-            $sms->sendSms([
-                'phoneNumber' => $number,
-                'message' => "Hello $fname, your report titled '$title' has been rejected. Please review the details and try again."
-            ]);
-            $pdo->prepare("DELETE FROM reports WHERE id = ?")->execute([$reportId]);
-        } elseif ($action === 'delete') {
-            $pdo->prepare("DELETE FROM reports WHERE id = ?")->execute([$reportId]);
-        }
-    }
-
-    header("Location: manage_reports.php?success=1");
-    exit;
-}
-
-// ✅ Filter by status
-$status = isset($_GET['status']) ? $_GET['status'] : 'All';
-
-if ($status === 'All') {
-    $stmt = $pdo->query("
-        SELECT r.*, u.firstname, u.lastname, u.mobile_number 
-        FROM reports r
-        JOIN users u ON r.user_id = u.id
-        ORDER BY r.date_submitted DESC
-    ");
-} else {
-    $stmt = $pdo->prepare("
-        SELECT r.*, u.firstname, u.lastname, u.mobile_number 
-        FROM reports r
-        JOIN users u ON r.user_id = u.id
-        WHERE r.status = ?
-        ORDER BY r.date_submitted DESC
-    ");
-    $stmt->execute([$status]);
-}
-$reports = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// Required for active sidebar highlight
-$current_page = basename($_SERVER['PHP_SELF']);
 ?>
 
 <!DOCTYPE html>
@@ -96,17 +75,26 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <h3 class="text-neon text-center mb-4">Manage Reports</h3>
 
             <!-- Filter buttons -->
-            <div class="d-flex justify-content-center mb-3 gap-2">
-                <a href="?status=All" class="btn btn-outline-light <?= ($status == 'All') ? 'active' : '' ?>">All</a>
-                <a href="?status=Pending" class="btn btn-outline-warning <?= ($status == 'Pending') ? 'active' : '' ?>">Pending</a>
-                <a href="?status=Approved" class="btn btn-outline-success <?= ($status == 'Approved') ? 'active' : '' ?>">Approved</a>
-                <a href="?status=Ongoing" class="btn btn-outline-info <?= ($status == 'Ongoing') ? 'active' : '' ?>">Ongoing</a>
-                <a href="?status=Resolved" class="btn btn-outline-primary <?= ($status == 'Resolved') ? 'active' : '' ?>">Resolved</a>
+            <div class="d-flex justify-content-center mb-3 gap-2 flex-wrap">
+                <?php 
+                $statuses = ['All','Pending','Approved','Ongoing','Resolved'];
+                foreach ($statuses as $s): ?>
+                    <a href="?status=<?= $s ?>" class="btn btn-outline-<?= match($s){
+                        'Pending'=>'warning',
+                        'Approved'=>'success',
+                        'Ongoing'=>'info',
+                        'Resolved'=>'primary',
+                        default=>'light'
+                    } ?> <?= ($status==$s)?'active':'' ?>">
+                        <?= $s ?>
+                    </a>
+                <?php endforeach; ?>
             </div>
 
-            <?php if (isset($_GET['success'])): ?>
-                <div class="alert alert-success text-center">✅ Action completed successfully!</div>
-            <?php endif; ?>
+            <!-- Search box -->
+            <div class="mb-3 d-flex justify-content-center">
+                <input type="text" id="reportSearch" class="form w-50" placeholder="Search reports by user, title, or category...">
+            </div>
 
             <?php if (empty($reports)): ?>
                 <p class="text-center">No reports found.</p>
@@ -127,33 +115,30 @@ $current_page = basename($_SERVER['PHP_SELF']);
                         <tbody>
                         <?php foreach ($reports as $r): ?>
                             <tr>
-                                <td><?= htmlspecialchars($r['id']); ?></td>
-                                <td><?= htmlspecialchars($r['firstname'] . ' ' . $r['lastname']); ?></td>
-                                <td><?= htmlspecialchars($r['title']); ?></td>
-                                <td><?= htmlspecialchars($r['category']); ?></td>
+                                <td><?= $r['id'] ?></td>
+                                <td><?= $r['firstname'] . ' ' . $r['lastname'] ?></td>
+                                <td><?= $r['title'] ?></td>
+                                <td><?= $r['category'] ?></td>
                                 <td>
-                                    <?php
-                                        $badge = match($r['status']) {
-                                            'Approved' => 'success',
-                                            'Pending' => 'warning',
-                                            'Ongoing' => 'info',
-                                            'Resolved' => 'primary',
-                                            default => 'secondary',
-                                        };
-                                    ?>
-                                    <span class="badge bg-<?= $badge; ?>"><?= htmlspecialchars($r['status']); ?></span>
+                                    <span class="badge bg-<?= match($r['status']){
+                                        'Approved'=>'success',
+                                        'Pending'=>'warning',
+                                        'Ongoing'=>'info',
+                                        'Resolved'=>'primary',
+                                        default=>'secondary'
+                                    } ?>"><?= $r['status'] ?></span>
                                 </td>
-                                <td><?= htmlspecialchars($r['date_submitted']); ?></td>
+                                <td><?= $r['date_submitted'] ?></td>
                                 <td>
                                     <button class="btn btn-sm btn-outline-info view-details" 
-                                            data-report='<?= json_encode($r); ?>'>
+                                            data-report='<?= json_encode($r) ?>'>
                                         View Details
                                     </button>
-                                    <?php if ($r['status'] === 'Pending'): ?>
-                                        <button onclick="confirmAction('approve', <?= $r['id']; ?>)" class="btn btn-success btn-sm">Approve</button>
-                                        <button onclick="confirmAction('reject', <?= $r['id']; ?>)" class="btn btn-danger btn-sm">Reject</button>
+                                    <?php if ($r['status']=='Pending'): ?>
+                                        <button onclick="confirmAction('approve', <?= $r['id'] ?>)" class="btn btn-success btn-sm">Approve</button>
+                                        <button onclick="confirmAction('reject', <?= $r['id'] ?>)" class="btn btn-danger btn-sm">Reject</button>
                                     <?php else: ?>
-                                        <button onclick="confirmAction('delete', <?= $r['id']; ?>)" class="btn btn-outline-danger btn-sm">Delete</button>
+                                        <button onclick="confirmAction('delete', <?= $r['id'] ?>)" class="btn btn-outline-danger btn-sm">Delete</button>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -182,8 +167,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <img id="modalImage" src="" class="img-fluid rounded shadow" style="max-height: 400px;">
         </div>
         <p><strong>Location:</strong> <span id="modalLocation"></span></p>
-        <div id="mapContainer" class="rounded overflow-hidden" style="height: 300px;">
-        </div>
+        <div id="mapContainer" class="rounded overflow-hidden" style="height: 300px;"></div>
       </div>
     </div>
   </div>
@@ -191,6 +175,5 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/admin.js"></script>
-
 </body>
 </html>
