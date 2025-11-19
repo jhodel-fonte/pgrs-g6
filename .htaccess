@@ -1,0 +1,12 @@
+# <IfModule mod_rewrite.c>
+#   RewriteEngine On
+#   RewriteBase /pgrs-g6
+
+#   # serve real files
+#   RewriteCond %{REQUEST_FILENAME} -f [OR]
+#   RewriteCond %{REQUEST_FILENAME} -d
+#   RewriteRule ^ - [L]
+
+#   # all other requests to front controller
+#   RewriteRule ^ index.php [L,QSA]
+# </IfModule>

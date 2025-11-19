@@ -1,5 +1,7 @@
 <?php
 
+echo json_encode(['status' => 'error', 'message' => 'Passwords do not match!']);
+
 // ob_start();
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

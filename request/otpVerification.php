@@ -36,7 +36,7 @@ try {
 
     if (empty($_SESSION['number'])) {
         http_response_code(400);
-        echo json_encode(['success' => false, 'message' => 'Session number missing']);
+        echo json_encode(['success' => false, 'message' => 'Invalid User Session.']);
         exit;
     }
 

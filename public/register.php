@@ -1,102 +1,206 @@
 <?php
-
-// $addressList = ["add1", "add1", "add1","add1","add1","add1","add1","add1","add1"];
-
-
+session_start();
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unity Register</title>
-  <link rel="stylesheet" href="assets/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Register - Padre Garcia Reporting System</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <img src="assets/logo.png" alt="Unity logo">
-    </div>
 
-        <div class="form-section">
-            <div class="card">
-                <h2>Register</h2>
-                <form id="registerForm" action="../request/register.php?register=1" method="POST">
-                  <div class="input-group">
-                        <i class="fa-solid fa-user"></i>
-                        <input type="text" id="FirstName" name="FirstName" placeholder="First Name">
-                    </div>
+  <div class="login-bg">
+    <div class="overlay"></div>
 
-            <div class="input-group">
-              <i class="fa-solid fa-user"></i>
-              <input type="text" id="LastName" name="LastName" placeholder="Last Name">
+    <div class="container d-flex justify-content-center align-items-start min-vh-100 py-5">
+      <div class="register-card p-5 text-light shadow-lg">
+        <div class="text-center">
+    <a href="index.php">
+        <img src="assets/img/logo.png" 
+             alt="UNITY PGSRS Logo" 
+             class="mb-2" 
+             style="width: 80px;">
+    </a>
+  </div>
+        <h2 class="text mb-4 text-center">Create Your Account</h2>
+
+        <!-- Alert Messages -->
+        <div id="alertContainer"></div>
+
+        <form id="registerForm" enctype="multipart/form-data"> <!-- action="register_process.php" method="POST" -->
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">First Name</label>
+              <input type="text" name="firstname" class="form-control form-control-lg" required>
             </div>
-
-            <div class="input-group">
-                <i class="fa-solid fa-phone"></i>
-                <input type="number" id="phNum" name="number" placeholder="Mobile Number">
-            </div>
-
-            <div class="input-group">
-              <i class="fa-solid fa-envelope"></i>
-              <input type="email" id="email" name="email" placeholder="Email">
-            </div>
-
-            <label for="gender">Gender:</label>
-            <select id="gender" name="gender" required>
-                <option value="">Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-            </select><br><br>
-
-            <label for="dob">Date of Birth:</label>
-            <input type="date" id="dob" name="dob" required><br><br>
-
-            <label for="address">Address:</label>
-            <textarea id="address" name="address" rows="2" cols="30"></textarea>
-
-            <!-- <label for="gender">A</label>
-            <select name="address">
-                <option value="">Select Address</option>
-                <?php foreach ($addressList as $add): ?>
-                  <option value="<?= $add ?>"><?= $add ?></option>
-                <?php endforeach; ?>  
-            </select><br><br> -->
-
-            <div class="input-group">
-              <i class="fa-solid fa-user"></i>
-              <input type="text" id="uName" name="username" placeholder="Username">
-            </div>
-
-            <div class="input-group">
-              <i class="fa-solid fa-lock"></i>
-              <input type="password" id="password" name="password" placeholder="Password">
-            </div>
-
-            <div class="input-group">
-              <i class="fa-solid fa-lock"></i>
-              <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Last Name</label>
+              <input type="text" name="lastname" class="form-control form-control-lg" required>
             </div>
           </div>
 
-          <button type="submit" class="btn">Register</button>
-          <div id="message"></div>
+          <div class="mb-3">
+            <label class="form-label">Mobile Number</label>
+            <input type="tel" name="mobile" class="form-control form-control-lg" pattern="09[0-9]{9}" placeholder="09XXXXXXXXX" required>
+          </div>
 
-          <div class="signup">
-            Already have an account? <a href="login.php">Login here</a>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control form-control-lg" required>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Gender</label>
+              <select name="gender" class="form-select form-select-lg" required>
+                <option value="">Select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Date of Birth</label>
+              <input type="date" name="dob" class="form-control form-control-lg" required>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Address</label>
+            <input type="text" name="address" class="form-control form-control-lg" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input type="text" name="username" class="form-control form-control-lg" required>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" id="password" name="password" class="form-control form-control-lg" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Confirm Password</label>
+              <input type="password" id="confirm_password" name="confirm_password" class="form-control form-control-lg" required>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <label class="form-label">Profile Picture</label>
+            <input type="file" name="profile_pic" accept="image/*" capture="user" class="form-control form-control-lg">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Government ID</label>
+            <input type="file" name="id_doc" accept="image/*,application/pdf" class="form-control form-control-lg">
+          </div>
+
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="terms" required>
+            <label class="form-check-label" for="terms">I acknowledge the above information is correct.</label>
+          </div>
+
+          <button type="submit" class="btn w-100 py-2" id="submitBtn">Register</button>
+
+          <div class="text-center mt-3">
+            <p>Already have an account? <a href="login.php" class="link text-decoration-none">Login here</a></p>
           </div>
         </form>
       </div>
     </div>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
-  <script src="../js/main.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    (function(){
+      const form = document.getElementById('registerForm');
+      const submitBtn = document.getElementById('submitBtn');
+
+      function escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = String(str);
+        return div.innerHTML;
+      }
+
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+
+        // Disable submit button
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Registering...';
+
+        try {
+          const response = await fetch('../request/register.php', {
+            method: 'POST',
+            body: formData
+          });
+
+          const text = await response.text();
+          let data;
+          try {
+            data = JSON.parse(text);
+            console.log('Server Response (parsed):', data);
+          } catch (err) {
+            console.warn('Server Response is not valid JSON. Raw response:', text);
+            data = { status: 'error', message: text || 'Empty response from server' };
+          }
+
+          // Enable submit button
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Register';
+
+          const message = (typeof data.message === 'string') ? data.message.trim() : JSON.stringify(data.message);
+          console.log('Server Response - status:', data.status, 'message:', message);
+
+          if (data.status === 'success') {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              html: escapeHtml(message),
+              timer: 1800,
+              showConfirmButton: false
+            });
+            setTimeout(() => { window.location.href = 'redirect.php'; }, 1500);
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              html: escapeHtml(message),
+              confirmButtonText: 'OK'
+            });
+          }
+        } catch (error) {
+          console.error('Fetch/network error:', error);
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Register';
+          Swal.fire({
+            icon: 'error',
+            title: 'Network Error',
+            text: String(error),
+            confirmButtonText: 'OK'
+          });
+        }
+      });
+    })();
+  </script>
+
 </body>
 </html>
