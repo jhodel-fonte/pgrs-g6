@@ -12,7 +12,7 @@ session_start();
 require_once __DIR__ . '/../src/auth/loginAuth.php';
 require_once __DIR__ . '/../src/api/otp.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['login']) && $_GET['login'] == 1) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['username']) && isset($_POST['password'])) {
 
         $user = login($_POST['username'], $_POST['password']); // this one verify the username and password and return a array of the user details 
