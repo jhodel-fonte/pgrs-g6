@@ -1,9 +1,9 @@
 <?php 
 
 //login verification 
-require_once __DIR__ ."../../user/account.php";
-require_once __DIR__ ."../../user/profile.php";
-require_once __DIR__ ."../../utillities/common.php";
+require_once __DIR__ . '/../user/account.php';
+require_once __DIR__ . '/../user/profile.php';
+require_once __DIR__ . '/../utillities/common.php';
 
 function login($uname, $password) { //checks if username and pass have same in db
     try {

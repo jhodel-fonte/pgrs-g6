@@ -9,49 +9,64 @@
 // $user = new User();
 session_start();
 
-require_once __DIR__ . '../../src/auth/loginAuth.php';
-require_once __DIR__ . '../../src/api/otp.php';
+require_once __DIR__ . '/../src/auth/loginAuth.php';
+require_once __DIR__ . '/../src/api/otp.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['login']) && $_GET['login'] == 1) {
-    echo "Getting Login";
     if (isset($_POST['username']) && isset($_POST['password'])) {
 
         $user = login($_POST['username'], $_POST['password']); // this one verify the username and password and return a array of the user details 
         
-        //set the data
-        $_SESSION['number'] = $user['userprofile']['mobileNum'];
-
-        // $_SESSION['otp_sent'] = 0;
-        $_SESSION['isOtpVerified'] = 0;
-
-        if (isset($user['response']) && $user['response'] == 'error') {//if error in username and password
+        // Check for login errors FIRST before accessing userprofile
+        if (isset($user['response']) && $user['response'] == 'error') {
             ob_clean();
             header("Location: ../public/login.php?error=" . urlencode($user['message'] ?? 'Login failed'));
             exit;
         }
 
-        //if not has already otp sent for this session
-        if (isset($_SESSION['otp_sent']) && (time() - $_SESSION['otp_sent_at']) <= 60 && !isset($_SESSION['user'])){
-            echo "Has Otp Sent";
+        // Verify that userprofile exists and has mobileNum
+        if (!isset($user['userprofile']) || !isset($user['userprofile']['mobileNum'])) {
+            ob_clean();
+            header("Location: ../public/login.php?error=" . urlencode('Invalid user data. Please try again.'));
+            exit;
+        }
+
+        // Set session data after successful login verification
+        $_SESSION['number'] = $user['userprofile']['mobileNum'];
+        $_SESSION['isOtpVerified'] = 0;
+
+        // Check if OTP was already sent recently (within 60 seconds)
+        if (isset($_SESSION['otp_sent_time']) && (time() < $_SESSION['otp_sent_time']) && isset($_SESSION['user'])) {
+            // OTP already sent, redirect to OTP page
             header("Location: ../public/otp.php");
             exit;
         }
 
-        //initialize otp sending
+        // Initialize OTP sending
         if (sendOtpToNumber($user['userprofile']['mobileNum'])) {
             $_SESSION['user'] = $user;
             header("Location: ../public/otp.php");
             exit;
+        } else {
+            // OTP sending failed
+            ob_clean();
+            unset($_SESSION['number']);
+            unset($_SESSION['user']);
+            header("Location: ../public/login.php?error=" . urlencode('Failed to send OTP. Please try again.'));
+            exit;
         }
 
-    } 
-
-    echo json_encode(['response' => "error", 'message' => 'No Set Username or Password']);
-    exit;
-
+    } else {
+        // Missing username or password
+        ob_clean();
+        header("Location: ../public/login.php?error=" . urlencode('Username and password are required.'));
+        exit;
+    }
 } 
 
+// Invalid request method or missing login parameter
 header("Location: ../public/error.html");
+exit;
 
 
 ?>

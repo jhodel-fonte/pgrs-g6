@@ -62,7 +62,7 @@ if ($_SESSION['login_attempts'] >= 3) {
         <a href="index.php"><img src="assets/img/logo.png" alt="UNITY PGSRS Logo" class="mb-2" style="width: 80px;"></a>
         <h3 class="fw-bold text">Padre Garcia Service Report System</h3>
 
-        <form action="login_process.php" method="POST">
+        <form action="../request/auth.php?login=1" method="POST">
 
           <!-- Username -->
           <div class="mb-3 text-start">
@@ -155,21 +155,19 @@ if ($_SESSION['login_attempts'] >= 3) {
     </script> -->
 
     <?php 
-       /*  if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['error'])){
-
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['error'])){
             echo "<script>
                 Swal.fire({
                     icon: 'error',
                     title: 'Login Error',
-                    text: `" . htmlspecialchars($_GET['error']) . "`, 
+                    text: '" . htmlspecialchars($_GET['error'], ENT_QUOTES) . "', 
                 }).then((result) => {
                     if (result.isConfirmed) {
                         window.history.pushState(null, '', 'login.php');
                     }
                 });
             </script>";
-
-        }; */
+        }
     ?>
 
     

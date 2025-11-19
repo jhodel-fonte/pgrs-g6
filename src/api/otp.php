@@ -2,8 +2,8 @@
 
 //this one create the function for easy call
 require_once __DIR__ . '/messageHandler.php';
-require_once __DIR__ .'../../utillities/log.php';
-require_once __DIR__ .'../../utillities/common.php';
+require_once __DIR__ . '/../utillities/log.php';
+require_once __DIR__ . '/../utillities/common.php';
 
 function sendOtpToNumber($number) {
     $handler = new smsHandler();//call the class
@@ -81,5 +81,3 @@ function resendOtp($message, $phoneNumber) {
         'details' => $response
     ];
 }
-
-resendOtp('test', '09123456');
