@@ -1,3 +1,19 @@
+# Disable directory listing
+Options -Indexes
+
+# Prevent access to sensitive files and directories
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|sql|conf)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Block access to sensitive directories
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^log/ - [F,L]
+    RewriteRule ^src/ - [F,L]
+</IfModule>
+
 # <IfModule mod_rewrite.c>
 #   RewriteEngine On
 #   RewriteBase /pgrs-g6
