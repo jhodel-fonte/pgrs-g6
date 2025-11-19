@@ -114,7 +114,7 @@ if ($_SESSION['login_attempts'] >= 3) {
         }     
     </script>
 
-    <!--     <script>
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
             const loginForm = document.getElementById('loginForm');
             const errorMessageDiv = document.getElementById('error-message');
@@ -152,7 +152,7 @@ if ($_SESSION['login_attempts'] >= 3) {
                 }
             });
         });
-    </script> -->
+    </script>
 
     <?php 
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['error'])){
