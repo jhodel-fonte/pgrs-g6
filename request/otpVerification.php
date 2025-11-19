@@ -28,15 +28,16 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 try {
     if (!isset($_POST['otp'])) {
         http_response_code(400);
-        echo json_encode(['success' => false, 'message' => 'OTP not providedzasa']);
+        echo json_encode(['success' => false, 'message' => 'OTP not provided']);
         exit;
     }
 
     $otp = sanitizeInput($_POST['otp']);
 
-    if (empty($_SESSION['number'])) {
+    // Check if user session exists
+    if (empty($_SESSION['number']) || !isset($_SESSION['user'])) {
         http_response_code(400);
-        echo json_encode(['success' => false, 'message' => 'Invalid User Session.']);
+        echo json_encode(['success' => false, 'message' => 'Invalid User Session. Please login again.']);
         exit;
     }
 

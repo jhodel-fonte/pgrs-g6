@@ -1,46 +1,46 @@
 <?php 
+// This file determines user authentication and redirects based on role
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-echo "This one deterimine the user authen";
-session_start();
-
-if (empty($_SESSION)) {
+// Check if user is logged in and OTP is verified
+if (empty($_SESSION) || !isset($_SESSION['user']) || !isset($_SESSION['isOtpVerified']) || $_SESSION['isOtpVerified'] !== 1) {
     header("Location: ../public/login.php");
     exit;
 }
 
-var_dump($_SESSION['user']['userprofile']['roleId']);
-
-if ($_SESSION['user']['userprofile']['roleId'] == 1) {
-    header("Location: ../public/admin/dashboard.php");
+// Check if userprofile and roleId exist
+if (!isset($_SESSION['user']['userprofile']) || !isset($_SESSION['user']['userprofile']['roleId'])) {
+    header("Location: ../public/login.php?error=" . urlencode('Invalid session data. Please login again.'));
     exit;
 }
 
-if ($_SESSION['user']['userprofile']['roleId'] !== 1) {
-    header("Location: ../public/user/user_dashboard.php"); 
-    exit;
+$roleId = $_SESSION['user']['userprofile']['roleId'];
+
+// Route based on roleId
+// roleId 1 = Admin
+// roleId 2 or 3 = Response Team (admin2)
+// roleId 4 = Regular User
+switch ($roleId) {
+    case 1:
+        // Admin
+        header("Location: ../public/admin/dashboard.php");
+        exit;
+        break;
+        
+    case 2:
+    case 3:
+        // Response Team
+        header("Location: ../public/admin2/admin_dashboard.php");
+        exit;
+        break;
+        
+    case 4:
+    default:
+        // Regular User
+        header("Location: ../public/user/user_dashboard.php");
+        exit;
+        break;
 }
-
-
-
-// if (session_status() === PHP_SESSION_NONE) {
-//     session_start();
-// }
-
-// if (!empty($_SESSION)) {
-//     foreach ($_SESSION as $key => $value) {
-//         echo "<p>Variable: " . htmlspecialchars($key) . "</p>";
-
-//         if (is_array($value)) {
-//             echo "<p>Value: (Array)</p>\n";
-//             echo "<pre>" . htmlspecialchars(print_r($value, true)) . "</pre>\n";
-//         } else {
-//             echo "<p>Value: " . htmlspecialchars($value) . "</p>\n";
-//         }
-//     }
-// } else {
-//     echo "<p>No session variables are currently set.</p>\n";
-// }
-
-
-
 ?>

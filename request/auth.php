@@ -32,11 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Set session data after successful login verification
+        $_SESSION['user'] = $user;
         $_SESSION['number'] = $user['userprofile']['mobileNum'];
         $_SESSION['isOtpVerified'] = 0;
 
         // Check if OTP was already sent recently (within 60 seconds)
-        if (isset($_SESSION['otp_sent_time']) && (time() < $_SESSION['otp_sent_time']) && isset($_SESSION['user'])) {
+        if (isset($_SESSION['otp_sent_time']) && (time() < $_SESSION['otp_sent_time'])) {
             // OTP already sent, redirect to OTP page
             header("Location: ../public/otp.php");
             exit;
@@ -44,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Initialize OTP sending
         if (sendOtpToNumber($user['userprofile']['mobileNum'])) {
-            $_SESSION['user'] = $user;
             header("Location: ../public/otp.php");
             exit;
         } else {
