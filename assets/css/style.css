@@ -36,7 +36,7 @@ body {
   background: rgba(236, 232, 232, 0.07);
   border-radius: 20px;
   backdrop-filter: blur(12px);
-  max-width: 420px;
+  max-width: 600px;
   width: 100%;
   max-height: 90vh; /* ✅ limit height to viewport */
   overflow-y: auto; /* ✅ scroll inside card only */

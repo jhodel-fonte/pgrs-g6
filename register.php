@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 ?>
@@ -36,7 +35,10 @@ session_start();
   </div>
         <h2 class="text mb-4 text-center">Create Your Account</h2>
 
-        <form id="registerForm" action="register_process.php" method="POST" enctype="multipart/form-data">
+        <!-- Alert Messages -->
+        <div id="alertContainer"></div>
+
+        <form id="registerForm" enctype="multipart/form-data"> <!-- action="register_process.php" method="POST" -->
 
           <div class="row">
             <div class="col-md-6 mb-3">
@@ -94,18 +96,23 @@ session_start();
               <input type="password" id="confirm_password" name="confirm_password" class="form-control form-control-lg" required>
             </div>
           </div>
+          
           <div class="mb-3">
-  <label class="form-label">Profile Picture</label>
-  <input type="file" name="profile_pic" accept="image/*" capture="user" class="form-control form-control-lg" required>
-</div>
+            <label class="form-label">Profile Picture</label>
+            <input type="file" name="profile_pic" accept="image/*" capture="user" class="form-control form-control-lg">
+          </div>
 
-<div class="mb-3">
-  <label class="form-label">Government ID</label>
-  <input type="file" name="id_doc" accept="image/*,application/pdf" class="form-control form-control-lg" required>
-</div>
+          <div class="mb-3">
+            <label class="form-label">Government ID</label>
+            <input type="file" name="id_doc" accept="image/*,application/pdf" class="form-control form-control-lg" required>
+          </div>
 
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="terms" required>
+            <label class="form-check-label" for="terms">I acknowledge the above information is correct.</label>
+          </div>
 
-          <button type="submit" class="btn w-100 py-2 ">Register</button>
+          <button type="submit" class="btn w-100 py-2" id="submitBtn">Register</button>
 
           <div class="text-center mt-3">
             <p>Already have an account? <a href="login.php" class="link text-decoration-none">Login here</a></p>
@@ -114,9 +121,86 @@ session_start();
       </div>
     </div>
   </div>
-  
 
   <script src="assets/js/main.js"></script>
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    (function(){
+      const form = document.getElementById('registerForm');
+      const submitBtn = document.getElementById('submitBtn');
+
+      function escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = String(str);
+        return div.innerHTML;
+      }
+
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+
+        // Disable submit button
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Registering...';
+
+        try {
+          const response = await fetch('register_process.php', {
+            method: 'POST',
+            body: formData
+          });
+
+          const text = await response.text();
+          let data;
+          try {
+            data = JSON.parse(text);
+            console.log('Server Response (parsed):', data);
+          } catch (err) {
+            console.warn('Server Response is not valid JSON. Raw response:', text);
+            data = { status: 'error', message: text || 'Empty response from server' };
+          }
+
+          // Enable submit button
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Register';
+
+          const message = (typeof data.message === 'string') ? data.message.trim() : JSON.stringify(data.message);
+          console.log('Server Response - status:', data.status, 'message:', message);
+
+          if (data.status === 'success') {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              html: escapeHtml(message),
+              timer: 1800,
+              showConfirmButton: false
+            });
+            setTimeout(() => { window.location.href = 'redirect.php'; }, 1500);
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              html: escapeHtml(message),
+              confirmButtonText: 'OK'
+            });
+          }
+        } catch (error) {
+          console.error('Fetch/network error:', error);
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Register';
+          Swal.fire({
+            icon: 'error',
+            title: 'Network Error',
+            text: String(error),
+            confirmButtonText: 'OK'
+          });
+        }
+      });
+    })();
+  </script>
 
 </body>
 </html>

@@ -1,7 +1,9 @@
 <?php
 session_start();
-require_once 'config/db.php'; // PDO connection
-require_once 'config/smsHandler.php';
+header('Content-Type: application/json');
+
+require_once __DIR__ .'/config/API/smsHandler.php';
+require_once './config/Database/dbqueries.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $firstname = trim($_POST['firstname']);
@@ -17,21 +19,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // --- Password confirmation ---
     if ($password !== $confirm) {
-        echo "<script>alert('Passwords do not match!'); window.history.back();</script>";
+        echo json_encode(['status' => 'error', 'message' => 'Passwords do not match!']);
         exit();
     }
 
     // --- Check for duplicates ---
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? OR email = ? OR mobile_number = ?");
-    $stmt->execute([$username, $email, $mobile]);
-    $existing = $stmt->fetch(PDO::FETCH_ASSOC);
+    $db = new DbQueries();
+    $existing = $db->checkDuplicateUser($username, $email, $mobile);
+    // var_dump($existing);
 
     if ($existing) {
         $msg = "";
-        if ($existing['username'] === $username) $msg .= "Username already exists.\n";
+        if ($existing['username'] === $username) $msg .= "Username already exists.";
         if ($existing['email'] === $email) $msg .= "Email already exists.\n";
-        if ($existing['mobile_number'] === $mobile) $msg .= "Mobile number already exists.\n";
-        echo "<script>alert('{$msg}'); window.history.back();</script>";
+        if (isset($existing['mobile_number']) && $existing['mobile_number'] === $mobile) $msg .= "Mobile number already exists.";
+        echo json_encode(['status' => 'error', 'message' => $msg]);
         exit();
     }
 
@@ -51,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $profilePic = uniqid('profile_') . '.' . $ext;
         move_uploaded_file($_FILES['profile_pic']['tmp_name'], $profileDir . $profilePic);
     } else {
-        echo "<script>alert('Please upload a profile picture.'); window.history.back();</script>";
+        echo json_encode(['status' => 'error', 'message' => 'Please upload a profile picture.']);
         exit();
     }
 
@@ -61,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $idDoc = uniqid('id_') . '.' . $ext;
         move_uploaded_file($_FILES['id_doc']['tmp_name'], $idDir . $idDoc);
     } else {
-        echo "<script>alert('Please upload a government ID.'); window.history.back();</script>";
+        echo json_encode(['status' => 'error', 'message' => 'Please upload a Valid ID.']);
         exit();
     }
 
@@ -71,7 +73,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $res = json_decode($response, true);
 
     if (isset($res['status']) && $res['status'] === 'success') {
-        // Save everything in session for OTP verification
+        // Save mobile and pending registration in session for OTP verification
+        $_SESSION['mobile_number'] = $mobile;
         $_SESSION['pending_registration'] = [
             'firstname'    => $firstname,
             'lastname'     => $lastname,
@@ -81,19 +84,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             'dob'          => $dob,
             'address'      => $address,
             'username'     => $username,
-            'password'     => password_hash($password, PASSWORD_DEFAULT), // store hashed
+            'password'     => password_hash($password, PASSWORD_DEFAULT),
             'profile_pic'  => $profilePic,
             'id_doc'       => $idDoc
         ];
 
-        header("Location: otp.php");
+        // Return JSON only — client will redirect
+        echo json_encode(['status' => 'success', 'message' => 'Registration successful! Redirecting to OTP verification...']);
         exit();
     } else {
-        echo "<script>alert('Failed to send OTP. Please check your number or try again later.'); window.history.back();</script>";
+        echo json_encode(['status' => 'error', 'message' => 'Failed to send OTP. Please check your number or try again later.']);
         exit();
     }
 } else {
-    header("Location: register.php");
+    echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
     exit();
 }
 ?>
