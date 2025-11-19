@@ -1,7 +1,7 @@
 <?php
 //this file to help some functions like input sanitation hashing
 //tito yung helpers
-require_once __DIR__ .'../../user/profile.php';
+require_once __DIR__ .'../../data/profile.php';
 
 function sanitizeInput($input) {//remove whitespace
     // $var = gettype($input);
