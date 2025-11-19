@@ -23,10 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['action'])){
 $userId = $_SESSION['user']['userprofile']['pgCode'];
 // var_dump($_SESSION['user']);
 
-if (isset($_SESSION['user'])){
-    //update data 
-    // updateSession($userId);
-}
+// if (isset($_SESSION['user'])){
+//     //update data 
+//     // updateSession($userId);
+// }
 
 // Fetch counts from reports table
 try {

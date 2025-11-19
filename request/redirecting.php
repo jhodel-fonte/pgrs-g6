@@ -4,6 +4,15 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// foreach ($_SESSION as $value => $data) {
+//     echo $value .": " .$data ."<br>";
+
+// }
+
+// var_dump($_SESSION['user']['userprofile']);
+
+// exit;
+
 // Check if user is logged in and OTP is verified
 if (empty($_SESSION) || !isset($_SESSION['user']) || !isset($_SESSION['isOtpVerified']) || $_SESSION['isOtpVerified'] !== 1) {
     header("Location: ../public/login.php");
