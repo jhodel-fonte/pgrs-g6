@@ -12,7 +12,7 @@ session_start();
 require_once __DIR__ . '../../src/auth/loginAuth.php';
 require_once __DIR__ . '../../src/api/otp.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['login']) && $_GET['login'] == 1) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "Getting Login";
     if (isset($_POST['username']) && isset($_POST['password'])) {
 
@@ -49,9 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['login']) && $_GET['log
     echo json_encode(['response' => "error", 'message' => 'No Set Username or Password']);
     exit;
 
-} 
+} else {
+    header("Location: ../index.php");
+}
 
-header("Location: ../public/error.html");
+
 
 
 ?>
