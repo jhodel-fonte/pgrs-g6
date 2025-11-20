@@ -20,3 +20,7 @@
 [2025-11-15 07:26:55] SQLSTATE[HY000] [1130] Host 'localhost' is not allowed to connect to this MariaDB server
 [2025-11-15 07:29:03] SQLSTATE[HY000] [1130] Host 'localhost' is not allowed to connect to this MariaDB server
 [2025-11-15 07:37:08] SQLSTATE[HY000] [1045] Access denied for user 'pgsys_admin'@'localhost' (using password: YES)
+[2025-11-17 16:36:42] SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[2025-11-17 16:37:02] SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[2025-11-18 16:22:17] SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it
+[2025-11-18 16:22:21] SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it

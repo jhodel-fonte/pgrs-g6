@@ -61,3 +61,6 @@
 [2025-11-17 12:59:48] Login attempt: username=admin2, status=success, user_id=6, IP=::1, agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
 [2025-11-17 13:00:22] Login attempt: username=neil, status=success, user_id=25, IP=::1, agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
 [2025-11-17 13:16:30] Login attempt: username=admin2, status=success, user_id=6, IP=::1, agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
+[2025-11-17 16:37:15] Login attempt: username=Karma, status=success, user_id=11, IP=::1, agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
+[2025-11-17 16:37:32] Login attempt: username=admin2, status=success, user_id=6, IP=::1, agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
+[2025-11-18 16:25:44] Login attempt: username=admin2, status=success, user_id=6, IP=::1, agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36

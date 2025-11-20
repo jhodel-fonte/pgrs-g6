@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: url('../img/bg.jpg') no-repeat center/cover fixed;
+    background: url('../img/pgsrsBG.jpg') no-repeat center/cover fixed;
 }
 
 body::before {
@@ -86,8 +86,9 @@ body::before {
 .dashboard-title,
 .chart-title,
 .text-neon {
-    color: #00eaff;
+    color: #ffffff;
     font-weight: 700;
+    text-shadow: 0 0 20px #00eaff;
 }
 
 /* ---------------------------------------
@@ -99,7 +100,6 @@ body::before {
     text-align: center;
     border-radius: 12px;
     color: #fff;
-    box-shadow: 0 0 12px rgba(0,255,255,0.3);
     transition: 0.3s ease;
 }
 
@@ -121,7 +121,6 @@ body::before {
     padding: 20px;
     border-radius: 12px;
     height: 350px;
-    box-shadow: 0 0 15px rgba(0,255,255,0.3);
 }
 
 .chart-box canvas {
@@ -133,12 +132,12 @@ body::before {
    FORM CARD (Shared)
 --------------------------------------- */
 .card-custom {
-    background: rgba(20,20,20,0.9);
-    border: 1px solid #2a2a2a !important;
-    box-shadow: 0 0 15px rgba(0,255,150,0.15);
+    background: #111827;
     padding: 25px;
-    border-radius: 18px;
+    text-align: center;
+    border-radius: 12px;
     color: #fff;
+    transition: 0.3s ease;
 }
 
 .card-custom label {
