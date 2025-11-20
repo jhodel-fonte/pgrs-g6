@@ -6,9 +6,6 @@ session_start();
 // echo '1';
 if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isValid'] === 1 && isset($_SESSION['isOtpVerified']) && $_SESSION['isOtpVerified'] === 1) {
     //aready login so it will redirect to main
-
-
-
     header("Location: ../public/user/user_dashboard.php");
     exit;
 }
@@ -20,19 +17,6 @@ if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isVali
     exit;
 } */
 
-// Initialize login attempts if not set
-if (!isset($_SESSION['login_attempts'])) {
-    $_SESSION['login_attempts'] = 0;
-    $_SESSION['last_attempt'] = time();
-}
-
-// Generate CAPTCHA numbers if needed
-if ($_SESSION['login_attempts'] >= 3) {
-    if (!isset($_SESSION['captcha_a']) || !isset($_SESSION['captcha_b'])) {
-        $_SESSION['captcha_a'] = rand(1, 9);
-        $_SESSION['captcha_b'] = rand(1, 9);
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -75,20 +59,6 @@ if ($_SESSION['login_attempts'] >= 3) {
             <label class="form-label text-light">Password</label>
             <input type="password" name="password" class="form-control form-control-lg" required>
           </div>
-
-          <!-- CAPTCHA (only shows after 3 failed attempts) -->
-          <?php if ($_SESSION['login_attempts'] >= 3): ?>
-          <div class="mb-4 text-start">
-            <label class="form-label text-light fw-bold">Security Check</label>
-            <div class="p-3 rounded bg-dark text-light border border-secondary mb-2">
-              <span class="fs-5">
-                <?= (int)$_SESSION['captcha_a'] ?> + <?= (int)$_SESSION['captcha_b'] ?> = ?
-              </span>
-            </div>
-            <input type="number" name="captcha_answer" class="form-control form-control-lg" placeholder="Enter the answer" required>
-            <small class="text-warning">CAPTCHA visible due to multiple failed login attempts.</small>
-          </div>
-          <?php endif; ?>
 
           <!-- Login Button -->
           <button type="submit" class="btn w-100 py-2">Login</button>

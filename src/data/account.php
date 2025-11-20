@@ -53,31 +53,28 @@ class UserAcc {//this class communicates to database Account Table
         return !empty($existing);
     }
 
-
     //create account 
-    function register($username, $hashedPass, $mNumber, $pgCode, $email) {
+    function addAccount($username, $hashedPass, $mNumber, $pgCode, $email) {
         
         try {
             $num = sanitizeInput($mNumber);
 
             if ($this->isUsernameRegistered($username)) {
-                // echo '11';
                 throw new Exception('Already Have Username');
             }
 
-            $defaultRole = 4;
+            $defaultRole = 3;
             $defaultStatus = 4;
 
             // $reg = $this->conn->prepare("Call CreateNewAccount(?, ?, ?, ?, ?, ?, ?)");
             $reg = $this->conn->prepare("INSERT INTO `account`(`username`, `saltedPass`, `mobileNum`, `roleId`, `statusId`, `pgCode`, `email`) 
-                                            VALUES (?, ?, ?, ?, ?, ?, ?)");
-            // var_dump($num);
+                                         VALUES (?, ?, ?, ?, ?, ?, ?)");
             $reg->bind_param("sssiiis", $username, $hashedPass, $num, $defaultRole, $defaultStatus, $pgCode, $email);
             
             if (!$reg->execute()){
                 throw new Exception($reg->error);
             };
-            // echo $reg->insert_id;
+
             return true;
 
         } catch (Exception $errs) {
@@ -90,7 +87,6 @@ class UserAcc {//this class communicates to database Account Table
 
     //update account
     function update($id, $key, $value){
-        // $keyList = [1 => "username", 2 => "saltedPass", 3 => "mobileNum", 4 => "roleId", 5 => "statusId"];
 
         $keyList = getTableRows($this->conn, 'account');
         $id = sanitizeInput($id);
@@ -98,7 +94,6 @@ class UserAcc {//this class communicates to database Account Table
 
         try {
             if (!in_array($key, $keyList, true)) {
-                // echo "Updated : " .$key ." = " .$value;
                 throw new Exception("Exception : Fail to Update Data! Unauthorize Account Table Row Key : " .$key);
             }
 
@@ -147,7 +142,7 @@ class UserAcc {//this class communicates to database Account Table
             }
 
         } catch (Exception $r) {
-            // echo "Message: " .$r->getMessage();
+            echo "Message: " .$r->getMessage();
             return 0;
         }
     }

@@ -29,9 +29,10 @@ function CreateNewUserAccount($arrayInfo) {
         if (isset($profileResult['error'])) {
             throw new Exception('Profile creation failed: ' . $profileResult['error']);
         }
+
         $pgCode = $profileResult['pgID']; 
-        // var_dump($number);
-        $regResult = $userAcc->register($username, $pass, $number, $pgCode, $email);
+        
+        $regResult = $userAcc->addAccount($username, $pass, $number, $pgCode, $email);
         if ($regResult['status'] == 'error') {
             $userProfile->deleteUser($pgCode);
             throw new Exception('Account registration failed ') ;
@@ -40,6 +41,7 @@ function CreateNewUserAccount($arrayInfo) {
         return [
             'response' => 'success',    
         ];
+        
     } catch (Exception $er) {
         error_log('CreateNewUserAccount error: ' . $er->getMessage());
         return ['message' => $er->getMessage(),

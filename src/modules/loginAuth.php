@@ -10,16 +10,14 @@ function login($uname, $password) { //checks if username and pass have same in d
         $tempAccount = new UserAcc(); //init acc
 
         $result = $tempAccount->getAccByUsername($uname);//get acc same username in db is available then return a array or false
-        // var_dump($result);
 
-        if ($result != 0){// check the return contents
+        if ($result != 0){
 
             $isUnameMatched = ($uname == $result['username']) ? true : false;
             $isPassMatched = verifyPassword($password, $result['saltedPass']);
 
             if ($isUnameMatched && $isPassMatched) {
-                
-                error_log("Login successful for user: " . $uname); // Log successful login
+                error_log("Login successful for user: " . $uname); 
 
                 //return array details
                 $profile = new profileMng();
@@ -29,7 +27,6 @@ function login($uname, $password) { //checks if username and pass have same in d
                     'userprofile' => $userProfile 
                 ];
                 
-                // var_dump($userProfile);
                 return $response;
 
             } else {
@@ -48,6 +45,11 @@ function login($uname, $password) { //checks if username and pass have same in d
     }
 
 }
+
+/* function checkUserStatus($username) {
+    $tempAccount = new UserAcc();
+    $tempAccount->
+} */
 
 
 ?>
