@@ -1,10 +1,13 @@
-
+<?php
+// Get current page filename
+$currentPage = basename($_SERVER['PHP_SELF']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="./assets/admin.css">
 </head>
 <body>
 
@@ -15,9 +18,9 @@
 <div class="sidebar">
     <h3 class="text-neon text-center mb-4">Admin Panel</h3>
 
-    <a href="dashboard.php" class="active">Dashboard</a>
-    <a href="manage_users.php" class="#">Manage Users</a>
-    <a href="manage_reports.php" class="#">Manage Reports</a>
+    <a href="dashboard.php" class="<?php echo ($currentPage === 'dashboard.php') ? 'active' : ''; ?>">Dashboard</a>
+    <a href="manage_users.php" class="<?php echo ($currentPage === 'manage_users.php') ? 'active' : ''; ?>">Manage Users</a>
+    <a href="manage_reports.php" class="<?php echo ($currentPage === 'manage_reports.php') ? 'active' : ''; ?>">Manage Reports</a>
     <a href="../request/logout.php?logout=1">Logout</a>
 </div>
 

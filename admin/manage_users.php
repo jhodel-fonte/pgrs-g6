@@ -50,6 +50,12 @@ $users = [
 session_start();
 $message = $_SESSION['message'] ?? null;
 unset($_SESSION['message']);
+
+//filter
+$status = $_GET['status'] ?? 'All';
+if ($status !== 'All') {
+    $users = array_filter($users, fn($r) => $r['status'] === $status);
+}
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +64,7 @@ unset($_SESSION['message']);
 <meta charset="UTF-8">
 <title>Manage Users | Padre Garcia Reporting</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="../assets/css/admin.css" rel="stylesheet">
+<link href="./assets/admin.css" rel="stylesheet">
 </head>
 
 <body>
@@ -82,6 +88,21 @@ unset($_SESSION['message']);
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
             <?php endif; ?>
+                <!-- Filter -->
+            <div class="d-flex justify-content-center mb-3 gap-2 flex-wrap">
+                <?php 
+                $statuses = ['All','Pending','Approved', 'Rejected'];
+                foreach ($statuses as $s): ?>
+                    <a href="?status=<?= $s ?>" class="btn btn-outline-<?= match($s){
+                        'Pending'=>'warning',
+                        'Approved'=>'success',
+                        'Rejected'=>'danger',
+                        default=>'light'
+                    } ?> <?= ($status==$s)?'active':'' ?>">
+                        <?= $s ?>
+                    </a>
+                <?php endforeach; ?>
+            </div>
 
              <!-- Search box -->
             <div class="mb-3 d-flex justify-content-center">

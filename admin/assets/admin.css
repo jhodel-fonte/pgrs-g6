@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: url('../img/bg.jpg') no-repeat center/cover fixed;
+    background: url('../../public/assets/img/pgsrsBG.jpg') no-repeat center/cover fixed;
 }
 
 body::before {

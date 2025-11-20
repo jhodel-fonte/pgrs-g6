@@ -20,6 +20,7 @@ class Database { //Database Connection
                 throw new Exception("Connection failed: " . mysqli_connect_error());
             }
             // echo "<script>console.log('Connected Database!')</script>";
+            return $this->conn;
          
         } catch (Exception $error) {
             error_log(date('[Y-m-d H:i:s] ') . $error->getMessage() . PHP_EOL, 3, __DIR__ . '/../log/database.log');

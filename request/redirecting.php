@@ -34,7 +34,7 @@ $roleId = $_SESSION['user']['userprofile']['roleId'];
 switch ($roleId) {
     case 1:
         // Admin
-        header("Location: ../public/admin/dashboard.php");
+        header("Location: ../admin/dashboard.php");
         exit;
         break;
         
