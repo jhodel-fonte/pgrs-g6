@@ -148,7 +148,7 @@ session_start();
         submitBtn.textContent = 'Registering...';
 
         try {
-          const response = await fetch('../request/register.php', {
+          const response = await fetch('../handlers/register.php', {
             method: 'POST',
             body: formData
           });

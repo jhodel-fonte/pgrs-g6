@@ -167,7 +167,7 @@ try {
             <li><a href="user_dashboard.php" class="active">Dashboard</a></li>
             <li><a href="../user/report.php">Submit Report</a></li>
             <li><a href="../user/view.php">My Reports</a></li>
-            <li><a href="../../request/logout.php?logout=1">Logout</a></li>
+            <li><a href="../../handlers/logout.php?logout=1">Logout</a></li>
         </ul>
     </aside>
 

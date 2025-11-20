@@ -10,7 +10,7 @@ if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isVali
   exit;
 }
 
-require_once __DIR__ .'../../request/logout.php';
+require_once __DIR__ .'../../handlers/logout.php';
 
 
 ?>

@@ -2,7 +2,22 @@
 // ----------------------------
 // SAMPLE REPORTS DATA
 // ----------------------------
-$reports = [
+
+require_once __DIR__ .'../../src/modules/reports.php';
+$result = getAllReports(1);
+$sanitizedReports = [];
+
+$data_source_url = ''; 
+
+// Fetch the raw JSON string
+// You can use cURL here for more control, but file_get_contents is simplest
+$json_report_string = file_get_contents($data_source_url);
+
+if ($json_report_string === false) {
+    die("Error: Could not retrieve data from the source URL.");
+}
+
+/* $reports = [
     [
         "id" => 1,
         "firstname" => "Jay Mark",
@@ -45,7 +60,7 @@ $reports = [
         "latitude" => 13.7550,
         "longitude" => 121.0620
     ]
-];
+]; */
 
 // ----------------------------
 // FILTER STATUS (from query string)

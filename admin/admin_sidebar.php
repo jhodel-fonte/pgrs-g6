@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ .'../../src/utillities/sessionRouting.php';
+require_once __DIR__ .'../../src/modules/reports.php';
 
 $currentPage = basename($_SERVER['PHP_SELF']);
 ?>
@@ -21,7 +23,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <a href="dashboard.php" class="<?php echo ($currentPage === 'dashboard.php') ? 'active' : ''; ?>">Dashboard</a>
     <a href="manage_users.php" class="<?php echo ($currentPage === 'manage_users.php') ? 'active' : ''; ?>">Manage Users</a>
     <a href="manage_reports.php" class="<?php echo ($currentPage === 'manage_reports.php') ? 'active' : ''; ?>">Manage Reports</a>
-    <a href="../request/logout.php?logout=1">Logout</a>
+    <a href="../handlers/logout.php?logout=1">Logout</a>
 </div>
 
 <!-- Main content -->

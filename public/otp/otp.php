@@ -59,7 +59,7 @@ $_SESSION['otp_sent_time'] = time() + 3;
 
     <p>Enter the 6-digit code sent to <span><?= (isset($_SESSION['number'])) ? htmlspecialchars($_SESSION['number']) : '(Error User Number)'; ?></span></p>
 
-    <form id="verifyForm"> <!-- method="POST" action="../request/otpVerification.php"> -->
+    <form id="verifyForm"> <!-- method="POST" action="../../handlers/otpVerification.php"> -->
       <div class="otp-input">
         <input type="text" maxlength="1" >
         <input type="text" maxlength="1" >
@@ -82,7 +82,7 @@ $_SESSION['otp_sent_time'] = time() + 3;
         echo "<p>Verify Your Identity</p>";
       } else {
           echo "<div class='Log-Out'>
-                <a href='../request/logout.php?logout=1'>Logout</a>
+                <a href='../../handlers/logout.php?logout=1'>Logout</a>
               </div>";
       } */
     
@@ -196,7 +196,7 @@ $_SESSION['otp_sent_time'] = time() + 3;
           body.append('otp', otp);
           showMessage('Verifying...');
 
-          const res = await fetch('../../request/otpVerification.php', {
+          const res = await fetch('../../handlers/otpVerification.php', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -213,7 +213,7 @@ $_SESSION['otp_sent_time'] = time() + 3;
           if (res.ok && data.success) {
             showSweetAlert(data.message || 'OTP verified successfully.');
             setTimeout(() => {
-              window.location.href = '../request/redirecting.php';
+              window.location.href = '../../handlers/redirecting.php';
             }, 1500);
 
           } else {

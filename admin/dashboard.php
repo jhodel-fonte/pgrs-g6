@@ -1,4 +1,9 @@
 <?php
+session_start();
+
+require_once __DIR__ .'../../src/modules/reports.php';
+$reports = getAllReports(1);
+
 // alam mo na to
 $users = [
     ["id" => 1, "name" => "John Doe"],
@@ -88,3 +93,5 @@ let chartTotals = <?= json_encode($totals) ?>;
 
 </body>
 </html>
+
+

@@ -188,7 +188,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <li><a href="user_dashboard.php">Dashboard</a></li>
         <li><a href="../user/report.php" class="active">Submit Report</a></li>
         <li><a href="../user/view.php">My Reports</a></li>
-        <li><a href="../../request/logout.php?logout=1">Logout</a></li>
+        <li><a href="../../handlers/logout.php?logout=1">Logout</a></li>
     </ul>
 </aside>
 

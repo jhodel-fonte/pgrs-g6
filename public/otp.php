@@ -55,7 +55,7 @@ var_dump($_SESSION['secretOtp']) ."<br>" ."Remove This One after testing";
     </form>
 
     <div class="resend">
-      Didn't receive the code? <a href="../request/resend.php?resend=1" id="resendBtn" class="resendButton" disabled>Resend Code</a>
+      Didn't receive the code? <a href="../handlers/resendOtp.php?resend=1" id="resendBtn" class="resendButton" disabled>Resend Code</a>
       <p>Time remaining to wait: <span id="countdown"></span></p>
     </div>
 
@@ -64,7 +64,7 @@ var_dump($_SESSION['secretOtp']) ."<br>" ."Remove This One after testing";
         echo "<p>Verify Your Identity</p>";
       } else {
           echo "<div class='Log-Out'>
-                <a href='../request/logout.php?logout=1'>Logout</a>
+                <a href='../handlers/logout.php?logout=1'>Logout</a>
               </div>";
       }
     
@@ -168,7 +168,7 @@ var_dump($_SESSION['secretOtp']) ."<br>" ."Remove This One after testing";
           const body = new URLSearchParams();
           body.append('otp', otp);
 
-          const res = await fetch('../request/otpVerification.php', {
+          const res = await fetch('../handlers/otpVerification.php', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -181,7 +181,7 @@ var_dump($_SESSION['secretOtp']) ."<br>" ."Remove This One after testing";
 
           if (res.ok && data.success) {
             showMessage(data.message || 'OTP verified successfully.');
-              window.location.href = '../request/redirecting.php';
+              window.location.href = '../handlers/redirecting.php';
 
           } else {
             showMessage(data.message || 'OTP verification failed.', true);
@@ -201,7 +201,7 @@ var_dump($_SESSION['secretOtp']) ."<br>" ."Remove This One after testing";
         }
         e.preventDefault();
         showMessage('Resending OTP.');
-        window.location.href = '../request/resendOtp.php?resend=1';
+        window.location.href = '../handlers/resendOtp.php?resend=1';
         
       });
     })();

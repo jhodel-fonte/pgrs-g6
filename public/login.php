@@ -46,7 +46,7 @@ if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isVali
         <a href="index.php"><img src="assets/img/logo.png" alt="UNITY PGSRS Logo" class="mb-2" style="width: 80px;"></a>
         <h3 class="fw-bold text">Padre Garcia Service Report System</h3>
 
-        <form action="../request/auth.php?login=1" method="POST">
+        <form action="../handlers/auth.php?login=1" method="POST">
 
           <!-- Username -->
           <div class="mb-3 text-start">
@@ -95,7 +95,7 @@ if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isVali
 
                 try {
                     //get the data
-                    const response = await fetch('../request/auth.php?login=1', {
+                    const response = await fetch('../handlers/auth.php?login=1', {
                         method: 'POST',
                         body: new FormData(loginForm)
                     });

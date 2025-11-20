@@ -7,9 +7,11 @@
 //     exit;
 // }
 
-if (!isset($_SESSION['user'])) {
-    header("Location: ../public/login.php");
-    exit;
-}
+// if (!isset($_SESSION['user'])) {
+//     header("Location: ../public/login.php");
+//     exit;
+// } 
+
+// if ($_SESSION['user']['userprofile']['roleId'])
 
 ?>
