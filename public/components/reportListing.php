@@ -1,26 +1,6 @@
-<?php
-require_once __DIR__ .'/../src/utillities/log.php';
-
-$reports = include __DIR__ .'/dataProcess.php';
-
-$status = $_GET['status'] ?? 'All';
-if ($status !== 'All' && is_array($reports)) {
-    $reports = array_filter($reports, fn($r) => isset($r['status']) && $r['status'] === $status);
-}
+<?php 
+$reports = require __DIR__ . '../../../admin/report_data.php';
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Manage Reports | Padre Garcia Reporting</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="../assets/css/admin.css">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
-<body>
-
-<?php include '../admin/admin_sidebar.php'; ?>
 <div class="main-content">
     <div class="container mt-4">
         <div class="card-custom p-4">
@@ -82,9 +62,8 @@ if ($status !== 'All' && is_array($reports)) {
                                 </td>
                                 <td><?= $r['date_created'] ?></td>
                                 <td>
-                                    <button class="btn btn-sm btn-outline-info" 
-                                            data-bs-toggle="modal" 
-                                            data-bs-target="#reportModal<?= htmlspecialchars($r['id'] ?? '') ?>">
+                                    <button class="btn btn-sm btn-outline-info view-details" 
+                                            data-report='<?= json_encode($r) ?>'>
                                         View Details
                                     </button>
                                     <?php if ($r['status']=='Pending'): ?>
@@ -103,12 +82,3 @@ if ($status !== 'All' && is_array($reports)) {
         </div>
     </div>
 </div>
-
-<!-- Report Detail Modals -->
-<?php include __DIR__ . '/components/detailModal.php'; ?>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<script src="../assets/js/admin.js"></script>
-</body>
-</html>

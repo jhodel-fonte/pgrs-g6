@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.querySelectorAll(".view-details").forEach(btn => {
             btn.addEventListener("click", () => {
-                const report = JSON.parse(btn.dataset.report || "{}");
+                const report = JSON.parse(reportData.data || "{}");
 
                 modalTitle.textContent = report.title || "Untitled Report";
                 modalCategory.textContent = "Category: " + (report.category || "Unknown");
@@ -137,6 +137,10 @@ function confirmAction(action, id) {
         delete: "Permanently delete this report?"
     };
 
+    const responseTeam = {
+
+    }
+
     Swal.fire({
         title: messages[action] || "Are you sure?",
         icon: "warning",
@@ -146,7 +150,35 @@ function confirmAction(action, id) {
         confirmButtonText: "Yes, continue"
     }).then(result => {
         if (result.isConfirmed) {
-            window.location.href = `?action=${action}&id=${id}`;
+            // window.location.href = `?action=${action}&id=${id}`;
+            Swal.fire({
+                title: "Assign Response Team!",
+                icon: "warning",
+                input: 'select',
+                inputPlaceholder: 'Select a Response Team',
+                inputOptions: {
+                    'US': 'United States',
+                    'CA': 'Canada',
+                    'MX': 'Mexico',
+                    'JP': 'Japan',
+                    'UK': 'United Kingdom'
+                },
+                inputValidator: (value) => {
+                    return new Promise((resolve) => {
+                        if (value === '') {
+                            resolve('You need to select a country!');
+                        } else {
+                            resolve();
+                        }
+                    });
+                }
+            }).then((result) => {
+                    // The 'value' property holds the key chosen from inputOptions
+                    if (result.isConfirmed) {
+                        Swal.fire(`You selected the value: ${result.value}`);
+                    }
+            });
+                
         }
     });
 }
