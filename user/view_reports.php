@@ -10,14 +10,27 @@ if (!isset($_SESSION['role']) || strtolower($_SESSION['role']) !== 'user') {
 
 $user_id = $_SESSION['user_id'];
 
-// ✅ Check if 'created_at' exists in your table (optional)
-try {
-    $stmt = $pdo->prepare("SELECT * FROM reports WHERE user_id = ? ORDER BY id DESC");
-    $stmt->execute([$user_id]);
-} catch (PDOException $e) {
-    die("Database error: " . $e->getMessage());
+// -------------------------------
+// FILTER HANDLING
+// -------------------------------
+$filter = isset($_GET['filter']) ? strtolower($_GET['filter']) : '';
+
+$query = "SELECT * FROM reports WHERE user_id = ?";
+$params = [$user_id];
+
+// Apply filters from dashboard cards
+if ($filter === 'pending') {
+    $query .= " AND status = 'pending'";
+}
+elseif ($filter === 'approved') {
+    $query .= " AND (status = 'approved' OR status = 'resolved' OR status = 'finished')";
 }
 
+$query .= " ORDER BY id DESC";
+
+// Fetch reports
+$stmt = $pdo->prepare($query);
+$stmt->execute($params);
 $reports = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -53,6 +66,7 @@ body { background-color: #0a0a0a; color: #fff; }
     </div>
 
     <div class="card-custom">
+
         <?php if (count($reports) > 0): ?>
         <table class="table table-dark table-bordered table-hover text-center align-middle">
             <thead>
@@ -71,16 +85,24 @@ body { background-color: #0a0a0a; color: #fff; }
                     <td><?= $index + 1; ?></td>
                     <td><?= htmlspecialchars($report['title']); ?></td>
                     <td><?= htmlspecialchars($report['category']); ?></td>
+
                     <td>
                         <?php
                         $status = strtolower($report['status']);
-                        if ($status === 'pending') echo '<span class="status-pending">Pending</span>';
-                        elseif ($status === 'ongoing') echo '<span class="status-ongoing">Ongoing</span>';
-                        elseif ($status === 'finished') echo '<span class="status-finished">Finished</span>';
-                        else echo '<span>Unknown</span>';
+                        if ($status === 'pending') {
+                            echo '<span class="status-pending">Pending</span>';
+                        } elseif ($status === 'ongoing') {
+                            echo '<span class="status-ongoing">Ongoing</span>';
+                        } elseif ($status === 'finished' || $status === 'approved' || $status === 'resolved') {
+                            echo '<span class="status-finished">Finished</span>';
+                        } else {
+                            echo '<span>Unknown</span>';
+                        }
                         ?>
                     </td>
-                    <td><?= isset($report['created_at']) ? htmlspecialchars($report['created_at']) : 'N/A'; ?></td>
+
+                    <td><?= $report['created_at'] ?? 'N/A'; ?></td>
+
                     <td>
                         <a href="report_details.php?id=<?= $report['id']; ?>" class="btn btn-sm btn-info">View</a>
                     </td>
@@ -88,9 +110,11 @@ body { background-color: #0a0a0a; color: #fff; }
                 <?php endforeach; ?>
             </tbody>
         </table>
+
         <?php else: ?>
             <p class="text-center text-muted">You haven't submitted any reports yet.</p>
         <?php endif; ?>
+
     </div>
 </div>
 

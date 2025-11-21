@@ -45,28 +45,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <title>Submit Report | Padre Garcia Reporting</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-<style>
-body { background: #0a0a0a; color: #fff; }
-.text-neon { color: #00ffff; }
-#map { height: 400px; border-radius: 10px; margin-bottom: 10px; }
-.card-custom { background-color: #111; border: 1px solid #00ffff; padding: 25px; border-radius: 12px; }
-.btn-neon {
-    background-color: #fff;
-    color: #000;
-    font-weight: bold;
-    border: none;
-    transition: 0.3s;
-}
-
-</style>
+<link rel="stylesheet" href="../assets/css/user.css">
 </head>
 <body>
-
-<div class="container py-4">
-    <!-- ✅ Back Button -->
-    <div class="mb-3">
-        <a href="dashboard.php" class="btn btn-neon">&larr; Back to Dashboard</a>
-    </div>
+<?php include 'user_sidebar.php'; ?>
+<div class = "main-content container py-5">
 
 <div class="container py-4">
     <h2 class="text-center text-neon mb-4"> Submit a Report</h2>
