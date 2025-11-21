@@ -96,7 +96,7 @@ foreach ($reports as $report):
                         ?>
                             <div class="col-md-4 mb-3">
                                 <div class="text-center">
-                                    <img src="<?= $imageDir .htmlspecialchars($imagePath) ?>"
+                                    <img src="/assets/uploads/reports/ <?= htmlspecialchars($imagePath) ?>"
                                          class="img-fluid rounded shadow"
                                          style="max-height: 200px; width: 100%; object-fit: cover; cursor: pointer;"
                                          alt="Report image"
@@ -109,7 +109,7 @@ foreach ($reports as $report):
                 <?php elseif ($legacyPhoto): ?>
                     <p><strong>Uploaded Image:</strong></p>
                     <div class="text-center mb-3">
-                        <img src="../uploads/reports/<?= htmlspecialchars($legacyPhoto) ?>"
+                        <img src="/assets/uploads/reports/ <?= htmlspecialchars($legacyPhoto) ?>"
                              class="img-fluid rounded shadow"
                              style="max-height: 400px;"
                              alt="Report photo"
