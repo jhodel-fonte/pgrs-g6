@@ -1,14 +1,4 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Admin Panel</title>
-    <!-- Link your CSS -->
-    <link rel="stylesheet" href="../admin/assets/admin.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-</head>
-<body>
 <!-- Hamburger toggle button for mobile -->
 <button class="sidebar-toggle" aria-expanded="false">☰</button>
 
@@ -21,7 +11,7 @@
     <a href="manage_users.php" class="<?php echo ($currentPage === 'manage_users.php') ? 'active' : ''; ?>"><i class="fa-solid fa-users me-2"></i> Manage Users</a>
     <a href="manage_reports.php" class="<?php echo ($currentPage === 'manage_reports.php') ? 'active' : ''; ?>"><i class="fa-solid fa-file-alt me-2"></i> Manage Reports</a>
     <a href="activity_log.php" class="<?php echo ($currentPage === 'activity_log.php') ? 'active' : ''; ?>"><i class="fa-solid fa-list-check me-2"></i> Activity Log</a>
-    <a href="manage_response_team.php" class="<?php echo ($currentPage === 'manage_response_team.php') ? 'active' : ''; ?>"><i class="fa-solid fa-list-check me-2"></i> Manage Response Team</a>
+    <a href="../public/response_team/manage_response_team.php" class="<?php echo ($currentPage === 'manage_response_team.php') ? 'active' : ''; ?>"><i class="fa-solid fa-list-check me-2"></i> Manage Response Team</a>
     
 </div>
 
@@ -49,8 +39,3 @@
     </div>
 </div>
 
-
-<!-- Link your JS -->
-<script src="../admin/assets/admin.js"></script>
-</body>
-</html>

@@ -15,6 +15,7 @@ if ($status !== 'All' && is_array($reports)) {
 <meta charset="UTF-8">
 <title>Manage Teams | Padre Garcia Reporting</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="../assets/css/admin.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
