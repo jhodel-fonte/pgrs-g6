@@ -1,7 +1,10 @@
 <?php
 require_once __DIR__ .'/../src/utillities/log.php';
+require_once __DIR__ .'../../request/dataProcess.php';
 
-$reports = include __DIR__ .'../../request/dataProcess.php';
+$data_source_url = "http://localhost/pgrs-g6/request/getData.php?data=report";
+
+$reports = getDataSource($data_source_url);
 
 $status = $_GET['status'] ?? 'All';
 if ($status !== 'All' && is_array($reports)) {
