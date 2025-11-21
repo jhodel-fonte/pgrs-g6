@@ -1,8 +1,9 @@
+
 document.addEventListener("DOMContentLoaded", () => {
 
-  
-     //  SIDEBAR TOGGLE 
-    
+    /* =========================================
+       SIDEBAR TOGGLE (Responsive)
+    ========================================= */
     const toggleBtn = document.querySelector(".sidebar-toggle");
     const sidebar = document.querySelector(".sidebar");
 
@@ -12,8 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-      // DASHBOARD CHART
-    
+
+    /* =========================================
+       DASHBOARD CHART
+    ========================================= */
     const chartCanvas = document.getElementById("monthlyChart");
 
     if (chartCanvas && typeof Chart !== "undefined") {
@@ -24,8 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 datasets: [{
                     label: "Reports Submitted",
                     data: chartTotals,
-                    backgroundColor: "rgba(0, 255, 255, 0.5)",
-                    borderColor: "#00eaff",
+                    backgroundColor: "rgba(64, 0, 255, 0.5)",
+                    borderColor: "#1900ffff",
                     borderWidth: 1,
                     borderRadius: 5
                 }]
@@ -36,16 +39,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 plugins: { legend: { display: false } },
                 scales: {
                     y: { beginAtZero: true },
-                    x: { ticks: { color: "#00eaff" } }
+                    x: { ticks: { color: "#0800ffff" } }
                 }
             }
         });
     }
 
 
-    
-      // COUNTER ANIMATION
-    
+    /* =========================================
+       COUNTER ANIMATION
+    ========================================= */
     const counters = document.querySelectorAll(".count");
 
     counters.forEach(el => {
@@ -66,9 +69,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    
-      // MODAL REPORT VIEWER
-  
+    /* =========================================
+       MODAL REPORT VIEWER
+    ========================================= */
     const detailsModalEl = document.getElementById("detailsModal");
 
     if (detailsModalEl) {
@@ -110,9 +113,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-   
-      // AUTO-DISMISS FLASH MESSAGES
-   
+    /* =========================================
+       AUTO-DISMISS FLASH MESSAGES
+    ========================================= */
     const alerts = document.querySelectorAll('.alert');
 
     alerts.forEach(alert => {
@@ -124,9 +127,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
-   //SWEETALERT CONFIRMATION
-
+/* =========================================
+   SWEETALERT CONFIRMATION
+========================================= */
 function confirmAction(action, id) {
     const messages = {
         approve: "Approve this report?",
@@ -149,9 +152,9 @@ function confirmAction(action, id) {
 }
 
 
-
-   //RETURN TO USER MODAL
-
+/* =========================================
+   RETURN TO USER MODAL
+========================================= */
 function returnToUserModal(id) {
     const idModal = document.getElementById("idModal" + id);
     const userModal = document.getElementById("userModal" + id);
@@ -212,3 +215,95 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+function toggleProfileMenu() {
+    const menu = document.getElementById("profileDropdown");
+    menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+}
+
+document.addEventListener("click", function (event) {
+    const profileMenu = document.getElementById("profileDropdown");
+    const profileImg = document.querySelector(".profile-img");
+
+    if (!profileMenu.contains(event.target) && event.target !== profileImg) {
+        profileMenu.style.display = "none";
+    }
+});
+// ito yung sa notification bell
+function toggleNotifications() {
+    // Example: open a dropdown or modal for notifications
+    alert("Show notifications panel here!");
+}
+
+// Temporary demo notifications array
+const demoNotifications = [
+    { id: 1, message: "New user registered", time: "2 min ago" },
+    { id: 2, message: "Server backup completed", time: "10 min ago" },
+    { id: 3, message: "New report submitted", time: "1 hour ago" },
+    { id: 4, message: "System maintenance scheduled", time: "3 hours ago" }
+];
+
+// Populate dropdown
+function populateNotifications() {
+    const dropdown = document.getElementById('notificationDropdown');
+    dropdown.innerHTML = ''; // Clear existing
+
+    demoNotifications.forEach(notif => {
+        const item = document.createElement('div');
+        item.classList.add('notification-item');
+        item.innerHTML = `
+            <strong>${notif.message}</strong><br>
+            <small>${notif.time}</small>
+        `;
+        dropdown.appendChild(item);
+    });
+
+    // Update badge count
+    const badge = document.getElementById('notificationCount');
+    badge.textContent = demoNotifications.length;
+}
+
+// Toggle dropdown visibility
+function toggleNotifications() {
+    const dropdown = document.getElementById('notificationDropdown');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+}
+
+// Close dropdown if clicked outside
+document.addEventListener('click', function(event) {
+    const bell = document.querySelector('.notification-bell');
+    const dropdown = document.getElementById('notificationDropdown');
+
+    if (!bell.contains(event.target)) {
+        dropdown.style.display = 'none';
+    }
+});
+
+// Initialize
+populateNotifications();
+
+
+
+function updateClock() {
+    const dateElement = document.getElementById('dateDisplay');
+    const now = new Date();
+
+    // Format date and time
+    const options = { 
+        weekday: 'short', 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric',
+        hour: '2-digit', 
+        minute: '2-digit', 
+    };
+    
+    dateElement.textContent = now.toLocaleString('en-US', options);
+}
+
+// Update clock immediately
+updateClock();
+
+// Then update every second
+setInterval(updateClock, 1000);
+

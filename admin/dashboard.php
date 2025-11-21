@@ -59,7 +59,7 @@ $totals = [5, 8, 12, 20, 15, 9];
         <div class="col-md-3">
             <div class="admin-card">
                 <h1 class="count" data-value="<?= $teamCount ?>">0</h1>
-                <p>Response Team Members</p>
+                <p>Response Team</p>
             </div>
         </div>
 
@@ -69,9 +69,8 @@ $totals = [5, 8, 12, 20, 15, 9];
                 <p>Finished Works</p>
             </div>
         </div>
-
     </div>
-
+<br>
     <h3 class="chart-title text-center">Monthly Reports</h3>
     <div class="chart-box">
         <canvas id="monthlyChart"></canvas>

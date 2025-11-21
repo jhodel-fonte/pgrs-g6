@@ -44,6 +44,90 @@ $reports = [
         "location" => "Riverside",
         "latitude" => 13.7550,
         "longitude" => 121.0620
+    ],
+    [
+        "id" => 3,
+        "firstname" => "miel",
+        "lastname" => "Na Bisaya",
+        "title" => "Flooding",
+        "category" => "Natural Disaster",
+        "status" => "Ongoing",
+        "date_submitted" => "2025-11-10",
+        "description" => "Flooding reported in low-lying areas",
+        "image" => "sample3.jpg",
+        "location" => "Riverside",
+        "latitude" => 13.7550,
+        "longitude" => 121.0620
+    ],
+    [
+        "id" => 3,
+        "firstname" => "miel",
+        "lastname" => "Na Bisaya",
+        "title" => "Flooding",
+        "category" => "Natural Disaster",
+        "status" => "Ongoing",
+        "date_submitted" => "2025-11-10",
+        "description" => "Flooding reported in low-lying areas",
+        "image" => "sample3.jpg",
+        "location" => "Riverside",
+        "latitude" => 13.7550,
+        "longitude" => 121.0620
+    ],
+    [
+        "id" => 3,
+        "firstname" => "miel",
+        "lastname" => "Na Bisaya",
+        "title" => "Flooding",
+        "category" => "Natural Disaster",
+        "status" => "Ongoing",
+        "date_submitted" => "2025-11-10",
+        "description" => "Flooding reported in low-lying areas",
+        "image" => "sample3.jpg",
+        "location" => "Riverside",
+        "latitude" => 13.7550,
+        "longitude" => 121.0620
+    ],
+    [
+        "id" => 3,
+        "firstname" => "miel",
+        "lastname" => "Na Bisaya",
+        "title" => "Flooding",
+        "category" => "Natural Disaster",
+        "status" => "Ongoing",
+        "date_submitted" => "2025-11-10",
+        "description" => "Flooding reported in low-lying areas",
+        "image" => "sample3.jpg",
+        "location" => "Riverside",
+        "latitude" => 13.7550,
+        "longitude" => 121.0620
+    ],
+    [
+        "id" => 3,
+        "firstname" => "miel",
+        "lastname" => "Na Bisaya",
+        "title" => "Flooding",
+        "category" => "Natural Disaster",
+        "status" => "Ongoing",
+        "date_submitted" => "2025-11-10",
+        "description" => "Flooding reported in low-lying areas",
+        "image" => "sample3.jpg",
+        "location" => "Riverside",
+        "latitude" => 13.7550,
+        "longitude" => 121.0620
+    ],
+    [
+        "id" => 3,
+        "firstname" => "miel",
+        "lastname" => "Na Bisaya",
+        "title" => "Flooding",
+        "category" => "Natural Disaster",
+        "status" => "Resolved",
+        "date_submitted" => "2025-11-10",
+        "description" => "Flooding reported in low-lying areas",
+        "image" => "sample3.jpg",
+        "location" => "Riverside",
+        "latitude" => 13.7550,
+        "longitude" => 121.0620
     ]
 ];
 
@@ -61,18 +145,17 @@ if ($status !== 'All') {
 <head>
 <meta charset="UTF-8">
 <title>Manage Reports | Padre Garcia Reporting</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="../assets/css/admin.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/css/admin.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
-<div class="admin-bg">
 <?php include '../admin/admin_sidebar.php'; ?>
 <div class="main-content">
-    <div class="container py-5">
-        <div class="card-custom p-4 shadow-lg">
-            <h3 class="text-neon text-center mb-4">Manage Reports</h3>
+    <div class="container mt-4">
+        <div class="card-custom p-4">
+            <h3 class="text text-left mb-4">Manage Reports</h3>
 
             <!-- Filter buttons -->
             <div class="d-flex justify-content-center mb-3 gap-2 flex-wrap">
@@ -84,7 +167,7 @@ if ($status !== 'All') {
                         'Approved'=>'success',
                         'Ongoing'=>'info',
                         'Resolved'=>'primary',
-                        default=>'light'
+                        default=>'dark'
                     } ?> <?= ($status==$s)?'active':'' ?>">
                         <?= $s ?>
                     </a>
@@ -99,7 +182,7 @@ if ($status !== 'All') {
             <?php if (empty($reports)): ?>
                 <p class="text-center">No reports found.</p>
             <?php else: ?>
-                <div class="table-responsive">
+                <div class="table-responsive scroll-card">
                     <table class="table table-dark table-striped text-center align-middle rounded-3 overflow-hidden">
                         <thead>
                             <tr>
@@ -156,7 +239,7 @@ if ($status !== 'All') {
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content bg-dark text-light">
       <div class="modal-header border-secondary">
-        <h5 class="modal-title text-neon">Report Details</h5>
+        <h5 class="modal-title text">Report Details</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">

@@ -1,6 +1,4 @@
-/* =========================================================
-   GLOBAL RESET
-========================================================= */
+/* General Reset */
 body {
   font-family: 'Poppins', sans-serif;
   background-color: #ffffff;
@@ -10,23 +8,22 @@ body {
   height: 100vh;
 }
 
-/* =========================================================
-   GLOBAL BACKGROUNDS (Login, Register, OTP, Forgot)
-========================================================= */
-.login-bg, .register-bg, .otp-bg, .forgot-bg {
+/* Backgrounds for Login/Register/OTP */
+.login-bg, .register-bg, .otp-bg {
   background: url('../img/pgsrsBG.jpg') no-repeat center center/cover;
   position: relative;
-  height: 100vh;
+  height: 100vh; /* keep full height */
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Overlay for all pages */
+/* Overlay */
 .overlay {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.55);
@@ -34,55 +31,42 @@ body {
   z-index: 0;
 }
 
-/* =========================================================
-   GLOBAL CARD STYLE (shared by login/register/otp/forgot)
-========================================================= */
-.login-card, .register-card, .otp-container, .forgot-card {
+/* Card Styling - Login/Register/OTP */
+.login-card, .register-card, .otp-container {
   background: rgba(236, 232, 232, 0.07);
   border-radius: 20px;
   backdrop-filter: blur(12px);
+  max-width: 420px;
   width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
+  max-height: 90vh; /* ✅ limit height to viewport */
+  overflow-y: auto; /* ✅ scroll inside card only */
   position: relative;
   z-index: 1;
-
   border: 1px solid rgba(0,191,255,0.3);
+  box-shadow: 0 0 25px rgba(0,191,255,0.3);
   padding: 25px 30px;
-  max-width: 600px;
 }
 
-/* Scrollbars */
-.login-card::-webkit-scrollbar,
-.register-card::-webkit-scrollbar,
-.forgot-card::-webkit-scrollbar {
+/* Optional: customize scrollbar for a cleaner look */
+.register-card::-webkit-scrollbar {
   width: 8px;
 }
-
-.login-card::-webkit-scrollbar-thumb,
-.register-card::-webkit-scrollbar-thumb,
-.forgot-card::-webkit-scrollbar-thumb {
+.register-card::-webkit-scrollbar-thumb {
   background-color: rgba(0, 191, 255, 0.4);
   border-radius: 10px;
 }
-
-.login-card::-webkit-scrollbar-thumb:hover,
-.register-card::-webkit-scrollbar-thumb:hover,
-.forgot-card::-webkit-scrollbar-thumb:hover {
+.register-card::-webkit-scrollbar-thumb:hover {
   background-color: rgba(0, 191, 255, 0.6);
 }
 
-/* =========================================================
-   GLOBAL TEXT (Titles, Neon Effects)
-========================================================= */
+/* Neon Text & Titles */
 .text, .title {
   color: #f3f7f9;
+  text-shadow: 0 0 10px #00bfff;
   font-weight: 500;
 }
 
-/* =========================================================
-   GLOBAL INPUTS (Login + Register)
-========================================================= */
+/* Input Fields - Login/Register */
 .register-card input,
 .register-card select,
 .login-card input {
@@ -94,18 +78,39 @@ body {
   padding: 8px 10px;
 }
 
-/* Focus */
+/* Input Focus */
 .register-card input:focus,
 .register-card select:focus,
 .login-card input:focus {
   background-color: rgba(255,255,255,0.2);
   border-color: #00bfff;
+  box-shadow: 0 0 5px #00bfff;
   color: #fff;
 }
 
-/* =========================================================
-   BOOTSTRAP OVERRIDES FOR DARK GLASS STYLE
-========================================================= */
+/* Buttons */
+.btn {
+  background: #00bfff;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 5px #00bfff;
+}
+
+.btn:hover {
+  background: #fff;
+  box-shadow: 0 0 10px #009acd, 0 0 20px #009acd;
+  color: #000;
+}
+
+/* Links */
+.link {
+  color: #00bfff;
+}
+
+/* Override Bootstrap select & input for dark glass style */
 .form-select, 
 .form-control {
   background-color: rgba(255, 255, 255, 0.1) !important;
@@ -113,28 +118,32 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.3) !important;
   border-radius: 10px !important;
   backdrop-filter: blur(8px);
+  box-shadow: none !important;
   transition: 0.3s ease;
 }
 
 .form-select:focus,
 .form-control:focus {
-  background-color: rgba(255,255,255,0.2) !important;
+  background-color: rgba(255, 255, 255, 0.2) !important;
   border-color: #00bfff !important;
+  box-shadow: 0 0 10px #00bfff, 0 0 20px #00bfff inset !important;
+  color: #fff !important;
 }
 
+/* Dropdown options */
 .form-select option {
   background-color: rgba(20, 20, 20, 0.95);
   color: #fff;
 }
 
-/* Input sizes */
+/* Slightly smaller font for inputs and selects */
 .form-control-lg,
 .form-select-lg {
-  font-size: 0.9rem !important;
-  padding: 0.55rem 0.75rem !important;
+  font-size: 0.9rem !important; /* default ~1rem, this is smaller */
+  padding: 0.55rem 0.75rem !important; /* less vertical height */
 }
 
-/* Password fields */
+/* Make password fields even and tighter */
 .row .col-md-6 input[type="password"] {
   font-size: 0.9rem;
   padding: 0.55rem 0.75rem;
@@ -144,33 +153,10 @@ label {
   font-size: 0.85rem;
   font-weight: 500;
   margin-bottom: 0.3rem;
-  color: #ddd;
+  color: #ddd; /* adjust to match your theme */
 }
 
-/* =========================================================
-   BUTTONS
-========================================================= */
-.btn {
-  background: #00bfff;
-  border: none;
-  color: #fff;
-  font-weight: 600;
-  border-radius: 30px;
-  transition: all 0.3s ease;
-}
-
-.btn:hover {
-  background: #fff;
-  color: #000;
-}
-
-.link {
-  color: #00bfff;
-}
-
-/* =========================================================
-   OTP DESIGN
-========================================================= */
+/* OTP Inputs */
 .otp-inputs {
   display: flex;
   justify-content: center;
@@ -183,9 +169,10 @@ label {
   height: 50px;
   text-align: center;
   font-size: 1.3rem;
+  border: 2px;
+  border-radius: 10px;
   background: rgba(0,0,0,0.5);
   color: #fff;
-  border-radius: 10px;
   outline: none;
 }
 
@@ -193,10 +180,10 @@ label {
   box-shadow: 0 0 20px #00e0ff;
 }
 
+/* Resend link */
 .resend {
   margin-top: 15px;
   color: #b3ecff;
-  text-align: center;
 }
 
 .resend a {
@@ -204,29 +191,19 @@ label {
   font-weight: 600;
 }
 
-/* =========================================================
-   FORGOT PASSWORD DESIGN
-========================================================= */
-.forgot-card {
-  max-width: 420px;
+.resend a:hover {
+  text-decoration: underline;
 }
 
-.forgot-card p {
-  color: #e4f7ff;
-  font-size: 0.9rem;
-}
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+/* Responsive tweaks */
 @media (max-width: 576px) {
   h2 {
     font-size: 1.2rem;
   }
-  .login-card, .register-card, .otp-container, .forgot-card {
+  .login-card, .register-card, .otp-container {
     padding: 20px;
     max-width: 95%;
-    max-height: 85vh;
+    max-height: 85vh; /* scrollable inside on smaller screens */
   }
   .otp-inputs input {
     width: 35px;

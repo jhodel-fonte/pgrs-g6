@@ -13,7 +13,7 @@ $users = [
         "gender" => "Male",
         "address" => "123 Main St, Barangay 1",
         "dob" => "1990-05-15",
-        "profile_pic" => "profile1.jpg",
+        "profile_pic" => "profile_690ca862e4448.jpg",
         "id_doc" => "id1.jpg"
     ],
     [
@@ -41,8 +41,104 @@ $users = [
         "dob" => "1988-12-02",
         "profile_pic" => "",
         "id_doc" => ""
+    ],
+     [
+        "id" => 3,
+        "firstname" => "Mhiel",
+        "lastname" => "Bisa",
+        "email" => "Sakol@example.com",
+        "mobile_number" => "09191234567",
+        "status" => "Pending",
+        "gender" => "Male",
+        "address" => "789 Barangay Street",
+        "dob" => "1988-12-02",
+        "profile_pic" => "",
+        "id_doc" => ""
+     ],
+      [
+        "id" => 3,
+        "firstname" => "Mhiel",
+        "lastname" => "Bisa",
+        "email" => "Sakol@example.com",
+        "mobile_number" => "09191234567",
+        "status" => "Pending",
+        "gender" => "Male",
+        "address" => "789 Barangay Street",
+        "dob" => "1988-12-02",
+        "profile_pic" => "",
+        "id_doc" => ""
+      ],
+       [
+        "id" => 3,
+        "firstname" => "Mhiel",
+        "lastname" => "Bisa",
+        "email" => "Sakol@example.com",
+        "mobile_number" => "09191234567",
+        "status" => "Pending",
+        "gender" => "Male",
+        "address" => "789 Barangay Street",
+        "dob" => "1988-12-02",
+        "profile_pic" => "",
+        "id_doc" => ""
+       ],
+        [
+        "id" => 3,
+        "firstname" => "Mhiel",
+        "lastname" => "Bisa",
+        "email" => "Sakol@example.com",
+        "mobile_number" => "09191234567",
+        "status" => "Pending",
+        "gender" => "Male",
+        "address" => "789 Barangay Street",
+        "dob" => "1988-12-02",
+        "profile_pic" => "",
+        "id_doc" => ""
+        ],
+         [
+        "id" => 3,
+        "firstname" => "Mhiel",
+        "lastname" => "Bisa",
+        "email" => "Sakol@example.com",
+        "mobile_number" => "09191234567",
+        "status" => "Pending",
+        "gender" => "Male",
+        "address" => "789 Barangay Street",
+        "dob" => "1988-12-02",
+        "profile_pic" => "",
+        "id_doc" => ""
+         ],
+          [
+        "id" => 3,
+        "firstname" => "Mhiel",
+        "lastname" => "Bisa",
+        "email" => "Sakol@example.com",
+        "mobile_number" => "09191234567",
+        "status" => "Pending",
+        "gender" => "Male",
+        "address" => "789 Barangay Street",
+        "dob" => "1988-12-02",
+        "profile_pic" => "",
+        "id_doc" => ""
+    ]
+    , [
+        "id" => 3,
+        "firstname" => "Mhiel",
+        "lastname" => "Bisa",
+        "email" => "Sakol@example.com",
+        "mobile_number" => "09191234567",
+        "status" => "Rejected",
+        "gender" => "Male",
+        "address" => "789 Barangay Street",
+        "dob" => "1988-12-02",
+        "profile_pic" => "",
+        "id_doc" => ""
     ]
 ];
+
+$status = $_GET['status'] ?? 'All';
+if ($status !== 'All') {
+    $users = array_filter($users, fn($r) => $r['status'] === $status);
+}
 
 // ----------------------------
 // FLASH MESSAGE SIMULATION
@@ -57,12 +153,11 @@ unset($_SESSION['message']);
 <head>
 <meta charset="UTF-8">
 <title>Manage Users | Padre Garcia Reporting</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="../assets/css/admin.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/css/admin.css">
 </head>
 
 <body>
-<div class="admin-bg">
 
 <?php include '../admin/admin_sidebar.php'; ?>
 
@@ -71,8 +166,23 @@ unset($_SESSION['message']);
         <div class="card-custom p-4">
 
             <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
-                <h3 class="text-neon">Manage User Requests</h3>
-                <a href="create_team.php" class="btn btn-outline-info mt-2 mt-md-0">➕ Create Response Team</a>
+                <h3 class="text">Manage User Requests</h3>
+                <a href="create_team.php" class="btn btn-primary mt-2 mt-md-0"> Create Response Team</a>
+            </div>
+
+            <div class="d-flex justify-content-center mb-3 gap-2 flex-wrap">
+                <?php 
+                $statuses = ['All','Pending','Approved','Rejected'];
+                foreach ($statuses as $s): ?>
+                    <a href="?status=<?= $s ?>" class="btn btn-outline-<?= match($s){
+                        'Pending'=>'warning',
+                        'Approved'=>'success',
+                        'Rejected'=>'danger',
+                        default=>'dark'
+                    } ?> <?= ($status==$s)?'active':'' ?>">
+                        <?= $s ?>
+                    </a>
+                <?php endforeach; ?>
             </div>
 
             <!-- FLASH MESSAGE -->
@@ -88,7 +198,7 @@ unset($_SESSION['message']);
                 <input type="text" id="userSearch" class="form w-50" placeholder="Search reports by user name, email, or mobile number...">
             </div>
 
-            <div class="table-responsive">
+            <div class="table-responsive scroll-card">
             <table class="table table-dark table-hover text-center align-middle">
                 <thead>
                     <tr>
@@ -111,7 +221,9 @@ unset($_SESSION['message']);
                         <td><?= htmlspecialchars($u['mobile_number']); ?></td>
                         <td><?= htmlspecialchars($u['email']); ?></td>
                         <td>
-                            <span class="badge bg-<?= $u['status'] === 'Approved' ? 'success' : 'warning text-dark' ?>"><?= $u['status'] ?></span>
+                            <span class="badge bg-<?= 
+                                $u['status'] === 'Approved' ? 'success' : ($u['status'] === 'Rejected' ? 'danger' : 'warning text-dark') ?>"> <?= $u['status'] ?>
+                            </span>
                         </td>
 
                         <!-- VIEW BUTTON -->
@@ -126,7 +238,12 @@ unset($_SESSION['message']);
                         <td>
                             <?php if($u['status'] === 'Pending'): ?>
                                 <button class="btn btn-sm btn-success">Approve</button>
-                                <button class="btn btn-sm btn-danger">Reject</button>
+                                <button class="btn btn-sm btn-danger">Rejected</button>
+                            <?php elseif($u['status'] === 'Approved'): ?>
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            <?php elseif($u['status'] === 'Rejected'): ?>
+                                <button class="btn btn-sm btn-success">Approve</button>
+                                <button class="btn btn-sm btn-danger">Delete</button>
                             <?php else: ?>
                                 <span>No Action</span>
                             <?php endif; ?>
@@ -138,8 +255,6 @@ unset($_SESSION['message']);
             </div>
         </div>
     </div>
-</div>
-
 </div>
 
 <!-- USER MODALS -->
