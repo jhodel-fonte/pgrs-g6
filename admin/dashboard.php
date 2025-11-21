@@ -1,9 +1,4 @@
 <?php
-session_start();
-
-require_once __DIR__ .'../../src/data/reports.php';
-$reports = getAllReports([]); // Get all reports with default options
-
 // alam mo na to
 $users = [
     ["id" => 1, "name" => "John Doe"],
@@ -41,7 +36,7 @@ $totals = [5, 8, 12, 20, 15, 9];
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<link rel="stylesheet" href="./assets/admin.css">
+<link rel="stylesheet" href="../admin/assets/admin.css">
 </head>
 
 <body>
@@ -64,7 +59,7 @@ $totals = [5, 8, 12, 20, 15, 9];
         <div class="col-md-3">
             <div class="admin-card">
                 <h1 class="count" data-value="<?= $teamCount ?>">0</h1>
-                <p>Response Team Members</p>
+                <p>Response Team</p>
             </div>
         </div>
 
@@ -74,9 +69,8 @@ $totals = [5, 8, 12, 20, 15, 9];
                 <p>Finished Works</p>
             </div>
         </div>
-
     </div>
-
+<br>
     <h3 class="chart-title text-center">Monthly Reports</h3>
     <div class="chart-box">
         <canvas id="monthlyChart"></canvas>
@@ -89,10 +83,7 @@ let chartMonths = <?= json_encode($months) ?>;
 let chartTotals = <?= json_encode($totals) ?>;
 </script>
 
-<script src="../assets/js/admin.js"></script>
-
+<script src="admin/assets/admin.js"></script>
 
 </body>
 </html>
-
-

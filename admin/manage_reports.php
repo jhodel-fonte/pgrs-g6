@@ -39,7 +39,7 @@ if ($status !== 'All') {
 <meta charset="UTF-8">
 <title>Manage Reports | Padre Garcia Reporting</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="./assets/admin.css" rel="stylesheet">
+<link href="../admin/assets/admin.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
@@ -265,6 +265,6 @@ if ($status !== 'All') {
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="./assets/js/admin.js"></script>
+<script src="admin/assets/admin.js"></script>
 </body>
 </html>
