@@ -15,6 +15,48 @@ class profileMng {  //Profile functions for user
         return $this->conn;
     }
 
+    function getAllImage(){
+        try {
+            $query = $this->conn->prepare("SELECT * FROM `images`");
+            
+            if (!$query->execute()) {
+                throw new Exception("An Error Occured!");
+            }
+            $result = $query->fetchAll();
+            
+            if ($result) {
+                return $result;
+            } else {
+                throw new Exception("No Profile results found");
+            }
+
+        } catch (Exception $r) {
+            return ['success' => false,'message' => $r->getMessage()];
+        }
+    }
+
+    function getAllProfileData(){
+        try {
+            $query = $this->conn->prepare("SELECT profile.*, acc.mobileNum, acc.email, acc.username, st.Name as status FROM `profile` 
+                                            Left JOIN account as acc on userId = acc.pgCode
+                                            Left JOIN status as st on st.statusId = acc.statusId");
+            
+            if (!$query->execute()) {
+                throw new Exception("An Error Occured!");
+            }
+            $result = $query->fetchAll();
+            
+            if ($result) {
+                return $result;
+            } else {
+                throw new Exception("No Profile results found");
+            }
+
+        } catch (Exception $r) {
+            return ['success' => false,'message' => $r->getMessage()];
+        }
+    }
+
     function getUserByRole($role) {
         try {
             $role = sanitizeInput($role);

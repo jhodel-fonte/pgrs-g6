@@ -34,7 +34,6 @@ function getAllReportImages() {
         error_log("Query failed: " . $e->getMessage());
         return false;
     }
-    return $images;
 }
 
 ?>

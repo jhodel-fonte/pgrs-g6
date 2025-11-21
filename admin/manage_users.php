@@ -1,8 +1,13 @@
 <?php
-// ----------------------------
-// SAMPLE USERS DATA
-// ----------------------------
-$users = [
+
+require_once __DIR__ .'/../src/utillities/log.php';
+require_once __DIR__ .'../../request/dataProcess.php';
+
+$data_source_url = "http://localhost/pgrs-g6/request/getData.php?data=members";
+
+$users = getDataSource($data_source_url);
+
+/* $users = [
     [
         "id" => 1,
         "firstname" => "Jay Mark",
@@ -133,7 +138,7 @@ $users = [
         "profile_pic" => "",
         "id_doc" => ""
     ]
-];
+]; */
 
 $status = $_GET['status'] ?? 'All';
 if ($status !== 'All') {
@@ -165,11 +170,6 @@ unset($_SESSION['message']);
 <div class="main-content">
     <div class="container mt-4">
         <div class="card-custom p-4">
-
-            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
-                <h3 class="text">Manage User Requests</h3>
-                <a href="create_team.php" class="btn btn-primary mt-2 mt-md-0"> Create Response Team</a>
-            </div>
 
             <div class="d-flex justify-content-center mb-3 gap-2 flex-wrap">
                 <?php 
@@ -218,12 +218,12 @@ unset($_SESSION['message']);
                 <?php else: foreach($users as $index => $u): ?>
                     <tr>
                         <td><?= $index + 1; ?></td>
-                        <td><?= htmlspecialchars($u['firstname'] . ' ' . $u['lastname']); ?></td>
-                        <td><?= htmlspecialchars($u['mobile_number']); ?></td>
+                        <td><?= htmlspecialchars($u['firstName'] . ' ' . $u['lastName']); ?></td>
+                        <td><?= htmlspecialchars($u['mobileNum']); ?></td>
                         <td><?= htmlspecialchars($u['email']); ?></td>
                         <td>
                             <span class="badge bg-<?= 
-                                $u['status'] === 'Approved' ? 'success' : ($u['status'] === 'Rejected' ? 'danger' : 'warning text-dark') ?>"> <?= $u['status'] ?>
+                                $u['status'] === 'Active' ? 'success' : ($u['status'] === 'Rejected' ? 'danger' : 'warning text-dark') ?>"> <?= (isset($u['status'])) ? htmlspecialchars($u['status']) : 'N/A' ?>
                             </span>
                         </td>
 
@@ -231,7 +231,7 @@ unset($_SESSION['message']);
                         <td>
                             <button class="btn btn-sm btn-primary"
                                 data-bs-toggle="modal"
-                                data-bs-target="#userModal<?= $u['id']; ?>">
+                                data-bs-target="#userModal<?= $u['userId']; ?>">
                                 View
                             </button>
                         </td>
@@ -260,20 +260,20 @@ unset($_SESSION['message']);
 
 <!-- USER MODALS -->
 <?php foreach($users as $u): ?>
-<div class="modal fade" id="userModal<?= $u['id']; ?>" tabindex="-1">
+<div class="modal fade" id="userModal<?= $u['userId']; ?>" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content bg-dark text-light">
 
             <div class="modal-header">
-                <h5 class="modal-title">User Details - <?= htmlspecialchars($u['firstname'] . ' ' . $u['lastname']); ?></h5>
+                <h5 class="modal-title">User Details - <?= htmlspecialchars($u['firstName'] . ' ' . $u['lastName']); ?></h5>
                 <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
 
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-4 text-center">
-                        <?php if ($u['profile_pic']): ?>
-                            <img src="../uploads/profile/<?= $u['profile_pic']; ?>"
+                        <?php if ($u['profileImage']): ?>
+                            <img src="../uploads/profile/<?= (isset($u['profileImage']) || $u['profileImage'] == Null) ? htmlspecialchars($u['profileImage']) : 'default.jpg'; ?>"
                                  class="img-fluid rounded mb-3"
                                  style="max-height: 200px;">
                         <?php else: ?>
@@ -282,26 +282,51 @@ unset($_SESSION['message']);
                     </div>
 
                     <div class="col-md-8">
-                        <p><strong>Name:</strong> <?= $u['firstname'].' '.$u['lastname']; ?></p>
-                        <p><strong>Email:</strong> <?= $u['email']; ?></p>
-                        <p><strong>Mobile:</strong> <?= $u['mobile_number']; ?></p>
-                        <p><strong>Gender:</strong> <?= $u['gender']; ?></p>
-                        <p><strong>Address:</strong> <?= $u['address']; ?></p>
-                        <p><strong>Date of Birth:</strong> <?= $u['dob']; ?></p>
+                        <p><strong>Name:</strong> <?= htmlspecialchars($u['firstName']).' '.htmlspecialchars($u['lastName']); ?></p>
+                        <p><strong>Email:</strong> <?= htmlspecialchars($u['email']); ?></p>
+                        <p><strong>Mobile:</strong> <?= htmlspecialchars($u['mobileNum']); ?></p>
+                        <p><strong>Gender:</strong> <?= htmlspecialchars($u['gender']); ?></p>
+                        <p><strong>Address:</strong> <?= (isset($u['address']) || $u['address'] != Null) ? htmlspecialchars($u['address']) : 'N/A'; ?></p>
+                        <p><strong>Date of Birth:</strong> <?= htmlspecialchars($u['dateOfBirth']); ?></p>
                     </div>
                 </div>
 
                 <hr>
-
-                <h5>ID Document</h5>
-                <?php if ($u['id_doc']): ?>
-                    <div class="text-center mt-2">
-                        <img src="../uploads/id/<?= $u['id_doc']; ?>"
-                             class="img-fluid rounded shadow"
-                             style="max-height: 500px; object-fit: contain;">
+                
+                <h5>ID Documents</h5>
+                <?php 
+                    $userImages = $u['images'] ?? [];
+                    if (!empty($userImages) || $userImages != NULL): ?>
+                    <div class="row mb-3">
+                        <?php foreach ($userImages as $img):
+                            $imagePath = $img['image_path'] ?? $img['location'] ?? $img['photo'] ?? $img['path'] ?? $img['filename'] ?? null;
+                            if (!$imagePath) {
+                                continue;
+                            }
+                            
+                            if (strpos($imagePath, 'uploads/') !== false || strpos($imagePath, '/') === 0) {
+                                $fullImagePath = $imagePath;
+                            } else {
+                                $fullImagePath = '../assets/uploads/id/' . $imagePath;
+                            }
+                        ?>
+                            <div class="col-md-4 mb-3">
+                                <div class="text-center">
+                                    <img src="<?= htmlspecialchars($fullImagePath) ?>"
+                                         class="img-fluid rounded shadow"
+                                         style="max-height: 200px; width: 100%; object-fit: cover; cursor: pointer;"
+                                         alt="ID Document"
+                                         onclick="window.open(this.src, '_blank')"
+                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                    <p class="text-muted text-center" style="display:none;">Image not available</p>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 <?php else: ?>
-                    <p>No ID Document Uploaded</p>
+                    <div class="text-center mb-3">
+                        <p class="text-muted">No ID Documents Uploaded</p>
+                    </div>
                 <?php endif; ?>
 
             </div>

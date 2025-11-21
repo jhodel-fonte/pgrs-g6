@@ -30,7 +30,10 @@ if ($status !== 'All' && is_array($reports)) {
 <div class="main-content">
     <div class="container mt-4">
         <div class="card-custom p-4">
-            <h3 class="text text-left mb-4">Manage Teams</h3>
+            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+                <h3 class="text text-left mb-4">Manage Teams</h3>
+                <a href="create_team.php" class="btn btn-primary mt-2 mt-md-0"> Create Response Team</a>
+            </div>
 
             <!-- Filter buttons -->
             <div class="d-flex justify-content-center mb-3 gap-2 flex-wrap">

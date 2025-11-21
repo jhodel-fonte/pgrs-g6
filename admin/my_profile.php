@@ -24,7 +24,7 @@ $admin = [
 
 // SIMULATED UPDATE
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $_SESSION['success'] = "Profile updated successfully! (Demo only)";
+    $_SESSION['success'] = "Profile updated successfully! Unexpected error occur!";
     header("Location: my_profile.php");
     exit;
 }

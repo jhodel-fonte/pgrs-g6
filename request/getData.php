@@ -5,6 +5,7 @@ ob_start();
 header('Content-Type: application/json');
 
 require_once __DIR__ . '/../src/data/reports.php';
+require_once __DIR__ . '/../src/data/profile.php';
 require_once __DIR__ . '/../src/data/res_teams.php';
 require_once __DIR__ . '/../src/utillities/log.php';
 
@@ -96,6 +97,49 @@ try {
             $response = [
                 'success' => true,
                 'data' => $teams
+            ];
+
+        }
+        //get users
+        if (isset($_GET['data']) && $_GET['data'] == 'members') {
+            $memberClass = new profileMng();
+            $members = $memberClass->getAllProfileData();
+            $images = $memberClass->getAllImage();
+
+            if (isset($members['success']) && $members['success'] == false) {
+                throw new Exception('Failed to fetch members');
+            }
+
+            if (isset($images['success']) && $images['success'] == false) {
+                $images = []; // Set to empty array if failed instead of throwing error
+            }
+
+            // Group images by user_id
+            $imagesByUserId = [];
+            if (is_array($images)) {
+                foreach ($images as $image) {
+                    $userId = $image['user_id'] ?? null;
+                    if ($userId) {
+                        if (!isset($imagesByUserId[$userId])) {
+                            $imagesByUserId[$userId] = [];
+                        }
+                        $imagesByUserId[$userId][] = $image;
+                    }
+                }
+            }
+            
+            // Merge images into each member/user
+            if (is_array($members)) {
+                foreach ($members as &$member) {
+                    $userId = $member['userId'] ?? null;
+                    $member['images'] = $userId && isset($imagesByUserId[$userId]) ? $imagesByUserId[$userId] : [];
+                }
+                unset($member); // Unset reference to avoid issues
+            }
+
+            $response = [
+                'success' => true,
+                'data' => $members
             ];
 
         }
