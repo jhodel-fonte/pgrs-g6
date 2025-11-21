@@ -10,77 +10,23 @@
             "address": null,
             "latitude": null,
             "longitude": null,
-            "members": [ 
+            "members": [
                 {
-                    "userId": 250324,
-                    "firstName": "M2",
-                    "lastName": "Rs",
+                    "team_id": 1,
+                    "userId": 250323,
+                    "firstName": "Response Team1",
+                    "lastName": "Response Team1",
                     "gender": "Team",
                     "description": null,
-                    "dateOfBirth": "2025-11-01",
+                    "dateOfBirth": "2025-11-18",
                     "date_created": "2025-11-21 19:23:11",
                     "role_id": 2,
                     "profileImage": null
                 },
                 {
+                    "team_id": 1,
                     "userId": 250324,
                     "firstName": "Response Team2",
-                    "lastName": "Rs",
-                    "gender": "Team",
-                    "description": null,
-                    "dateOfBirth": "2025-11-01",
-                    "date_created": "2025-11-21 19:23:11",
-                    "role_id": 2,
-                    "profileImage": null
-                },
-                {
-                    "userId": 250324,
-                    "firstName": "Response Team3", 
-                    "lastName": "Rs",
-                    "gender": "Team",
-                    "description": null,
-                    "dateOfBirth": "2025-11-01",
-                    "date_created": "2025-11-21 19:23:11",
-                    "role_id": 2,
-                    "profileImage": null
-                }
-            ]
-        },
-        {
-            "team_id": 2,
-            "name": "Team2",
-            "contact_number": "12345678901",
-            "is_active": 1,
-            "email": "12@m.com",
-            "address": null,
-            "latitude": null,
-            "longitude": null,
-            "members": [ 
-                {
-                    "userId": 250324,
-                    "firstName": "M2",
-                    "lastName": "Rs",
-                    "gender": "Team",
-                    "description": null,
-                    "dateOfBirth": "2025-11-01",
-                    "date_created": "2025-11-21 19:23:11",
-                    "role_id": 2,
-                    "profileImage": null
-                },
-                {
-                    "userId": 250324,
-                    "firstName": "Response Team2",
-                    "lastName": "Rs",
-                    "gender": "Team",
-                    "description": null,
-                    "dateOfBirth": "2025-11-01",
-                    "date_created": "2025-11-21 19:23:11",
-                    "role_id": 2,
-                    "profileImage": null
-                },
-                {
-                    "userId": 250324,
-                    "firstName": "Response Team3", 
                     "lastName": "Rs",
                     "gender": "Team",
                     "description": null,
@@ -91,7 +37,5 @@
                 }
             ]
         }
-        
-
     ]
 }
