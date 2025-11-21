@@ -49,9 +49,9 @@ if ($status !== 'All') {
 <?php include '../admin/admin_sidebar.php'; ?>
 
 <div class="main-content">
-    <div class="container py-5">
-        <div class="card-custom p-4 shadow-lg">
-            <h3 class="text-neon text-center mb-4">Manage Reports</h3>
+    <div class="container mt-4">
+        <div class="card-custom p-4">
+            <h3 class="text text-left mb-4">Manage Reports</h3>
 
             <!-- Filter buttons -->
             <div class="d-flex justify-content-center mb-3 gap-2 flex-wrap">
@@ -78,7 +78,7 @@ if ($status !== 'All') {
             <?php if (empty($reports)): ?>
                 <p class="text-center">No reports found.</p>
             <?php else: ?>
-                <div class="table-responsive">
+                <div class="table-responsive scroll-card">
                     <table class="table table-dark table-striped text-center align-middle rounded-3 overflow-hidden">
                         <thead>
                             <tr>
