@@ -85,8 +85,12 @@ if ($status !== 'All' && is_array($reports)) {
                                             data-bs-target="#teamModal<?= htmlspecialchars($r['team_id'] ?? '') ?>">
                                         View Details
                                     </button>
-                                    <button onclick="confirmAction('edit', <?= htmlspecialchars($r['team_id']) ?>)" class="btn btn-warning btn-sm">Edit</button>
-                                    <button onclick="confirmAction('delete', <?= htmlspecialchars($r['team_id']) ?>)" class="btn btn-outline-danger btn-sm">Delete</button>
+                                    <button class="btn btn-warning btn-sm" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#editTeamModal<?= htmlspecialchars($r['team_id'] ?? '') ?>">
+                                        Edit
+                                    </button>
+                                    <button onclick="confirmTeamAction('delete', <?= htmlspecialchars($r['team_id']) ?>)" class="btn btn-outline-danger btn-sm">Delete</button>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -111,6 +115,7 @@ if ($status !== 'All' && is_array($reports)) {
     $longitude = $team['longitude'] ?? null;
     $members = $team['members'] ?? [];
 ?>
+
 <div class="modal fade" id="teamModal<?= $teamId ?>" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content bg-dark text-light">
@@ -170,8 +175,11 @@ if ($status !== 'All' && is_array($reports)) {
 </div>
 <?php endforeach; ?>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Edit Team Modals -->
+<?php include __DIR__ . '/components/editTeams.php'; ?>
 
-<script src="../admin/assets/admin.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="../admin/assets/admin.js"></script> -->
+<script src="../admin/assets/teamAction.js"></script>
 </body>
 </html>
