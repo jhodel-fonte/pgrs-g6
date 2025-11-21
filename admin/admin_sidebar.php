@@ -30,6 +30,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 <div class="main-content">
 </div>
 
-<script src="admin.js"></script>
+<script src="./assets/js/admin.js"></script>
 </body>
 </html>

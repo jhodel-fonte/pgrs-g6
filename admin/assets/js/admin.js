@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Debug: Confirm script is loading
+    console.log("Admin.js script loaded successfully");
 
-  
      //  SIDEBAR TOGGLE 
     
     const toggleBtn = document.querySelector(".sidebar-toggle");
@@ -65,50 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 20);
     });
 
-
-    
-      // MODAL REPORT VIEWER
-  
-    const detailsModalEl = document.getElementById("detailsModal");
-
-    if (detailsModalEl) {
-        const detailsModal = new bootstrap.Modal(detailsModalEl);
-        const modalTitle = document.getElementById("modalTitle");
-        const modalCategory = document.getElementById("modalCategory");
-        const modalDescription = document.getElementById("modalDescription");
-        const modalLocation = document.getElementById("modalLocation");
-        const modalImage = document.getElementById("modalImage");
-        const mapContainer = document.getElementById("mapContainer");
-
-        document.querySelectorAll(".view-details").forEach(btn => {
-            btn.addEventListener("click", () => {
-                const report = JSON.parse(btn.dataset.report || "{}");
-                console.log(report.name);
-
-                modalTitle.textContent = report.userId || "Untitled Report";
-                modalCategory.textContent = "Category: " + (report.category || "Unknown");
-                modalDescription.textContent = report.description || "No description provided.";
-                modalLocation.textContent = report.location || "Location not specified.";
-                modalImage.src = "../uploads/reports/" + (report.image || "default.png");
-
-                if (report.latitude && report.longitude) {
-                    mapContainer.innerHTML = `
-                        <iframe
-                            width="100%"
-                            height="100%"
-                            style="border:0;"
-                            loading="lazy"
-                            allowfullscreen
-                            src="https://www.google.com/maps?q=${report.latitude},${report.longitude}&z=14&output=embed">
-                        </iframe>`;
-                } else {
-                    mapContainer.innerHTML = `<p class="text-center text-muted">No map location available.</p>`;
-                }
-
-                detailsModal.show();
-            });
-        });
-    }
 
 
    

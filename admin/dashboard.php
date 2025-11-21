@@ -91,6 +91,7 @@ let chartTotals = <?= json_encode($totals) ?>;
 
 <script src="../assets/js/admin.js"></script>
 
+
 </body>
 </html>
 

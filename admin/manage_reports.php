@@ -103,7 +103,6 @@ if ($status !== 'All') {
                             if ($dateSubmitted && strpos($dateSubmitted, 'T') !== false) {
                                 $dateSubmitted = date('Y-m-d H:i:s', strtotime($dateSubmitted));
                             }
-                            $reportJson = htmlspecialchars(json_encode($r));
                         ?>
                             <tr>
                                 <td><?= $reportId ?></td>
@@ -121,8 +120,9 @@ if ($status !== 'All') {
                                 </td>
                                 <td><?= $dateSubmitted ?></td>
                                 <td>
-                                    <button class="btn btn-sm btn-outline-info view-details" 
-                                            data-report='<?= $reportJson ?>'>
+                                    <button class="btn btn-sm btn-outline-info" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#reportModal<?= $reportId ?>">
                                         View Details
                                     </button>
                                     <?php if ($reportStatus == 'Pending'): ?>
@@ -142,26 +142,126 @@ if ($status !== 'All') {
     </div>
 </div>
 
-<!-- Modal: View Report Details -->
-<div class="modal fade" id="detailsModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content bg-dark text-light">
-      <div class="modal-header border-secondary">
-        <h5 class="modal-title text-neon">Report Details</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <p><strong>Title:</strong> <span id="modalTitle"><?=  ?></span></p>
-        <p><strong>Category:</strong> <span id="modalCategory"></span></p>
-        <p><strong>Description:</strong> <span id="modalDescription"></span></p>
-        <div class="text-center mb-3">
-            <img id="modalImage" src="" class="img-fluid rounded shadow" style="max-height: 400px;" alt="Report photo">
+<!-- Generate modals for each report -->
+    <?php foreach ($reports as $r): 
+         $reportId = htmlspecialchars($r['id'] ?? '');
+         $modalTitle = htmlspecialchars($r['name'] ?? 'Untitled Report');
+         $modalCategory = htmlspecialchars($r['report_type'] ?? $r['ml_category'] ?? 'Unknown');
+         $modalDescription = htmlspecialchars($r['description'] ?? 'No description provided.');
+         $modalLocation = htmlspecialchars($r['location'] ?? 'Location not specified.');
+         $modalPhoto = $r['photo'] ?? $r['image'] ?? null; 
+         $modalImages = $r['images'] ?? []; // Images array from merged data
+         $modalLat = $r['latitude'] ?? null;
+         $modalLng = $r['longitude'] ?? null;
+         $modalUser = htmlspecialchars(($r['user_full_name'] ?? ($r['firstName'] ?? '') . ' ' . ($r['lastName'] ?? '')) ?: 'Unknown');
+         $modalDate = htmlspecialchars($r['created_at'] ?? '');
+         if ($modalDate && strpos($modalDate, 'T') !== false) {
+             $modalDate = date('Y-m-d H:i:s', strtotime($modalDate));
+         }
+     ?>
+                        <div class="modal fade" id="reportModal<?= $reportId ?>" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content bg-dark text-light">
+                                    <div class="modal-header border-secondary">
+                                        <h5 class="modal-title text-neon">Report Details</h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <p><strong>Report ID:</strong> <?= $reportId ?></p>
+                                                <p><strong>Title:</strong> <?= $modalTitle ?></p>
+                                                <p><strong>Category:</strong> <?= $modalCategory ?></p>
+                                                <p><strong>Status:</strong> 
+                                                    <span class="badge bg-<?= match($r['status'] ?? ''){
+                                                        'Approved'=>'success',
+                                                        'Pending'=>'warning',
+                                                        'Ongoing'=>'info',
+                                                        'Resolved'=>'primary',
+                                                        default=>'secondary'
+                                                    } ?>"><?= htmlspecialchars($r['status'] ?? 'Unknown') ?></span>
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><strong>Submitted By:</strong> <?= $modalUser ?></p>
+                                                <p><strong>User ID:</strong> <?= htmlspecialchars($r['user_id'] ?? 'N/A') ?></p>
+                                                <p><strong>Date Submitted:</strong> <?= $modalDate ?></p>
+                                                <?php if (isset($r['ml_category'])): ?>
+                                                    <p><strong>ML Category:</strong> <?= htmlspecialchars($r['ml_category']) ?></p>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                        <hr class="border-secondary">
+                                        <p><strong>Description:</strong></p>
+                                        <p class="mb-3"><?= nl2br($modalDescription) ?></p>
+
+                                        <p><strong>Location:</strong> <?= $modalLocation ?></p>
+                                        
+                                        <?php if ($modalLat && $modalLng): ?>
+                                            <div class="rounded overflow-hidden mb-3" style="height: 300px;">
+                                                <iframe
+                                                    width="100%"
+                                                    height="100%"
+                                                    style="border:0;"
+                                                    loading="lazy"
+                                                    allowfullscreen
+                                                    src="https://www.google.com/maps?q=<?= urlencode($modalLat) ?>,<?= urlencode($modalLng) ?>&z=14&output=embed">
+                                                </iframe>
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="rounded overflow-hidden mb-3" style="height: 300px;">
+                                                <p class="text-center text-muted p-3">No map location available.</p>
+                                            </div>
+                                        <?php endif; ?>
+
+                                        <?php 
+                                        // Display images from report_images table (merged into report object)
+                                        if (!empty($modalImages)): ?>
+                                            <p><strong>Report Images:</strong></p>
+                                            <div class="row mb-3">
+                                                <?php foreach ($modalImages as $img): 
+                                                    $imagePath = $img['photo'] ?? $img['image_path'] ?? null;
+                                                    if ($imagePath): ?>
+                                                        <div class="col-md-4 mb-3">
+                                                            <div class="text-center">
+                                                                <img src="../assets/uploads/reports/<?= htmlspecialchars($imagePath) ?>"
+                                                                     class="img-fluid rounded shadow" 
+                                                                     style="max-height: 200px; width: 100%; object-fit: cover; cursor: pointer;"
+                                                                     alt="Report image"
+                                                                     onclick="window.open(this.src, '_blank')"
+                                                                     onerror="this.style.display='none';">
+                                                            </div>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        <?php 
+                                        
+                                        elseif ($modalPhoto): ?>
+                                            <p><strong>Uploaded Image:</strong></p>
+                                            <div class="text-center mb-3">
+                                                <img src="../assets/uploads/reports/<?= htmlspecialchars($modalPhoto) ?>"
+                                                     class="img-fluid rounded shadow" 
+                                                     style="max-height: 400px;" 
+                                                     alt="Report photo"
+                                                     onclick="window.open(this.src, '_blank')"
+                                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                                <p class="text-muted text-center" style="display:none;">Image not available</p>
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="text-center mb-3">
+                                                <p class="text-muted">No images provided</p>
+                                            </div>
+                                        <?php endif; ?>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    <?php endforeach; ?>
         </div>
-        <p><strong>Location:</strong> <span id="modalLocation"></span></p>
-        <div id="mapContainer" class="rounded overflow-hidden" style="height: 300px;"></div>
-      </div>
     </div>
-  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
