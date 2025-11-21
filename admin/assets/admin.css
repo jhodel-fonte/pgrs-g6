@@ -711,9 +711,9 @@ body {
 }
 /* Scrollable table/card area */
 .scroll-card {
-    max-height: 32vh;      /* Adjust height as needed */
-    overflow-y: auto;      /* Enables vertical scroll */
-    overflow-x: hidden;    /* Prevent horizontal scroll */
+    max-height: 32vh;      
+    overflow-y: auto;      
+    overflow-x: auto;    
 }
 
 /* Optional: smooth scrollbar */

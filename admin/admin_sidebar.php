@@ -1,9 +1,8 @@
-
+ <?php $currentPage = basename($_SERVER['PHP_SELF']); ?>
 <!-- Hamburger toggle button for mobile -->
 <button class="sidebar-toggle" aria-expanded="false">☰</button>
 
 <!-- Sidebar -->
- <?php $currentPage = basename($_SERVER['PHP_SELF']); ?>
 <div class="sidebar">
     <h3 class="text text-center mb-4">Admin Panel</h3>
 

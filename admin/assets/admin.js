@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
 
     const toggleBtn = document.querySelector(".sidebar-toggle");
