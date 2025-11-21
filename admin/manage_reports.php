@@ -2,134 +2,37 @@
 // ----------------------------
 // SAMPLE REPORTS DATA
 // ----------------------------
-$reports = [
-    [
-        "id" => 1,
-        "firstname" => "Jay Mark",
-        "lastname" => "Rocero",
-        "title" => "Fire in Barangay",
-        "category" => "Fire",
-        "status" => "Pending",
-        "date_submitted" => "2025-11-01",
-        "description" => "Fire reported near residential area",
-        "image" => "sample1.jpg",
-        "location" => "Barangay 1",
-        "latitude" => 13.7563,
-        "longitude" => 121.0583
-    ],
-    [
-        "id" => 2,
-        "firstname" => "Neil",
-        "lastname" => "Tomoc",
-        "title" => "Road Accident",
-        "category" => "Accident",
-        "status" => "Approved",
-        "date_submitted" => "2025-11-05",
-        "description" => "Car collision reported",
-        "image" => "sample2.jpg",
-        "location" => "Main St.",
-        "latitude" => 13.7580,
-        "longitude" => 121.0600
-    ],
-    [
-        "id" => 3,
-        "firstname" => "miel",
-        "lastname" => "Na Bisaya",
-        "title" => "Flooding",
-        "category" => "Natural Disaster",
-        "status" => "Ongoing",
-        "date_submitted" => "2025-11-10",
-        "description" => "Flooding reported in low-lying areas",
-        "image" => "sample3.jpg",
-        "location" => "Riverside",
-        "latitude" => 13.7550,
-        "longitude" => 121.0620
-    ],
-    [
-        "id" => 3,
-        "firstname" => "miel",
-        "lastname" => "Na Bisaya",
-        "title" => "Flooding",
-        "category" => "Natural Disaster",
-        "status" => "Ongoing",
-        "date_submitted" => "2025-11-10",
-        "description" => "Flooding reported in low-lying areas",
-        "image" => "sample3.jpg",
-        "location" => "Riverside",
-        "latitude" => 13.7550,
-        "longitude" => 121.0620
-    ],
-    [
-        "id" => 3,
-        "firstname" => "miel",
-        "lastname" => "Na Bisaya",
-        "title" => "Flooding",
-        "category" => "Natural Disaster",
-        "status" => "Ongoing",
-        "date_submitted" => "2025-11-10",
-        "description" => "Flooding reported in low-lying areas",
-        "image" => "sample3.jpg",
-        "location" => "Riverside",
-        "latitude" => 13.7550,
-        "longitude" => 121.0620
-    ],
-    [
-        "id" => 3,
-        "firstname" => "miel",
-        "lastname" => "Na Bisaya",
-        "title" => "Flooding",
-        "category" => "Natural Disaster",
-        "status" => "Ongoing",
-        "date_submitted" => "2025-11-10",
-        "description" => "Flooding reported in low-lying areas",
-        "image" => "sample3.jpg",
-        "location" => "Riverside",
-        "latitude" => 13.7550,
-        "longitude" => 121.0620
-    ],
-    [
-        "id" => 3,
-        "firstname" => "miel",
-        "lastname" => "Na Bisaya",
-        "title" => "Flooding",
-        "category" => "Natural Disaster",
-        "status" => "Ongoing",
-        "date_submitted" => "2025-11-10",
-        "description" => "Flooding reported in low-lying areas",
-        "image" => "sample3.jpg",
-        "location" => "Riverside",
-        "latitude" => 13.7550,
-        "longitude" => 121.0620
-    ],
-    [
-        "id" => 3,
-        "firstname" => "miel",
-        "lastname" => "Na Bisaya",
-        "title" => "Flooding",
-        "category" => "Natural Disaster",
-        "status" => "Ongoing",
-        "date_submitted" => "2025-11-10",
-        "description" => "Flooding reported in low-lying areas",
-        "image" => "sample3.jpg",
-        "location" => "Riverside",
-        "latitude" => 13.7550,
-        "longitude" => 121.0620
-    ],
-    [
-        "id" => 3,
-        "firstname" => "miel",
-        "lastname" => "Na Bisaya",
-        "title" => "Flooding",
-        "category" => "Natural Disaster",
-        "status" => "Resolved",
-        "date_submitted" => "2025-11-10",
-        "description" => "Flooding reported in low-lying areas",
-        "image" => "sample3.jpg",
-        "location" => "Riverside",
-        "latitude" => 13.7550,
-        "longitude" => 121.0620
-    ]
-];
+$reports = 
+
+$data_source_url = "http://localhost/pgrs-g6/request/reports.json";
+
+try {
+    $data = file_get_contents($data_source_url);
+
+    if ($data === false) { 
+        throw new Exception("Error: Could not retrieve data from the server.");
+    }
+
+    $response_data = json_decode($data, true); 
+
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        throw new Exception("Error: Failed to decode JSON. JSON Error: " . json_last_error_msg());
+    }
+
+    if ($response_data === null || !isset($response_data['success']) || $response_data['success'] !== true) {
+        throw new Exception("Error: Invalid or unsuccessful response from data source.");
+    }
+
+    $reports = $response_data['data'] ?? [];
+
+} catch (Exception $er) {
+    // containlog('Error', $er->getMessage(), __DIR__, 'reportData.log');
+}
+
+$status = $_GET['status'] ?? 'All';
+if ($status !== 'All') {
+    $reports = array_filter($reports, fn($r) => isset($r['status']) && $r['status'] === $status);
+}
 
 // ----------------------------
 // FILTER STATUS (from query string)
@@ -198,10 +101,10 @@ if ($status !== 'All') {
                         <tbody>
                         <?php foreach ($reports as $r): ?>
                             <tr>
-                                <td><?= $r['id'] ?></td>
+                                <td><?= $r['user_id'] ?></td>
                                 <td><?= $r['firstname'] . ' ' . $r['lastname'] ?></td>
-                                <td><?= $r['title'] ?></td>
-                                <td><?= $r['category'] ?></td>
+                                <td><?= $r['name'] ?></td>
+                                <td><?= htmlspecialchars($r['description']) ?></td>
                                 <td>
                                     <span class="badge bg-<?= match($r['status']){
                                         'Approved'=>'success',
