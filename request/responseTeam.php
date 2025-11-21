@@ -4,49 +4,30 @@ ob_start();
 
 header('Content-Type: application/json');
 
-require_once __DIR__ . '/../src/data/reports.php';
+require_once __DIR__ . '/../src/data/profile.php';
+require_once __DIR__ . '/../src/utillities/log.php';
 
 try {
+    $profile = new profileMng();
+    $teams = $profile->getUserByRole(2);
+    // var_dump($teams);
     
-    $reports = getAllReports();
-    $images = getAllReportImages();
-    
-    if ($reports === false) {
+    if (isset($teams['success']) && $teams['success'] == false ) {
         throw new Exception('Failed to fetch reports');
     }
 
-    if ($images === false) {
-        $images = []; // Set to empty array if failed instead of throwing error
-    }
-
-    // Group images by report_id
-    $imagesByReportId = [];
-    foreach ($images as $image) {
-        $reportId = $image['report_id'] ?? null;
-        if ($reportId) {
-            if (!isset($imagesByReportId[$reportId])) {
-                $imagesByReportId[$reportId] = [];
-            }
-            $imagesByReportId[$reportId][] = $image;
-        }
-    }
-    
-    // Merge images into each report
-    foreach ($reports as &$report) {
-        $reportId = $report['id'] ?? null;
-        $report['images'] = $imagesByReportId[$reportId] ?? [];
-    }
-    unset($report); // Unset reference to avoid issues
-
     $response = [
         'success' => true,
-        'data' => $reports
+        'data' => $teams
     ];
     
-    ob_clean();
-    echo json_encode($response, JSON_PRETTY_PRINT);
-    
 } catch (Exception $e) {
-    error_log("Error: " . $e->getMessage());
     containlog('Error', $e->getMessage(), __DIR__, 'reportData.log');
+        $response = [
+        'success' => false,
+        'message' => $e->getMessage()
+    ];
 }
+
+ob_clean();
+echo json_encode($response, JSON_PRETTY_PRINT);

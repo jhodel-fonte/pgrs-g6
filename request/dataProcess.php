@@ -1,7 +1,10 @@
 <?php
 require_once __DIR__ . '/../src/utillities/log.php';
 
-$data_source_url = "http://localhost/pgrs-g6/request/listReport.php";
+$auth = 'asasa2q34aer';
+$request = 
+
+$data_source_url = "http://localhost/pgrs-g6/request/listReport.php?data=1";
 // $data_source_url = "http://localhost/pgrs-g6/request/listReport.json";
 
 try {

@@ -4,15 +4,36 @@ require_once __DIR__ ."../../data/Db.php";
 require_once __DIR__ ."../../utillities/common.php";
 
 class profileMng {  //Profile functions for user
-    private $User;
     private $conn;
 
     function __construct() {//use user object or i think better the Id, hmm lets seee
-        // $this->User = $userObj;
         $dbObj = new Database();
         $this->conn = $dbObj->getConn();
     }
     
+    function getConn() {
+        return $this->conn;
+    }
+
+    function getUserByRole($role) {
+        try {
+            $role = sanitizeInput($role);
+            $query = $this->conn->prepare("SELECT * FROM `profile` WHERE `role_id` = ?");
+            $query->execute([$role]);
+            $result = $query->fetchAll();
+            // var_dump($result);
+            
+            if ($result) {
+                return $result;
+            } else {
+                throw new Exception("No Profile results found");
+            }
+
+        } catch (Exception $r) {
+            return ['success' => false,'message' => $r->getMessage()];
+        }
+    }
+
     function getProfile($id) {
         try {
             // $query = $this->conn->prepare("Call GetProfileById(?)");

@@ -1,0 +1,27 @@
+{
+    "success": true,
+    "data": [
+        {
+            "userId": 250323,
+            "firstName": "Response Team1",
+            "lastName": "Response Team1",
+            "gender": "Team",
+            "description": null,
+            "dateOfBirth": "2025-11-18",
+            "date_created": "2025-11-21 19:23:11",
+            "role_id": 2,
+            "profileImage": null
+        },
+        {
+            "userId": 250324,
+            "firstName": "Response Team2",
+            "lastName": "Rs",
+            "gender": "Team",
+            "description": null,
+            "dateOfBirth": "2025-11-01",
+            "date_created": "2025-11-21 19:23:11",
+            "role_id": 2,
+            "profileImage": null
+        }
+    ]
+}
