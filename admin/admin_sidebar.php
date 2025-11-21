@@ -40,7 +40,7 @@
         </div>
 
         <div class="profile-menu">
-            <img src="../assets/img/logo.png" class="profile-img" onclick="toggleProfileMenu()">
+            <img src="../assets/uploads/reports/1762441784_gojo.jpg" class="profile-img" onclick="toggleProfileMenu()">
             <div class="profile-dropdown" id="profileDropdown">
                 <a href="my_profile.php"><i class="fa-solid fa-user me-2"></i> My Profile</a>
                 <a href="../logout.php"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a>

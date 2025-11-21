@@ -70,3 +70,6 @@
 [2025-11-21 12:29:53]["type": "Error", "message": "Failed to fetch reports", "file": "C:\xampp\htdocs\pgrs-g6\request"]
 [2025-11-21 12:30:17]["type": "Error", "message": "Failed to fetch reports", "file": "C:\xampp\htdocs\pgrs-g6\request"]
 [2025-11-21 12:30:20]["type": "Error", "message": "Failed to fetch reports", "file": "C:\xampp\htdocs\pgrs-g6\request"]
+[2025-11-21 12:52:08]["type": "Error", "message": "Error: 404, Could not retrieve data from the server. ", "file": "C:\xampp\htdocs\My report system\request"]
+[2025-11-21 12:52:11]["type": "Error", "message": "Error: 404, Could not retrieve data from the server. ", "file": "C:\xampp\htdocs\My report system\request"]
+[2025-11-21 12:52:14]["type": "Error", "message": "Error: 404, Could not retrieve data from the server. ", "file": "C:\xampp\htdocs\My report system\request"]

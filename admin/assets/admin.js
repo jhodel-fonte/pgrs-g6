@@ -1,9 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* =========================================
-       SIDEBAR TOGGLE (Responsive)
-    ========================================= */
     const toggleBtn = document.querySelector(".sidebar-toggle");
     const sidebar = document.querySelector(".sidebar");
 
