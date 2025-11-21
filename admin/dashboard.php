@@ -83,7 +83,7 @@ let chartMonths = <?= json_encode($months) ?>;
 let chartTotals = <?= json_encode($totals) ?>;
 </script>
 
-<script src="admin/assets/admin.js"></script>
+<script src="../admin/assets/admin.js"></script>
 
 </body>
 </html>

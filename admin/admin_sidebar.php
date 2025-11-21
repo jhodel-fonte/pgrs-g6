@@ -49,6 +49,6 @@
 
 
 <!-- Link your JS -->
-<script src="admin/assets/admin.js"></script>
+<script src="../admin/assets/admin.js"></script>
 </body>
 </html>
