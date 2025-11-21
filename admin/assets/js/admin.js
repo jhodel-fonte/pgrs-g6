@@ -83,30 +83,15 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(".view-details").forEach(btn => {
             btn.addEventListener("click", () => {
                 const report = JSON.parse(btn.dataset.report || "{}");
+                console.log(report.name);
 
-                // Use correct field names from API response
-                const title = report.name || report.title || "Untitled Report";
-                const category = report.report_type || report.ml_category || report.category || "Unknown";
-                const description = report.description || "No description provided.";
-                const location = report.location || "Location not specified.";
-                const photo = report.photo || report.image || null;
-
-                modalTitle.textContent = title;
-                modalCategory.textContent = "Category: " + category;
-                modalDescription.textContent = description;
-                modalLocation.textContent = location;
-                
-                if (photo) {
-                    modalImage.src = "../uploads/reports/" + photo;
-                    modalImage.style.display = "block";
-                } else {
-                    modalImage.style.display = "none";
-                }
+                modalTitle.textContent = report.userId || "Untitled Report";
+                modalCategory.textContent = "Category: " + (report.category || "Unknown");
+                modalDescription.textContent = report.description || "No description provided.";
+                modalLocation.textContent = report.location || "Location not specified.";
+                modalImage.src = "../uploads/reports/" + (report.image || "default.png");
 
                 if (report.latitude && report.longitude) {
-                    // Escape coordinates to prevent XSS
-                    const lat = encodeURIComponent(report.latitude);
-                    const lng = encodeURIComponent(report.longitude);
                     mapContainer.innerHTML = `
                         <iframe
                             width="100%"
@@ -114,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             style="border:0;"
                             loading="lazy"
                             allowfullscreen
-                            src="https://www.google.com/maps?q=${lat},${lng}&z=14&output=embed">
+                            src="https://www.google.com/maps?q=${report.latitude},${report.longitude}&z=14&output=embed">
                         </iframe>`;
                 } else {
                     mapContainer.innerHTML = `<p class="text-center text-muted">No map location available.</p>`;
@@ -163,8 +148,6 @@ function confirmAction(action, id) {
         }
     });
 }
-
-
 
    //RETURN TO USER MODAL
 

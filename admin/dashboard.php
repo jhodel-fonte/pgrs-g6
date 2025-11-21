@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-require_once __DIR__ .'../../src/modules/reports.php';
-$reports = getAllReports(1);
+require_once __DIR__ .'../../src/data/reports.php';
+$reports = getAllReports([]); // Get all reports with default options
 
 // alam mo na to
 $users = [

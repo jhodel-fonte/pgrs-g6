@@ -14,15 +14,14 @@ class Database { //Database Connection
 
     function __construct() {//test connection
         try {
-            $this->conn = mysqli_connect($this->servername, $this->username, $this->password, $this->database);
-
-            if (!$this->conn) {
-                throw new Exception("Connection failed: " . mysqli_connect_error());
-            }
+            $dsn = "mysql:host={$this->servername};dbname={$this->database};charset=utf8mb4";
+            $this->conn = new PDO($dsn, $this->username, $this->password);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
             // echo "<script>console.log('Connected Database!')</script>";
             return $this->conn;
          
-        } catch (Exception $error) {
+        } catch (PDOException $error) {
             error_log(date('[Y-m-d H:i:s] ') . $error->getMessage() . PHP_EOL, 3, __DIR__ . '/../log/database.log');
             die("Database Connection Error!" ."<script>console.log('Database Connection Error! Check Log For details')</script>");
         }

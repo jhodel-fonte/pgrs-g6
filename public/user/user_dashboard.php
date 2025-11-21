@@ -30,9 +30,17 @@ $userId = $_SESSION['user']['userprofile']['pgCode'];
 
 // Fetch counts from reports table
 try {
-    $total = $pdo->query("SELECT COUNT(*) FROM reports where user_id = " .$userId)->fetchColumn();
-    $pending = $pdo->query("SELECT COUNT(*) FROM reports WHERE status = 'Pending' and user_id = " .$userId)->fetchColumn();
-    $resolved = $pdo->query("SELECT COUNT(*) FROM reports WHERE status = 'Resolved' and user_id = " .$userId)->fetchColumn();
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM reports WHERE user_id = ?");
+    $stmt->execute([$userId]);
+    $total = $stmt->fetchColumn();
+    
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM reports WHERE status = 'Pending' AND user_id = ?");
+    $stmt->execute([$userId]);
+    $pending = $stmt->fetchColumn();
+    
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM reports WHERE status = 'Resolved' AND user_id = ?");
+    $stmt->execute([$userId]);
+    $resolved = $stmt->fetchColumn();
 } catch (PDOException $e) {
     die("Query failed: " . $e->getMessage());
 }

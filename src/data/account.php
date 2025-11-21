@@ -26,12 +26,11 @@ class UserAcc {//this class communicates to database Account Table
             // $query = $this->conn->prepare("Call SelectUserAccById(?)");
             $query = $this->conn->prepare("SELECT * FROM account WHERE account.accId = ?");
             $id = sanitizeInput($id);
-            $query->bind_param("i", $id);
-            $query->execute();
-            $result = $query->get_result();
+            $query->execute([$id]);
+            $result = $query->fetch();
 
-            if ($result && $result->num_rows > 0) {
-                return $result->fetch_assoc();
+            if ($result) {
+                return $result;
             } else {
                 throw new Exception("No Account results found for ID: $id");
             }
@@ -69,10 +68,9 @@ class UserAcc {//this class communicates to database Account Table
             // $reg = $this->conn->prepare("Call CreateNewAccount(?, ?, ?, ?, ?, ?, ?)");
             $reg = $this->conn->prepare("INSERT INTO `account`(`username`, `saltedPass`, `mobileNum`, `roleId`, `statusId`, `pgCode`, `email`) 
                                          VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $reg->bind_param("sssiiis", $username, $hashedPass, $num, $defaultRole, $defaultStatus, $pgCode, $email);
             
-            if (!$reg->execute()){
-                throw new Exception($reg->error);
+            if (!$reg->execute([$username, $hashedPass, $num, $defaultRole, $defaultStatus, $pgCode, $email])){
+                throw new Exception("Failed to execute query");
             };
 
             return true;
@@ -104,14 +102,14 @@ class UserAcc {//this class communicates to database Account Table
             } */
 
             // $update = $this->conn->prepare("CALL `UpdateAccById`(?, ?, ?)");
-            $update = $this->conn->prepare("UPDATE account SET" .$key ." = ? WHERE accId = ?");
-            $update->bind_param("iss", $id, $value);
+            // Note: Column names cannot be parameterized in PDO, so we validate $key against allowed columns
+            $update = $this->conn->prepare("UPDATE account SET `" . $key . "` = ? WHERE accId = ?");
             
-            if (!$update->execute()){
-                throw new Exception($update->error);
+            if (!$update->execute([$value, $id])){
+                throw new Exception("Failed to execute query");
             };
             // echo "Updated : " .$key ." = " .$value;
-            return $update->affected_rows;//returms if has effect on database rows
+            return $update->rowCount();//returms if has effect on database rows
 
         } catch (Exception $p) {
             echo "<script>console.log('Account Update Error! Check Log For details')</script>";
@@ -131,12 +129,11 @@ class UserAcc {//this class communicates to database Account Table
             $query = $this->conn->prepare("SELECT * FROM `account` WHERE `username` = ? LIMIT 1");
             // echo $userN;
             $id = sanitizeInput($userN);
-            $query->bind_param("s", $id);
-            $query->execute();
-            $result = $query->get_result();
+            $query->execute([$id]);
+            $result = $query->fetch();
 
-            if ($result && $result->num_rows > 0) {
-                return $result->fetch_assoc();
+            if ($result) {
+                return $result;
             } else {
                 throw new Exception("No Account results found for ID: $id");
             }

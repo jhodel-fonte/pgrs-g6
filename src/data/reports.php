@@ -1,32 +1,22 @@
 <?php
 
-require_once __DIR__ .'Db.php';
+require_once __DIR__ .'../Db.php';
 
 function getAllReports($page) {
-    $mysqli = new Database();
-    $conn = $mysqli->getConn();
+    $db = new Database();
+    $conn = $db->getConn();
     
     $query = "SELECT * FROM reports JOIN profile ON reports.user_id = profile.userId";
 
-    if ($stmt = $conn->prepare($query)) {
-
+    try {
+        $stmt = $conn->prepare($query);
         $stmt->execute();
-        $result = $stmt->get_result();
-
-        $reports = [];
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $reports[] = $row;
-            }
-        }
+        $reports = $stmt->fetchAll();
         
-        $result->free(); 
-        $stmt->close();
-        var_dump($reports);
         return $reports;
 
-    } else {
-        echo "Query failed: " . $conn->error;
+    } catch (PDOException $e) {
+        error_log("Query failed: " . $e->getMessage());
         return false;
     }
 

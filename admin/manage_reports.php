@@ -1,73 +1,35 @@
 <?php
-// ----------------------------
-// SAMPLE REPORTS DATA
-// ----------------------------
 
-require_once __DIR__ .'../../src/modules/reports.php';
-$result = getAllReports(1);
-$sanitizedReports = [];
+require_once __DIR__ .'../../src/utillities/log.php';
 
-$data_source_url = ''; 
+$data_source_url = "http://localhost/pgrs-g6/request/listReport.php"; 
 
-// Fetch the raw JSON string
-// You can use cURL here for more control, but file_get_contents is simplest
-$json_report_string = file_get_contents($data_source_url);
+try {
+    $data = file_get_contents($data_source_url);
 
-if ($json_report_string === false) {
-    die("Error: Could not retrieve data from the source URL.");
+    if ($data === false) { 
+        throw new Exception("Error: Could not retrieve data from the server.");
+    }
+
+    $response_data = json_decode($data, true); 
+
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        throw new Exception("Error: Failed to decode JSON. JSON Error: " . json_last_error_msg());
+    }
+
+    if ($response_data === null || !isset($response_data['success']) || $response_data['success'] !== true) {
+        throw new Exception("Error: Invalid or unsuccessful response from data source.");
+    }
+
+    $reports = $response_data['data'] ?? [];
+
+} catch (Exception $er) {
+    containlog('Error', $er->getMessage(), __DIR__, 'reportData.log');
 }
 
-/* $reports = [
-    [
-        "id" => 1,
-        "firstname" => "Jay Mark",
-        "lastname" => "Rocero",
-        "title" => "Fire in Barangay",
-        "category" => "Fire",
-        "status" => "Pending",
-        "date_submitted" => "2025-11-01",
-        "description" => "Fire reported near residential area",
-        "image" => "sample1.jpg",
-        "location" => "Barangay 1",
-        "latitude" => 13.7563,
-        "longitude" => 121.0583
-    ],
-    [
-        "id" => 2,
-        "firstname" => "Neil",
-        "lastname" => "Tomoc",
-        "title" => "Road Accident",
-        "category" => "Accident",
-        "status" => "Approved",
-        "date_submitted" => "2025-11-05",
-        "description" => "Car collision reported",
-        "image" => "sample2.jpg",
-        "location" => "Main St.",
-        "latitude" => 13.7580,
-        "longitude" => 121.0600
-    ],
-    [
-        "id" => 3,
-        "firstname" => "miel",
-        "lastname" => "Na Bisaya",
-        "title" => "Flooding",
-        "category" => "Natural Disaster",
-        "status" => "Ongoing",
-        "date_submitted" => "2025-11-10",
-        "description" => "Flooding reported in low-lying areas",
-        "image" => "sample3.jpg",
-        "location" => "Riverside",
-        "latitude" => 13.7550,
-        "longitude" => 121.0620
-    ]
-]; */
-
-// ----------------------------
-// FILTER STATUS (from query string)
-// ----------------------------
 $status = $_GET['status'] ?? 'All';
 if ($status !== 'All') {
-    $reports = array_filter($reports, fn($r) => $r['status'] === $status);
+    $reports = array_filter($reports, fn($r) => isset($r['status']) && $r['status'] === $status);
 }
 ?>
 
@@ -83,7 +45,9 @@ if ($status !== 'All') {
 <body>
 
 <div class="admin-bg">
+
 <?php include '../admin/admin_sidebar.php'; ?>
+
 <div class="main-content">
     <div class="container py-5">
         <div class="card-custom p-4 shadow-lg">
@@ -94,14 +58,14 @@ if ($status !== 'All') {
                 <?php 
                 $statuses = ['All','Pending','Approved','Ongoing','Resolved'];
                 foreach ($statuses as $s): ?>
-                    <a href="?status=<?= $s ?>" class="btn btn-outline-<?= match($s){
+                    <a href="?status=<?= htmlspecialchars($s, ENT_QUOTES, 'UTF-8') ?>" class="btn btn-outline-<?= match($s){
                         'Pending'=>'warning',
                         'Approved'=>'success',
                         'Ongoing'=>'info',
                         'Resolved'=>'primary',
                         default=>'light'
                     } ?> <?= ($status==$s)?'active':'' ?>">
-                        <?= $s ?>
+                        <?= htmlspecialchars($s, ENT_QUOTES, 'UTF-8') ?>
                     </a>
                 <?php endforeach; ?>
             </div>
@@ -128,32 +92,44 @@ if ($status !== 'All') {
                             </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($reports as $r): ?>
+                        <?php foreach ($reports as $r): 
+                            $reportId = htmlspecialchars($r['id'] ?? '');
+                            $userName = htmlspecialchars(($r['user_full_name'] ?? ($r['firstName'] ?? '') . ' ' . ($r['lastName'] ?? '')) ?: 'Unknown');
+                            $title = htmlspecialchars($r['name'] ?? '');
+                            $category = htmlspecialchars($r['report_type'] ?? $r['ml_category'] ?? '');
+                            $reportStatus = htmlspecialchars($r['status'] ?? '');
+                            $dateSubmitted = htmlspecialchars($r['created_at'] ?? '');
+                            // Format date if it's in ISO format
+                            if ($dateSubmitted && strpos($dateSubmitted, 'T') !== false) {
+                                $dateSubmitted = date('Y-m-d H:i:s', strtotime($dateSubmitted));
+                            }
+                            $reportJson = htmlspecialchars(json_encode($r));
+                        ?>
                             <tr>
-                                <td><?= $r['id'] ?></td>
-                                <td><?= $r['firstname'] . ' ' . $r['lastname'] ?></td>
-                                <td><?= $r['title'] ?></td>
-                                <td><?= $r['category'] ?></td>
+                                <td><?= $reportId ?></td>
+                                <td><?= $userName ?></td>
+                                <td><?= $title ?></td>
+                                <td><?= $category ?></td>
                                 <td>
-                                    <span class="badge bg-<?= match($r['status']){
+                                    <span class="badge bg-<?= match($reportStatus){
                                         'Approved'=>'success',
                                         'Pending'=>'warning',
                                         'Ongoing'=>'info',
                                         'Resolved'=>'primary',
                                         default=>'secondary'
-                                    } ?>"><?= $r['status'] ?></span>
+                                    } ?>"><?= $reportStatus ?></span>
                                 </td>
-                                <td><?= $r['date_submitted'] ?></td>
+                                <td><?= $dateSubmitted ?></td>
                                 <td>
                                     <button class="btn btn-sm btn-outline-info view-details" 
-                                            data-report='<?= json_encode($r) ?>'>
+                                            data-report='<?= $reportJson ?>'>
                                         View Details
                                     </button>
-                                    <?php if ($r['status']=='Pending'): ?>
-                                        <button onclick="confirmAction('approve', <?= $r['id'] ?>)" class="btn btn-success btn-sm">Approve</button>
-                                        <button onclick="confirmAction('reject', <?= $r['id'] ?>)" class="btn btn-danger btn-sm">Reject</button>
+                                    <?php if ($reportStatus == 'Pending'): ?>
+                                        <button onclick="confirmAction('approve', <?= $reportId ?>)" class="btn btn-success btn-sm">Approve</button>
+                                        <button onclick="confirmAction('reject', <?= $reportId ?>)" class="btn btn-danger btn-sm">Reject</button>
                                     <?php else: ?>
-                                        <button onclick="confirmAction('delete', <?= $r['id'] ?>)" class="btn btn-outline-danger btn-sm">Delete</button>
+                                        <button onclick="confirmAction('delete', <?= $reportId ?>)" class="btn btn-outline-danger btn-sm">Delete</button>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -175,11 +151,11 @@ if ($status !== 'All') {
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
-        <p><strong>Title:</strong> <span id="modalTitle"></span></p>
+        <p><strong>Title:</strong> <span id="modalTitle"><?=  ?></span></p>
         <p><strong>Category:</strong> <span id="modalCategory"></span></p>
         <p><strong>Description:</strong> <span id="modalDescription"></span></p>
         <div class="text-center mb-3">
-            <img id="modalImage" src="" class="img-fluid rounded shadow" style="max-height: 400px;">
+            <img id="modalImage" src="" class="img-fluid rounded shadow" style="max-height: 400px;" alt="Report photo">
         </div>
         <p><strong>Location:</strong> <span id="modalLocation"></span></p>
         <div id="mapContainer" class="rounded overflow-hidden" style="height: 300px;"></div>
@@ -189,6 +165,6 @@ if ($status !== 'All') {
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/js/admin.js"></script>
+<script src="./assets/js/admin.js"></script>
 </body>
 </html>

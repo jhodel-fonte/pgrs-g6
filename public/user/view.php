@@ -13,7 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['action'])){
 // must fix this and dont place the query here
 try {
     $userId = $_SESSION['user']['userprofile']['pgCode'];
-    $stmt = $pdo->query("SELECT * FROM reports WHERE `user_id` = " .$userId  ." ORDER BY created_at DESC");
+    $stmt = $pdo->prepare("SELECT * FROM reports WHERE `user_id` = ? ORDER BY created_at DESC");
+    $stmt->execute([$userId]);
     $reports = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("Query failed: " . $e->getMessage());

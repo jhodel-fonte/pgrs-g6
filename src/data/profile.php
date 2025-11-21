@@ -18,12 +18,11 @@ class profileMng {  //Profile functions for user
             // $query = $this->conn->prepare("Call GetProfileById(?)");
             $query = $this->conn->prepare("SELECT * FROM `profile` WHERE `userId` = ? LIMIT 1");
             $id = sanitizeInput($id);
-            $query->bind_param("i", $id);
-            $query->execute();
-            $result = $query->get_result();
+            $query->execute([$id]);
+            $result = $query->fetch();
 
-            if ($result && $result->num_rows > 0) {
-                return $result->fetch_assoc();
+            if ($result) {
+                return $result;
             } else {
                 throw new Exception("No Profile results found for ID: $id");
             }
@@ -36,7 +35,6 @@ class profileMng {  //Profile functions for user
 
         function getProfileDetailsByID($id) {
         try {
-            $query = $this->conn->prepare("Call GetConfirnedUserAcc(?)");
             $query = $this->conn->prepare("SELECT 
                                                 a.accId,
                                                 p.userId as pgCode,
@@ -56,12 +54,11 @@ class profileMng {  //Profile functions for user
                                             WHERE a.accId = ?
                                             LIMIT 1");
             $id = sanitizeInput($id);
-            $query->bind_param("i", $id);
-            $query->execute();
-            $result = $query->get_result();
+            $query->execute([$id]);
+            $result = $query->fetch();
 
-            if ($result && $result->num_rows > 0) {
-                return $result->fetch_assoc();
+            if ($result) {
+                return $result;
             } else {
                 throw new Exception("No Results found for ID: $id");
             }
@@ -82,15 +79,12 @@ class profileMng {  //Profile functions for user
             // $reg = $this->conn->prepare("Call CreateNewProfile(?, ?, ?, ?)");
             $reg = $this->conn->prepare("INSERT INTO `profile`(`firstName`, `lastName`, `gender`, `dateOfBirth`) 
                                             VALUES (?, ?, ?, ?);");
-            $reg->bind_param("ssss", $fName, $lName, $Gnder, $DOB);
 
-            // $reg = $this->conn->("");
-
-            if (!$reg->execute()){
-                throw new Exception($reg->error);
+            if (!$reg->execute([$fName, $lName, $Gnder, $DOB])){
+                throw new Exception("Failed to execute query");
             };
 
-            $newId = $this->conn->insert_id;
+            $newId = $this->conn->lastInsertId();
 
             if ($newId === 0 || $newId === null) {
                 throw new Exception('No new ID was generated, insertion may have failed.');
@@ -110,12 +104,10 @@ class profileMng {  //Profile functions for user
     
         try {
             $stmt_profile = $this->conn->prepare("DELETE FROM profile WHERE `userId` = ?");
-            $stmt_profile->bind_param("i", $id);
 
-            if (!$stmt_profile->execute()) {
-                throw new Exception("Error deleting profile: " . $stmt_profile->error);
+            if (!$stmt_profile->execute([$id])) {
+                throw new Exception("Error deleting profile");
             }
-            $stmt_profile->close();
             return true;
 
         } catch (Exception $e) {

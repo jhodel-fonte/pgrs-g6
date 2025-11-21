@@ -10,6 +10,7 @@
 session_start();
 
 require_once __DIR__ . '/../src/modules/loginAuth.php';
+require_once __DIR__ . '/../src/modules/loginAuth.php';
 require_once __DIR__ . '/../src/api/otp.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
