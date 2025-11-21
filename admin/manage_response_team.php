@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ .'/../src/utillities/log.php';
 
-$reports = include __DIR__ .'../../../request/dataProcess.php';
+$reports = include __DIR__ .'../../request/dataProcess.php';
 
 $status = $_GET['status'] ?? 'All';
 if ($status !== 'All' && is_array($reports)) {
@@ -24,7 +24,7 @@ if ($status !== 'All' && is_array($reports)) {
 <div class="main-content">
     <div class="container mt-4">
         <div class="card-custom p-4">
-            <h3 class="text text-left mb-4">Manage Reports</h3>
+            <h3 class="text text-left mb-4">Manage Teams</h3>
 
             <!-- Filter buttons -->
             <div class="d-flex justify-content-center mb-3 gap-2 flex-wrap">
