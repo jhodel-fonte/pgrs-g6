@@ -18,11 +18,11 @@ class profileMng {  //Profile functions for user
     function getUserByRole($role) {
         try {
             $role = sanitizeInput($role);
-            $query = $this->conn->prepare("SELECT * FROM `profile` WHERE `role_id` = ?");
+            $query = $this->conn->prepare("SELECT mem.team_id, p.* FROM members_team AS mem JOIN profile AS p ON mem.member_id = p.userId WHERE p.role_id = ?;");
             $query->execute([$role]);
             $result = $query->fetchAll();
             // var_dump($result);
-            
+
             if ($result) {
                 return $result;
             } else {

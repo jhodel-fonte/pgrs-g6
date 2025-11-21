@@ -4,7 +4,6 @@ ob_start();
 
 header('Content-Type: application/json');
 
-require_once __DIR__ . '/../src/data/profile.php';
 require_once __DIR__ . '/../src/data/res_teams.php';
 require_once __DIR__ . '/../src/utillities/log.php';
 
@@ -12,35 +11,37 @@ try {
     $teamClass = new Teams();
     $teams = $teamClass->getAllTeams();
 
-    $memberClass = new profileMng();
-    $member = $memberClass->getUserByRole(2);
+    $members = $teamClass->getAllTeamMembers();
     
     if (isset($teams['success']) && $teams['success'] == false ) {
-        throw new Exception('Failed to fetch reports');
+        throw new Exception('Failed to fetch teams');
     }
 
-    if ($members === false) {
-        $images = []; // Set to empty array if failed instead of throwing error
+    if (isset($members['success']) && $members['success'] == false ) {
+        throw new Exception('Failed to fetch team members');
     }
 
-    // Group members
-    $members = [];
-    foreach ($member as $members) {
-        $reportId = $image['report_id'] ?? null;
-        if ($reportId) {
-            if (!isset($imagesByReportId[$reportId])) {
-                $imagesByReportId[$reportId] = [];
+    // Group members by team_id
+    $membersByTeam = [];
+    if (is_array($members)) {
+        foreach ($members as $member) {
+            $teamId = $member['team_id'] ?? null;
+            if (!$teamId) {
+                continue;
             }
-            $imagesByReportId[$reportId][] = $image;
+            if (!isset($membersByTeam[$teamId])) {
+                $membersByTeam[$teamId] = [];
+            }
+            $membersByTeam[$teamId][] = $member;
         }
     }
-    
-    // Merge images into each report
-    foreach ($reports as &$report) {
-        $reportId = $report['id'] ?? null;
-        $report['images'] = $imagesByReportId[$reportId] ?? [];
+
+    // Merge members into each team
+    foreach ($teams as &$team) {
+        $teamId = $team['team_id'] ?? $team['id'] ?? null;
+        $team['members'] = $teamId && isset($membersByTeam[$teamId]) ? $membersByTeam[$teamId] : [];
     }
-    unset($report); // Unset reference to avoid issues
+    unset($team);
 
     $response = [
         'success' => true,
