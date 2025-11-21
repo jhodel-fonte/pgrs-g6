@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <?php include 'user_sidebar.php'; ?>
-<div class = "main-content container py-5">
+<div class = "main-content-center container py-5">
 
 <div class="container py-4">
     <h2 class="text-center text-neon mb-4"> Submit a Report</h2>

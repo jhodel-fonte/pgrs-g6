@@ -1,10 +1,5 @@
 <?php
-// Start session only if not already started
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-// Include database connection once
+session_start();
 require_once '../config/db.php';
 
 // Redirect if not logged in or not a user
@@ -27,13 +22,12 @@ $report_stmt->execute([$user_id]);
 while ($row = $report_stmt->fetch(PDO::FETCH_ASSOC)) {
     $total_reports += $row['count'];
     if (strtolower($row['status']) === 'pending') $pending_reports = $row['count'];
-    if (strtolower($row['status']) === 'resolved' || strtolower($row['status']) === 'approved') $resolved_reports = $row['count'];
+    if (in_array(strtolower($row['status']), ['resolved','approved'])) $resolved_reports = $row['count'];
 }
 
-// Set current page for active sidebar link
+// Current page for active sidebar link
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,27 +35,48 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <title>User Dashboard | Padre Garcia Reporting</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/user.css">
+<script src="https://kit.fontawesome.com/a2e0e6ad15.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-<?php include 'user_sidebar.php'; ?>
+<!-- SIDEBAR -->
+<button class="sidebar-toggle">☰</button>
+<div class="sidebar user-sidebar">
+    <h3 class="text-center mb-4">User Panel</h3>
+    <a href="dashboard.php" class="<?= $current_page == 'dashboard.php' ? 'active' : ''; ?>"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
+    <a href="reports.php" class="<?= $current_page == 'reports.php' ? 'active' : ''; ?>"><i class="fa-solid fa-file-circle-plus me-2"></i> Submit Report</a>
+    <a href="view_reports.php" class="<?= $current_page == 'view_reports.php' ? 'active' : ''; ?>"><i class="fa-solid fa-list me-2"></i> View My Reports</a>
+    <a href="../logout.php"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a>
+</div>
 
-<!-- Main content -->
-<div class="main-content container py-5">
-    
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-neon">Welcome, <?= htmlspecialchars($user['firstname']); ?> 👋</h2>
+<!-- TOPBAR -->
+<div class="topbar">
+    <div class="topbar-right">
+        <span class="date-display" id="dateDisplay"></span>
+        <div class="profile-menu">
+            <img src="<?= !empty($user['profile_pic']) ? '../uploads/profile/' . htmlspecialchars($user['profile_pic']) : '../assets/default_user.png'; ?>" 
+                 class="profile-img" onclick="toggleProfileMenu()">
+            <div class="profile-dropdown" id="profileDropdown">
+                <a href="my_profile.php"><i class="fa-solid fa-user me-2"></i> My Profile</a>
+                <a href="../logout.php"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a>
+            </div>
+        </div>
     </div>
+</div>
 
-    <div class="row g-4">
+<!-- MAIN CONTENT -->
+<div class="main-content py-4">
+
+    <h2 class="mb-4 text-neon">Welcome, <?= htmlspecialchars($user['firstname']); ?> 👋</h2>
+
+    <div class="row g-4 align-cards-start">
 
         <!-- Profile Card -->
         <div class="col-md-4">
-            <div class="card bg-secondary text-center shadow border-neon">
+            <div class="card bg-secondary text-center shadow border-neon flex-fill">
                 <div class="card-body">
                     <img src="<?= !empty($user['profile_pic']) ? '../uploads/profile/' . htmlspecialchars($user['profile_pic']) : '../assets/default_user.png'; ?>" 
                          alt="Profile" class="rounded-circle mb-3" width="100" height="100">
-
                     <h5><?= htmlspecialchars($user['firstname'] . ' ' . $user['lastname']); ?></h5>
                     <p class="mb-1 text-light"><?= htmlspecialchars($user['email']); ?></p>
                     <p class="text-light"><?= htmlspecialchars($user['mobile_number']); ?></p>
@@ -69,25 +84,22 @@ $current_page = basename($_SERVER['PHP_SELF']);
             </div>
         </div>
 
-        <!-- Reports Overview -->
+        <!-- Reports Overview Card -->
         <div class="col-md-8">
-            <div class="card bg-dark border-neon p-4 shadow">
+            <div class="card bg-dark border-neon shadow">
 
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-neon"><i class="fa-solid fa-clipboard-list"></i> Your Reports</h4>
-                </div>
+                <h4 class="text-neon mb-3"><i class="fa-solid fa-clipboard-list"></i> Your Reports</h4>
+                <h3 class="text text-center mb-4 text-light">View, submit, and track your reports.</h3>
 
-                <p class="text-light">View, submit, and track your submitted reports here.</p>
-
-                <!-- CLICKABLE CARDS -->
-                <div class="row text-center mb-4    ">
+                <div class="row g-4 text-center mb-4">
 
                     <!-- Total Reports -->
                     <div class="col-md-4">
                         <a href="view_reports.php" class="text-decoration-none">
-                            <div class="report-stat card-click p-3 rounded">
-                                <h3><?= $total_reports; ?></h3>
-                                <p>Reports</p>
+                            <div class="card bg-dark text-center p-3 shadow border-neon">
+                                <i class="fa-solid fa-file-lines fa-2x mb-2 text-neon"></i>
+                                <h3 class="text-light"><?= $total_reports; ?></h3>
+                                <div class="btn btn-info btn-sm mt-2 text-light w-100">Total Reports</div>
                             </div>
                         </a>
                     </div>
@@ -95,30 +107,29 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     <!-- Pending Reports -->
                     <div class="col-md-4">
                         <a href="view_reports.php?filter=pending" class="text-decoration-none">
-                            <div class="report-stat card-click p-3 rounded">
-                                <h3><?= $pending_reports; ?></h3>
-                                <p>Pending</p>
+                            <div class="card bg-dark text-center p-3 shadow border-neon">
+                                <i class="fa-solid fa-clock fa-2x mb-2 text-warning"></i>
+                                <h3 class="text-light"><?= $pending_reports; ?></h3>
+                                <div class="btn btn-warning btn-sm mt-2 text-dark w-100">Pending</div>
                             </div>
                         </a>
                     </div>
 
                     <!-- Approved Reports -->
                     <div class="col-md-4">
-                        <a href="reports.php?filter=approved" class="text-decoration-none">
-                            <div class="report-stat card-click p-3 rounded">
-                                <h3><?= $resolved_reports; ?></h3>
-                                <p>Approved</p>
+                        <a href="view_reports.php?filter=approved" class="text-decoration-none">
+                            <div class="card bg-dark text-center p-3 shadow border-neon">
+                                <i class="fa-solid fa-check-circle fa-2x mb-2 text-success"></i>
+                                <h3 class="text-light"><?= $resolved_reports; ?></h3>
+                                <div class="btn btn-success btn-sm mt-2 text-light w-100">Approved</div>
                             </div>
                         </a>
                     </div>
 
                 </div>
 
-                <!-- Create Report Button -->
-                <div class="text-center mt-3">
-                    <a href="reports.php" class="btn btn-primary">
-                        <i class="fa-solid fa-plus"></i> Create Report
-                    </a>
+                <div class="text-center py-3">
+                    <a href="reports.php" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Create Report</a>
                 </div>
 
             </div>
@@ -127,24 +138,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
     </div>
 </div>
 
-<!-- JS -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.querySelector(".dropdown-btn");
-    const content = document.querySelector(".dropdown-content");
-
-    if (btn && content) {   // <-- prevents errors
-        btn.addEventListener("click", () => {
-            content.style.display =
-                content.style.display === "block" ? "none" : "block";
-        });
-    }
-});
-</script>
-
-
-<script src="https://kit.fontawesome.com/a2e0e6ad15.js" crossorigin="anonymous"></script>
 <script src="../assets/js/user.js"></script>
-
 </body>
 </html>
