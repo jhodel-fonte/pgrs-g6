@@ -137,50 +137,58 @@ function confirmAction(action, id) {
         delete: "Permanently delete this report?"
     };
 
-    const responseTeam = {
-
+    const ResponseTeam = {
+            'US': 'United States',
+            'CA': 'Canada',
+            'MX': 'Mexico',
+            'JP': 'Japan',
+            'UK': 'United Kingdom'
     }
 
-    Swal.fire({
-        title: messages[action] || "Are you sure?",
+    swal.fire({
+        title: "Assign Response Team!",
         icon: "warning",
+        input: 'select',
         showCancelButton: true,
-        confirmButtonColor: "#198754",
-        cancelButtonColor: "#6c757d",
-        confirmButtonText: "Yes, continue"
-    }).then(result => {
-        if (result.isConfirmed) {
-            // window.location.href = `?action=${action}&id=${id}`;
-            Swal.fire({
-                title: "Assign Response Team!",
-                icon: "warning",
-                input: 'select',
-                inputPlaceholder: 'Select a Response Team',
-                inputOptions: {
-                    'US': 'United States',
-                    'CA': 'Canada',
-                    'MX': 'Mexico',
-                    'JP': 'Japan',
-                    'UK': 'United Kingdom'
-                },
-                inputValidator: (value) => {
-                    return new Promise((resolve) => {
-                        if (value === '') {
-                            resolve('You need to select a country!');
-                        } else {
-                            resolve();
-                        }
-                    });
+        confirmButtonText: 'Continue',
+        inputPlaceholder: 'Select a Response Team',
+        inputOptions: {
+            ResponseTeam
+        },
+        inputValidator: (teamId) => {
+            return new Promise((resolve) => {
+                if (teamId === '') {
+                    resolve('You need to select a !');
+                } else {
+                    resolve();
                 }
-            }).then((result) => {
-                    // The 'value' property holds the key chosen from inputOptions
-                    if (result.isConfirmed) {
-                        Swal.fire(`You selected the value: ${result.value}`);
-                    }
             });
-                
+        }
+    }).then((result) => {
+        // FIX: The selected value is available as result.value here.
+        const selectedTeamId = result.value; 
+
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: messages[action] || "Are you sure?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#198754",
+                cancelButtonColor: "#6c757d",
+                confirmButtonText: "Yes, continue"
+            }).then(innerResult => {
+                    if (innerResult.isConfirmed) {
+                        Swal.fire(`You selected the team ID: ${selectedTeamId}`);
+                        
+                        // window.location.href = `?action=${action}&id=${id}&teamId=${selectedTeamId}`;
+                    }
+                });
         }
     });
+
+
+
+
 }
 
 

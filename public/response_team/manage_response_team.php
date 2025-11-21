@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ .'/../src/utillities/log.php';
+require_once __DIR__ .'./../../src/utillities/log.php';
 
 $reports = include __DIR__ .'/dataProcess.php';
 

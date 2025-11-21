@@ -27,7 +27,6 @@ foreach ($reports as $report):
     $lat = $report['latitude'] ?? null;
     $lng = $report['longitude'] ?? null;
     $images = $report['images'] ?? [];
-    $legacyPhoto = $report['photo'] ?? $report['image'] ?? null;
 ?>
 
 <div class="modal fade" id="reportModal<?= $reportId ?>" tabindex="-1" aria-hidden="true">
@@ -96,7 +95,7 @@ foreach ($reports as $report):
                         ?>
                             <div class="col-md-4 mb-3">
                                 <div class="text-center">
-                                    <img src="/assets/uploads/reports/ <?= htmlspecialchars($imagePath) ?>"
+                                    <img src="../assets/uploads/reports/<?= htmlspecialchars($imagePath) ?>"
                                          class="img-fluid rounded shadow"
                                          style="max-height: 200px; width: 100%; object-fit: cover; cursor: pointer;"
                                          alt="Report image"
@@ -105,17 +104,6 @@ foreach ($reports as $report):
                                 </div>
                             </div>
                         <?php endforeach; ?>
-                    </div>
-                <?php elseif ($legacyPhoto): ?>
-                    <p><strong>Uploaded Image:</strong></p>
-                    <div class="text-center mb-3">
-                        <img src="/assets/uploads/reports/ <?= htmlspecialchars($legacyPhoto) ?>"
-                             class="img-fluid rounded shadow"
-                             style="max-height: 400px;"
-                             alt="Report photo"
-                             onclick="window.open(this.src, '_blank')"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                        <p class="text-muted text-center" style="display:none;">Image not available</p>
                     </div>
                 <?php else: ?>
                     <div class="text-center mb-3">
