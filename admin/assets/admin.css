@@ -121,6 +121,7 @@ body {
 
     .sidebar.active {
         display: block; /* show dropdown */
+        position: fixed;
     }
 
     .sidebar a {
@@ -137,7 +138,7 @@ body {
     /* Hamburger button visible */
     .sidebar-toggle {
         display: block;
-        position: relative;
+        position: fixed;
         top: 0;
         left: 0;
         margin: 10px 20px;
@@ -169,7 +170,7 @@ body {
 .topbar {
     position: fixed;
     top: 0;
-    left: 260px;                 /* Desktop: aligned with sidebar */
+    left: 260px;                
     width: calc(100% - 260px);   /* Desktop width */
     height: 65px;
     background: #fff;
@@ -307,9 +308,9 @@ body {
 /* ======================
       MOBILE VIEW
 ====================== */
-@media (max-width: 900px) {
+@media (max-width: 1500px) {
     .topbar {
-        left: 0;             /* Sidebar becomes dropdown */
+        left: 0;             
         width: 100%;
     }
 
@@ -427,13 +428,71 @@ body {
 /* ============================
          CHART BOX
    ============================ */
+.reports-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 25px;
+    margin: 30px 0;
+}
+
+/* Left: MAP */
+.map-container {
+    width: 50%;
+    height: 570px;
+    border-radius: 18px;
+    background: #e6e6e6;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+/* Right: Chart Container */
+.chart-card-header {
+    display: flex;
+    justify-content: center;   /* centers horizontally */
+    align-items: center;       /* centers vertically */
+    margin-bottom: 15px;
+    width: 100%;
+    text-align: center;
+}
+
+.chart-card-header h4 {
+    margin: 0;
+    font-weight: 600;
+    color: #333;
+}
+
+
+/* Keep your existing chart-box styling */
 .chart-box {
+    width: 100%;
+    padding: 20px;
+    border-radius: 18px;
     background: #fff;
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
-    width: 90%;
-    margin: 0 auto 40px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.recent-reports {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    margin-top: 30px;
+}
+
+.recent-reports h3 {
+    font-weight: bold;
+    color: #333;
+}
+
+.table th {
+    background: #222;
+    color: #fff;
+}
+
+.table td,
+.table th {
+    padding: 12px;
 }
 
 @media (max-width: 900px) {

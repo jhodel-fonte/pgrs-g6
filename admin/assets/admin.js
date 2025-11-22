@@ -1,5 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    // ============================
+    // LEAFLET MAP INITIALIZATION
+    // ============================
+    const mapContainer = document.getElementById("map");
+
+    if (mapContainer) {
+        var map = L.map('map').setView([13.9333, 121.1167], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19
+        }).addTo(map);
+
+        L.marker([13.9333, 121.1167]).addTo(map)
+            .bindPopup("Test Pin")
+            .openPopup();
+    }
+
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
     const toggleBtn = document.querySelector(".sidebar-toggle");
     const sidebar = document.querySelector(".sidebar");
 
