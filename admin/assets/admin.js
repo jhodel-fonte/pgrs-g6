@@ -122,6 +122,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+const RESPONSE_TEAM_ENDPOINT = "__DIR__ .'./../../request/responseTeam.php";
+let responseTeamsCache = null;
+
+async function fetchResponseTeams() {
+    if (responseTeamsCache !== null) {
+        return responseTeamsCache;
+    }
+
+    const response = await fetch(RESPONSE_TEAM_ENDPOINT, {
+        headers: { "Accept": "application/json" }
+    });
+
+    if (!response.ok) {
+        throw new Error(`Unable to load response teams (status ${response.status}).`);
+    }
+
+    const payload = await response.json();
+    if (!payload.success) {
+        throw new Error(payload.message || "Failed to load response teams.");
+    }
+
+    responseTeamsCache = payload.data.teamId || [];
+    return responseTeamsCache;
+}
+
 function confirmAction(action, id) {
     const messages = {
         approve: "Approve this reports?",
@@ -129,14 +154,7 @@ function confirmAction(action, id) {
         delete: "Permanently delete this report?"
     };
 
-    const ResponseTeam = {
-            'US': 'United States',
-            'CA': 'Canada',
-            'MX': 'Mexico',
-            'JP': 'Japan',
-            'UK': 'United Kingdom'
-    }
-
+    const ResponseTeam = fetchResponseTeams();
     swal.fire({
         title: "Assign Response Team!",
         icon: "warning",

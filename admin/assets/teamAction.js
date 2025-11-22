@@ -118,7 +118,12 @@
     }
 
     window.confirmAction = confirmActionOverride;
+    
 })();
+
+async function teamSelect($id) {
+    
+}
 
 async function confirmTeamAction(action, id) {
 
@@ -257,3 +262,6 @@ window.openAddMemberModal = openAddMemberModal;
 window.openEditMemberModal = openEditMemberModal;
 window.removeMember = removeMember;
 window.confirmAction = confirmAction;
+window.confirmActionWithTeamSelection() = confirmActionWithTeamSelection()
+
+// window.confirmAction = confirmActionOverride;

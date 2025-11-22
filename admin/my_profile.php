@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 // ----------------------------
 // DEMO ADMIN DATA (Replace with DB later)
 // ----------------------------

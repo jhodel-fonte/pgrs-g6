@@ -1,23 +1,78 @@
 <?php
-
+include_once __DIR__ .'../../utillities/log.php';
+include_once __DIR__ .'/ca.pem';
 // $db_link = "";
 // $data_source_url = "http://iinfri/request/getData.php?data=members";
 
 class Database { //Database Connection
-    private $servername = "localhost";
-    private $username = "pgsys_admin";
-    private $password = "test";
-    private $database = "unity_pgsys_db";
 
-    // private $servername = "sql213.infinityfree.com";
-    // private $username = "if0_40422080";
-    // private $password = "rrLrWJCO9rp";
-    // private $database = "if0_40422080_unity_pgsys_db";
+    // Aiven Credentials
+    private $servername = "mysql-f33c54e-fontejoedel1-8150.k.aivencloud.com";
+    private $username = "avnadmin";
+    private $password = "AVNS__947RXvCC50mKjyI3i2";
+    private $database = "unity_pgsys_db";
+    private $port = "24340";
+    private $conn;
+    private $ssl_ca_path = __DIR__ .'/ca.pem';
+
+
+    function __construct() {
+        $dsn = "mysql:host={$this->servername};"
+             . "port={$this->port};"
+             . "dbname={$this->database};"
+             . "charset=utf8mb4";
+             
+        // SSL options array (passed as the fourth argument to PDO::__construct)
+        $ssl_options = [
+            PDO::MYSQL_ATTR_SSL_CA    => $this->ssl_ca_path, // Path to the ca.pem file
+            PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => true, // Enforce certificate verification
+            PDO::ATTR_ERRMODE         => PDO::ERRMODE_EXCEPTION, // Essential for robust error handling
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC // Sets default fetch mode
+        ];
+
+        try {
+            // Create the PDO instance using the DSN, username, password, and SSL options
+            $this->conn = new PDO(
+                $dsn,
+                $this->username,
+                $this->password,
+                $ssl_options
+            );
+
+        } catch (PDOException $error) { 
+            // Log the detailed error message
+            containlog('Database', $error->getMessage(), __DIR__, 'database.log');
+            
+            // Output a generic error response and terminate script execution
+            $response = ['success' => false, 'message' => 'Error Connecting Database'];
+            echo json_encode($response, JSON_PRETTY_PRINT); 
+            die();
+        }
+    }
+
+    function getConn(){
+        return $this->conn;
+    }
+}
+
+
+
+
+/* 
+class Database { //Database Connection
+    // private $servername = "localhost";
+    // private $username = "pgsys_admin";
+    // private $password = "test";
+    // private $database = "unity_pgsys_db";
+
+    private $servername = "mysql-f33c54e-fontejoedel1-8150.k.aivencloud.com";
+    private $username = "avnadmin";
+    private $password = "AVNS__947RXvCC50mKjyI3i2";
+    private $database = "unity_pgsys_db";
     private $conn;
 
     function __construct() {
-            // Build the DSN (Data Source Name) string for MySQL
-            $dsn = "mysql:host={$this->servername};dbname={$this->database};charset=utf8mb4";
+            // $dsn = "mysql:host={$this->servername};dbname={$this->database};charset=utf8mb4";
             
             try {
                 // Create the PDO instance
@@ -30,20 +85,15 @@ class Database { //Database Connection
                 $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
             } catch (PDOException $error) { 
-                // Log the error message to a file
-                error_log(date('[Y-m-d H:i:s] ') . $error->getMessage() . PHP_EOL, 3, __DIR__ . '/../log/database.log');
-                
-                // Halt script execution and display a generic connection error
-                die("Database Connection Error! <script>console.log('Database Connection Error! Check Log For details')</script>");
+                containlog('Database', $error->getMessage(), __DIR__, 'database.log');
+                $response = ['success' => false, 'message' => 'Error Connecting Database'];
+                echo json_encode($response, JSON_PRETTY_PRINT); 
+                die();
             }
         }
 
-        /**
-         * @brief Returns the PDO connection object.
-         * @return PDO The active PDO connection object.
-         */
         function getConn(){
             return $this->conn;
         }
-    }
+    } */
 ?>

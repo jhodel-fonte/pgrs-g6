@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h3 class="text mb-0 text-light">Create Response Team Account</h3>
-                <a href="manage_users.php" class="btn btn-primary">⬅ Back</a>
+                <a href="manage_response_team.php" class="btn btn-primary">⬅ Back</a>
             </div>
 
             <?php if ($message): ?>
