@@ -18,7 +18,7 @@ $admin = [
     "is_approved"   => 1,
     "created_at"    => "2023-01-10 14:22:00",
     "status"        => "Active",
-    "profile_pic"   => "default.png",
+    "profile_pic"   => "profile_6909db8442615.jpg",
     "id_doc"        => "sample_id.jpg"
 ];
 
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <!-- LEFT SIDE: Profile Picture -->
                 <div class="col-md-4 text-center border-end">
-                    <img src="../uploads/profile/<?= $admin['profile_pic']; ?>" 
+                    <img src="../assets/uploads/profile/<?= $admin['profile_pic']; ?>" 
                          class="img-fluid rounded-circle mb-3" 
                          style="width: 160px; height:160px; object-fit:cover;">
                     <input type="file" name="profile_pic" class="form-control">

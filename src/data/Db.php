@@ -1,5 +1,8 @@
 <?php
 
+// $db_link = "";
+// $data_source_url = "http://iinfri/request/getData.php?data=members";
+
 class Database { //Database Connection
     private $servername = "localhost";
     private $username = "pgsys_admin";

@@ -122,11 +122,72 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+function confirmAction(action, id) {
+    const messages = {
+        approve: "Approve this reports?",
+        reject: "Reject this report? (This action will delete it.)",
+        delete: "Permanently delete this report?"
+    };
+
+    const ResponseTeam = {
+            'US': 'United States',
+            'CA': 'Canada',
+            'MX': 'Mexico',
+            'JP': 'Japan',
+            'UK': 'United Kingdom'
+    }
+
+    swal.fire({
+        title: "Assign Response Team!",
+        icon: "warning",
+        input: 'select',
+        showCancelButton: true,
+        confirmButtonText: 'Continue',
+        inputPlaceholder: 'Select a Response Team',
+        inputOptions: {
+            ResponseTeam
+        },
+        inputValidator: (teamId) => {
+            return new Promise((resolve) => {
+                if (teamId === '') {
+                    resolve('You need to select a !');
+                } else {
+                    resolve();
+                }
+            });
+        }
+    }).then((result) => {
+        // FIX: The selected value is available as result.value here.
+        const selectedTeamId = result.value; 
+
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: messages[action] || "Are you sure?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#198754",
+                cancelButtonColor: "#6c757d",
+                confirmButtonText: "Yes, continue"
+            }).then(innerResult => {
+                    if (innerResult.isConfirmed) {
+                        Swal.fire(`You selected the team ID: ${selectedTeamId}`);
+                        
+                        // window.location.href = `?action=${action}&id=${id}&teamId=${selectedTeamId}`;
+                    }
+                });
+        }
+    });
+
+
+
+
+}
+
 
 /* =========================================
    SWEETALERT CONFIRMATION (BASE)
 ========================================= */
-function confirmAction(action, id) {
+/* function confirmAction(action, id) {
     const messages = {
         approve: "Approve this report?",
         reject: "Reject this report? (This action will delete it.)",
@@ -156,7 +217,7 @@ function confirmAction(action, id) {
             window.location.href = `${window.location.pathname}?action=${encodeURIComponent(action)}&id=${encodeURIComponent(id)}`;
         }
     });
-}
+} */
 
 
 /* =========================================

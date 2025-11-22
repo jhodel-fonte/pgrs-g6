@@ -6,7 +6,8 @@ require_once __DIR__ .'../../request/dataProcess.php';
 $data_source_url = "http://localhost/pgrs-g6/request/getData.php?data=members";
 
 $users = getDataSource($data_source_url);
-
+// var_dump($users);
+// exit;
 /* $users = [
     [
         "id" => 1,
@@ -167,10 +168,12 @@ unset($_SESSION['message']);
 
 <?php include '../admin/admin_sidebar.php'; ?>
 
+
+
 <div class="main-content">
     <div class="container mt-4">
-        <div class="card-custom p-4">
 
+        <div class="card-custom p-4">
             <div class="d-flex justify-content-center mb-3 gap-2 flex-wrap">
                 <?php 
                 $statuses = ['All','Pending','Approved','Rejected'];
@@ -199,6 +202,10 @@ unset($_SESSION['message']);
                 <input type="text" id="userSearch" class="form w-50" placeholder="Search reports by user name, email, or mobile number...">
             </div>
 
+        <?php if (isset($users['success']) && $users['success'] == false) : ?>
+        <p><?= $users['message'] ?></p>
+        <?php else : ?>
+            
             <div class="table-responsive scroll-card">
             <table class="table table-dark table-hover text-center align-middle">
                 <thead>
@@ -254,6 +261,7 @@ unset($_SESSION['message']);
                 </tbody>
             </table>
             </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>

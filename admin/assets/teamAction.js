@@ -256,3 +256,4 @@ function removeMember(teamId, memberId) {
 window.openAddMemberModal = openAddMemberModal;
 window.openEditMemberModal = openEditMemberModal;
 window.removeMember = removeMember;
+window.confirmAction = confirmAction;

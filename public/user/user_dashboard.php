@@ -4,7 +4,7 @@ require_once __DIR__ .'../../../src/data/config.php';
 require_once __DIR__ .'../../../src/utillities/common.php';
 
 // Redirect if not logged in
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['user']) || $_SESSION['isOtpVerified'] == false) {
     header("Location: ../login.php");
     exit;
 }
