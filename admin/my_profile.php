@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php include '../admin/admin_sidebar.php'; ?>
 
-<div class="main-contents">
+<div class="main-content">
 
     <div class="card-custom p-4">
 
@@ -146,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="mt-4 text-end">
-                <button class="btnP btn-primary px-4">Save Changes</button>
+                <button class="btn btn-primary px-4">Save Changes</button>
             </div>
 
         </form>
