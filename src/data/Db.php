@@ -9,7 +9,7 @@ class Database { //Database Connection
     // Aiven Credentials
     private $servername = "mysql-f33c54e-fontejoedel1-8150.k.aivencloud.com";
     private $username = "avnadmin";
-    // private $password = "AVNS__947RXvCC50mKjyI3i2";
+    private $password = "AVNS__947RXvCC50mKjyI3i2";
     private $database = "unity_pgsys_db";
     private $port = "24340";
     private $conn;
