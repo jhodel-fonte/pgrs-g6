@@ -75,9 +75,14 @@ body {
    ================ */
 .main-content {
     margin-left: 260px;
-    padding: 120px;
+    padding: 30px 40px; /* Top/Bottom = 30px, Left/Right = 40px */
     transition: 0.3s ease;
 }
+
+.card-custom {
+    width: 100%;
+}
+
 
 /* Button for mobile toggle */
 .sidebar-toggle {
@@ -159,37 +164,41 @@ body {
 }
 
 /* ======================
-    TOPBAR
-   ====================== */
+      TOPBAR
+====================== */
 .topbar {
     position: fixed;
-    left: 260px;
     top: 0;
-    width: calc(100% - 260px);
+    left: 260px;                 /* Desktop: aligned with sidebar */
+    width: calc(100% - 260px);   /* Desktop width */
     height: 65px;
     background: #fff;
+
     display: flex;
     align-items: center;
     justify-content: flex-end;
+
     padding: 0 25px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    z-index: 900;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 900; /* High enough but not blocking modals */
 }
 
-/* Right side (date + profile) */
+/* Container for right section */
 .topbar-right {
     display: flex;
     align-items: center;
     gap: 25px;
 }
 
-/* Date */
+/* Date text */
 .date-display {
     font-size: 15px;
     color: #444;
 }
 
-/* Notification Bell */
+/* ======================
+   NOTIFICATION BELL
+====================== */
 .notification-bell {
     position: relative;
     cursor: pointer;
@@ -201,14 +210,14 @@ body {
 
 .notification-bell .bell-icon {
     color: #444;
-    transition: color 0.2s;
+    transition: color 0.2s ease;
 }
 
 .notification-bell:hover .bell-icon {
     color: #4e89ff;
 }
 
-/* Badge */
+/* Notification badge */
 .notification-bell .notification-badge {
     position: absolute;
     top: -6px;
@@ -219,10 +228,9 @@ body {
     font-weight: bold;
     padding: 2px 6px;
     border-radius: 12px;
-    display: inline-block;
 }
 
-/* Notification dropdown */
+/* Notification dropdown list */
 .notification-dropdown {
     display: none;
     position: absolute;
@@ -232,12 +240,11 @@ body {
     max-height: 300px;
     overflow-y: auto;
     background: #fff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
     z-index: 1000;
 }
 
-/* Each notification item */
 .notification-dropdown .notification-item {
     padding: 12px 15px;
     font-size: 14px;
@@ -253,22 +260,23 @@ body {
     background: #f2f2f2;
 }
 
-
-/* Profile Icon */
+/* ======================
+      PROFILE ICON
+====================== */
 .profile-img {
     width: 42px;
     height: 42px;
     border-radius: 50%;
     cursor: pointer;
     border: 2px solid #eee;
-    transition: 0.2s;
+    transition: border-color 0.2s ease;
 }
 
 .profile-img:hover {
     border-color: #4e89ff;
 }
 
-/* Dropdown */
+/* Profile dropdown */
 .profile-dropdown {
     position: absolute;
     top: 65px;
@@ -276,32 +284,47 @@ body {
     background: white;
     width: 170px;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
     display: none;
     flex-direction: column;
     overflow: hidden;
+    z-index: 1000;
 }
 
 .profile-dropdown a {
     padding: 12px 15px;
     text-decoration: none;
     color: #333;
-    display: block;
     font-size: 14px;
-    transition: 0.2s;
+    display: block;
+    transition: background 0.2s ease;
 }
 
 .profile-dropdown a:hover {
     background: #f2f2f2;
 }
 
-/* Adjust for mobile */
+/* ======================
+      MOBILE VIEW
+====================== */
 @media (max-width: 900px) {
     .topbar {
-        left: 0;
+        left: 0;             /* Sidebar becomes dropdown */
         width: 100%;
     }
+
+    .topbar-right {
+        gap: 18px;
+    }
 }
+
+/* ======================
+ FIX: ERROR ALERT OVERLAP
+====================== */
+.main-content {
+    margin-top: 80px !important;  /* Prevent topbar overlapping content */
+}
+
 
 
 /* ============================
