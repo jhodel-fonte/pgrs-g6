@@ -1,8 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-
-    // ============================
     // LEAFLET MAP INITIALIZATION
-    // ============================
     const mapContainer = document.getElementById("map");
 
     if (mapContainer) {
@@ -30,11 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
             sidebar.classList.toggle("active");
         });
     }
+    
+      // DASHBOARD CHART
 
-
-    /* =========================================
-       DASHBOARD CHART
-    ========================================= */
     const chartCanvas = document.getElementById("monthlyChart");
 
     if (chartCanvas && typeof Chart !== "undefined") {
@@ -64,9 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       COUNTER ANIMATION
-    ========================================= */
+    
+       //COUNTER ANIMATION
     const counters = document.querySelectorAll(".count");
 
     counters.forEach(el => {
@@ -87,9 +81,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    /* =========================================
-       MODAL REPORT VIEWER
-    ========================================= */
+  
+      // MODAL REPORT VIEWER
     const detailsModalEl = document.getElementById("detailsModal");
 
     if (detailsModalEl) {
@@ -131,9 +124,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       AUTO-DISMISS FLASH MESSAGES
-    ========================================= */
+  
+      // AUTO-DISMISS FLASH MESSAGES
     const alerts = document.querySelectorAll('.alert');
 
     alerts.forEach(alert => {

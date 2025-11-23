@@ -9,7 +9,7 @@ body {
 }
 
 /* Backgrounds for Login/Register/OTP */
-.login-bg, .register-bg, .otp-bg, .forgot-bg {
+.login-bg, .register-bg, .forgot-bg {
   background: url('./img/pgsrsBG.jpg') no-repeat center center/cover;
   position: relative;
   height: 100vh; /* keep full height */
