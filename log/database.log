@@ -236,3 +236,4 @@
 [2025-11-22 22:44:44]["type": "Database", "message": "SQLSTATE[HY000] [2002] Cannot connect to MySQL using SSL", "file": "C:\xampp\htdocs\pgrs-g6\src\data"]
 [2025-11-22 22:44:47]["type": "Database", "message": "SQLSTATE[HY000] [2002] Cannot connect to MySQL using SSL", "file": "C:\xampp\htdocs\pgrs-g6\src\data"]
 [2025-11-22 22:45:52]["type": "Database", "message": "SQLSTATE[HY000] [2002] Cannot connect to MySQL using SSL", "file": "C:\xampp\htdocs\pgrs-g6\src\data"]
+[2025-11-23 13:09:29]["type": "Database", "message": "SQLSTATE[HY000] [1045] Access denied for user 'avnadmin'@'136.158.66.236' (using password: YES)", "file": "C:\xampp\htdocs\My report system\src\data"]
