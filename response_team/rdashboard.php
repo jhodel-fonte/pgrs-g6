@@ -82,7 +82,7 @@
     }
     ?>
 
-    <div class="container updates-container">
+    <div class="container updates-container" id="updates">
         <h2>Update Status</h2>
         <?php if (empty($updates)): ?>
             <p class="text-muted">No recent updates.</p>
