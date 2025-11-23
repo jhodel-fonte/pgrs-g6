@@ -1,12 +1,7 @@
 <?php
 //login logic and caller
 //this one return a json that contains all the user details
-//i mean this one handles the json that src returns when requested
 
-//mga bisaya dito lagi pupunta bago pag mag submit si public or user ng credential or data
-// include_once "../src/user/user.php";
-
-// $user = new User();
 session_start();
 
 require_once __DIR__ . '/../src/modules/loginAuth.php';

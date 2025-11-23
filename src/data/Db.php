@@ -1,9 +1,8 @@
 <?php
 include_once __DIR__ .'../../utillities/log.php';
-include_once __DIR__ .'/ca.pem';
-// $db_link = "";
-// $data_source_url = "http://iinfri/request/getData.php?data=members";
+include_once __DIR__ .'../../utillities/log.php';
 
+ob_start();
 class Database { //Database Connection
 
     // Aiven Credentials
@@ -21,8 +20,7 @@ class Database { //Database Connection
              . "port={$this->port};"
              . "dbname={$this->database};"
              . "charset=utf8mb4";
-             
-        // SSL options array (passed as the fourth argument to PDO::__construct)
+
         $ssl_options = [
             PDO::MYSQL_ATTR_SSL_CA    => $this->ssl_ca_path, // Path to the ca.pem file
             PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => true, // Enforce certificate verification
@@ -40,14 +38,12 @@ class Database { //Database Connection
             );
 
         } catch (PDOException $error) { 
-            // Log the detailed error message
-            containlog('Database', $error->getMessage(), __DIR__, 'database.log');
-            
-            // Output a generic error response and terminate script execution
-            $response = ['success' => false, 'message' => 'Error Connecting Database'];
-            echo json_encode($response, JSON_PRETTY_PRINT); 
-            die();
-        }
+         containlog('Database', 'Database connection failed', __DIR__, 'database.log');
+         ob_clean();
+         $response = ['success' => false, 'message' => 'Error Connecting Database'];
+         echo json_encode($response, JSON_PRETTY_PRINT); 
+         die();
+     }
     }
 
     function getConn(){
