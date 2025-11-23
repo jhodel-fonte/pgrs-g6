@@ -58,6 +58,9 @@
                         <p><?= htmlspecialchars($r['description'] ?? '') ?></p>
                         <p><strong>Location:</strong> <?= htmlspecialchars($r['location'] ?? '') ?></p>
                         <p><strong>Date:</strong> <?= htmlspecialchars($r['created_at'] ?? $r['date_submitted'] ?? '') ?></p>
+                        <?php $status = $r['status'] ?? ($r['legit_status'] ?? 'Pending'); ?>
+                        <span class="status-badge status-<?= strtolower(str_replace(' ', '-', $status)) ?>"><?= htmlspecialchars($status) ?></span>
+                        <br>
                         <a href="rupdate_status.php?id=<?= htmlspecialchars($r['id']) ?>" class="btn-update">Update Status</a>
                     </div>
                 <?php endforeach; ?>
