@@ -1,54 +1,25 @@
 <?php
 session_start();
 
-// Load centralized DB config
-// config.php defines $host, $port, $user, $pass, $db
-$configPath = __DIR__ . '/../config.php';
-if (file_exists($configPath)) {
-    include_once $configPath;
-} else {
-    error_log('Missing config.php at ' . $configPath);
-    header("HTTP/1.1 500 Internal Server Error");
-    echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Configuration Error</title>';
-    echo '<style>body{font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif;background:#111827;color:#fff;padding:24px} .card{background:#1f2937;padding:20px;border-radius:8px;}</style>';
-    echo '</head><body><div class="card"><h2>Configuration missing</h2><p>Database configuration file not found. Please create <code>config.php</code> in the project root.</p></div></body></html>';
-    exit;
-}
-
-// Try to connect, but handle errors gracefully so we don't expose stack traces
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-try {
-    $conn = new mysqli($host, $user, $pass, $db, $port);
-    $conn->set_charset('utf8mb4');
-} catch (mysqli_sql_exception $ex) {
-    // Log the real error for the developer, but show a friendly message to the user
-    error_log('DB connection failed: ' . $ex->getMessage());
-    header("HTTP/1.1 500 Internal Server Error");
-    echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Database Error</title>';
-    echo '<style>body{font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif;background:#111827;color:#fff;padding:24px} .card{background:#1f2937;padding:20px;border-radius:8px;}</style>';
-    echo '</head><body><div class="card"><h2>Database connection failed</h2><p>Please check your database credentials in <code>config.php</code> and ensure MySQL is running.</p></div></body></html>';
-    exit;
-}
+// Use centralized PDO config
+require_once __DIR__ . '/../src/data/config.php';
 
 // Get report ID from URL
-$report_id = $_GET['id'] ?? null;
+$report_id = isset($_GET['id']) ? (int)$_GET['id'] : null;
 
 // Initialize $report
 $report = null;
 
 if ($report_id) {
-    $stmt = $conn->prepare("SELECT * FROM reports WHERE id = ?");
-    $stmt->bind_param("i", $report_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result && $result->num_rows > 0) {
-        $report = $result->fetch_assoc();
+    try {
+        $stmt = $pdo->prepare('SELECT * FROM reports WHERE id = ?');
+        $stmt->execute([$report_id]);
+        $report = $stmt->fetch();
+    } catch (PDOException $e) {
+        error_log('Failed to fetch report ' . $report_id . ': ' . $e->getMessage());
+        $report = null;
     }
-    $stmt->close();
 }
-
-$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">

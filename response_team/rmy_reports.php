@@ -1,41 +1,21 @@
 <?php
-
 session_start();
 
-// Load centralized DB config
-// config.php defines $host, $port, $user, $pass, $db
-$configPath = __DIR__ . '/../config.php';
-if (file_exists($configPath)) {
-    include_once $configPath;
-} else {
-    error_log('Missing config.php at ' . $configPath);
-    // Fail gracefully - keep $reports empty so page still renders
-}
+// Use centralized PDO config
+require_once __DIR__ . '/../src/data/config.php';
 
-$reports = []; // Initialize as array to prevent errors
-
+$reports = [];
 $user_id = $_SESSION['user_id'] ?? null;
 
 if ($user_id) {
-    $conn = new mysqli($host, $user, $pass, $db, $port);
-    if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
-
-    $stmt = $conn->prepare("
-        SELECT id, user_id, user_name, category, description, status, created_at, date_submitted
-        FROM reports
-        WHERE assigned_to = ?
-        ORDER BY created_at DESC
-    ");
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result) {
-        $reports = $result->fetch_all(MYSQLI_ASSOC);
+    try {
+        $stmt = $pdo->prepare("SELECT id, user_id, user_name, category, description, status, created_at, date_submitted FROM reports WHERE assigned_to = ? ORDER BY created_at DESC");
+        $stmt->execute([$user_id]);
+        $reports = $stmt->fetchAll();
+    } catch (PDOException $e) {
+        error_log('Failed fetching reports for user ' . $user_id . ': ' . $e->getMessage());
+        $reports = [];
     }
-
-    $stmt->close();
-    $conn->close();
 }
 ?>
 <!DOCTYPE html>
