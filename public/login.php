@@ -65,7 +65,7 @@ if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isVali
 
           <!-- Links -->
           <div class="mt-3">
-            <a href="forgot_password.php" class="link text-decoration-none me-3">Forgot Password?</a>
+            <a href="forgot_pass.php" class="link text-decoration-none me-3">Forgot Password?</a>
             <a href="register.php" class="link text-decoration-none">Create Account</a>
           </div>
 
