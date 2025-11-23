@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/css/rdashboard.css?v=1">
+    <link rel="stylesheet" href="../admin/assets/admin.css">
 </head>
 <body>
 
@@ -14,7 +15,7 @@
 
     <?php include 'rrt_sidebar.php'; ?>
 
-    <div class="container">
+    <div class="main-content">
         <h2>Assigned Reports</h2>
         <div class="report-grid">
             <?php

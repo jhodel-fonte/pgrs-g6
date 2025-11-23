@@ -9,12 +9,13 @@ require_once __DIR__ . '/../src/data/config.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Update Status - Response Team</title>
     <link rel="stylesheet" href="assets/css/rdashboard.css?v=1">
+    <link rel="stylesheet" href="../admin/assets/admin.css">
 </head>
 <body>
 <button class="sidebar-toggle">&#9776;</button>
 <?php include 'rrt_sidebar.php'; ?>
 
-<div class="container">
+<div class="main-content">
     <h2>Update Status</h2>
 
     <?php

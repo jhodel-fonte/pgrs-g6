@@ -26,6 +26,7 @@ if ($user_id) {
     <title>My Reports</title>
     <link rel="stylesheet" href="assets/css/rmy_reports.css?v=1">
     <link rel="stylesheet" href="assets/css/rstyle.css?v=1">
+    <link rel="stylesheet" href="../admin/assets/admin.css">
 </head>
 <body>
 
@@ -36,7 +37,7 @@ if ($user_id) {
 <?php include 'rrt_sidebar.php'; ?>
 
 <!-- Main container -->
-<div class="container">
+<div class="main-content">
     <h2>📁 My Assigned Reports</h2>
     <p class="text-muted">These are the reports currently assigned to you.</p>
 

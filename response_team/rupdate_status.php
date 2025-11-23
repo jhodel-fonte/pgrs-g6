@@ -29,6 +29,7 @@ if ($report_id) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Dashboard-style CSS -->
     <link href="assets/css/rmy_reports.css?v=1" rel="stylesheet">
+    <link rel="stylesheet" href="../admin/assets/admin.css">
 </head>
 <body>
 
@@ -39,7 +40,7 @@ if ($report_id) {
 <?php include 'rrt_sidebar.php'; ?>
 
 <!-- Main content -->
-<div class="container mt-4">
+<div class="main-content mt-4">
     <h2 class="mb-3 text-light">Update Report Status</h2>
 
     <?php if ($report): ?>
