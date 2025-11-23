@@ -70,6 +70,39 @@
 
     <!-- JS Script -->
     <script src="assets/js/rdashboard.js?v=1"></script>
+    <?php
+    // Show recent update statuses below the assigned reports
+    try {
+        require_once __DIR__ . '/../src/data/config.php';
+        $stmtUpdates = $pdo->prepare("SELECT id, name, report_type, status, created_at FROM reports ORDER BY created_at DESC LIMIT 10");
+        $stmtUpdates->execute();
+        $updates = $stmtUpdates->fetchAll();
+    } catch (Exception $e) {
+        $updates = [];
+    }
+    ?>
+
+    <div class="container updates-container">
+        <h2>Update Status</h2>
+        <?php if (empty($updates)): ?>
+            <p class="text-muted">No recent updates.</p>
+        <?php else: ?>
+            <ul class="updates-list">
+                <?php foreach ($updates as $u): ?>
+                    <li>
+                        <div class="update-item">
+                            <div class="update-title"><?= htmlspecialchars($u['name'] ?? $u['report_type'] ?? 'Report') ?></div>
+                            <div class="update-meta">
+                                <span class="update-date"><?= htmlspecialchars($u['created_at']) ?></span>
+                                <span class="update-status status-<?= strtolower(str_replace(' ', '-', $u['status'] ?? 'pending')) ?>"><?= htmlspecialchars($u['status'] ?? 'Pending') ?></span>
+                                <a href="rupdate_status.php?id=<?= htmlspecialchars($u['id']) ?>" class="btn-update small">Update</a>
+                            </div>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+    </div>
 </body>
 </html>
 

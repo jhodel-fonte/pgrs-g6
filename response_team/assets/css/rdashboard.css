@@ -174,6 +174,31 @@ body::before {
 .status-responded { background: #a78bfa; color: #000; }
 .status-default { background: #94a3b8; color: #fff; }
 
+/* Update Status list styles */
+.updates-container {
+    margin-top: 32px;
+}
+.updates-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 12px;
+}
+.update-item {
+    background: rgba(17,24,39,0.9);
+    padding: 14px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.update-title { color: #00eaff; font-weight: 700; }
+.update-meta { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.update-date { color:#94a3b8; font-size:13px; }
+.btn-update.small { padding:6px 10px; font-size:13px; border-radius:8px; }
+
 /* ============================
    RESPONSIVE MEDIA QUERIES
 ============================ */
