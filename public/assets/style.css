@@ -32,16 +32,16 @@ body {
 
 /* Card Styling - Login/Register/OTP */
 .login-card, .register-card, .otp-container {
-  background: rgba(236, 232, 232, 0.07);
+  background: #fff;
   border-radius: 20px;
 
   width: 100%;
-  max-height: 90vh; /* ✅ limit height to viewport */
-  overflow-y: auto; /* ✅ scroll inside card only */
+  max-height: 90vh; /*  limit height to viewport */
+  overflow-y: auto; /*  scroll inside card only */
   position: relative;
   z-index: 1;
-  border: 1px solid rgba(0,191,255,0.3);
-  box-shadow: 0 0 25px rgba(0,191,255,0.3);
+  border: 1px solid rgb(0, 0, 0);
+  box-shadow: 0 0 25px rgb(0, 0, 0);
   padding: 25px 30px;
 }
 
@@ -63,17 +63,16 @@ body {
   width: 8px;
 }
 .register-card::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 191, 255, 0.4);
+  background-color: rgba(0, 0, 0, 0.651);
   border-radius: 10px;
 }
 .register-card::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(0, 191, 255, 0.6);
+  background-color: rgba(9, 24, 231, 0.6);
 }
 
 /* Neon Text & Titles */
 .text, .title {
-  color: #f3f7f9;
-  text-shadow: 0 0 10px #00bfff;
+  color: #000000;
   font-weight: 500;
 }
 
@@ -81,9 +80,9 @@ body {
 .register-card input,
 .register-card select,
 .login-card input {
-  background-color: rgba(255,255,255,0.15);
+  background-color: rgb(255, 255, 255);
   color: #ffffff;
-  border: 1px solid rgba(255,255,255,0.3);
+  border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
   transition: all 0.3s ease;
   padding: 8px 10px;
@@ -93,64 +92,43 @@ body {
 .register-card input:focus,
 .register-card select:focus,
 .login-card input:focus {
-  background-color: rgba(255,255,255,0.2);
-  border-color: #00bfff;
+  background-color: rgb(255, 255, 255);
+  border-color: #2f38977f;
   box-shadow: 0 0 5px #00bfff;
-  color: #fff;
+  color: #000000;
 }
 
 /* Buttons */
 .btn {
-  background: #00bfff;
+  background: #04c0ff;
   border: none;
-  color: #fff;
   font-weight: 600;
   border-radius: 30px;
   transition: all 0.3s ease;
-  box-shadow: 0 0 5px #00bfff;
 }
 
 .btn:hover {
-  background: #fff;
-  box-shadow: 0 0 10px #009acd, 0 0 20px #009acd;
+  background: #00bfff;
+  box-shadow: 0 0 10px #009acd;
   color: #000;
 }
 
 /* Links */
 .link {
-  color: #00bfff;
-}
-
-/* Override Bootstrap select & input for dark glass style */
-.form-select, 
-.form-control {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  color: #fff !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  border-radius: 10px !important;
-  box-shadow: none !important;
-  transition: 0.3s ease;
-}
-
-.form-select:focus,
-.form-control:focus {
-  background-color: rgba(255, 255, 255, 0.2) !important;
-  border-color: #00bfff !important;
-  box-shadow: 0 0 10px #00bfff, 0 0 20px #00bfff inset !important;
-  color: #fff !important;
+  color: #0022ff;
 }
 
 /* Dropdown options */
 .form-select option {
-  background-color: rgba(20, 20, 20, 0.95);
-  color: #fff;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #000000;
 }
 
 /* Slightly smaller font for inputs and selects */
 .form-control-lg,
 .form-select-lg {
-  font-size: 0.9rem !important; /* default ~1rem, this is smaller */
-  padding: 0.55rem 0.75rem !important; /* less vertical height */
+  font-size: 0.9rem;
+  padding: 0.55rem 0.75rem;
 }
 
 /* Make password fields even and tighter */
@@ -163,7 +141,7 @@ label {
   font-size: 0.85rem;
   font-weight: 500;
   margin-bottom: 0.3rem;
-  color: #ddd; /* adjust to match your theme */
+  color: #000000; /* adjust to match your theme */
 }
 
 /* OTP Inputs */

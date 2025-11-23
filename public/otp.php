@@ -35,7 +35,7 @@ var_dump($_SESSION['secretOtp']) ."<br>" ."Remove This One after testing";
   ?>
 
   <div class="verify-container">
-    <h3>Verify Your Account</h3>
+    <h3 class = "text text-dark">Verify Your Account</h3>
     <?php
     echo "We Have Sent an OTP to " .$_SESSION['number'];
     ?>

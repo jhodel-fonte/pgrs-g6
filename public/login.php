@@ -50,13 +50,13 @@ if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isVali
 
           <!-- Username -->
           <div class="mb-3 text-start">
-            <label class="form-label text-light">Username</label>
+            <label class="form-label text-dark">Username</label>
             <input type="text" name="username" class="form-control form-control-lg" required>
           </div>
 
           <!-- Password -->
           <div class="mb-4 text-start">
-            <label class="form-label text-light">Password</label>
+            <label class="form-label text-dark">Password</label>
             <input type="password" name="password" class="form-control form-control-lg" required>
           </div>
 

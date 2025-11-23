@@ -24,7 +24,7 @@ session_start();
     <div class="overlay"></div>
 
     <div class="container d-flex justify-content-center align-items-start min-vh-100 py-5">
-      <div class="register-card p-5 text-light shadow-lg">
+      <div class="register-card p-5 text-dark shadow-lg">
         <div class="text-center">
     <a href="index.php">
         <img src="assets/img/logo.png" 
