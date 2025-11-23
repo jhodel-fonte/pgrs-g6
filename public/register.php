@@ -96,11 +96,6 @@ session_start();
               <input type="password" id="confirm_password" name="confirm_password" class="form-control form-control-lg" required>
             </div>
           </div>
-          
-          <div class="mb-3">
-            <label class="form-label">Profile Picture</label>
-            <input type="file" name="profile_pic" accept="image/*" capture="user" class="form-control form-control-lg">
-          </div>
 
           <div class="mb-3">
             <label class="form-label">Government ID</label>
