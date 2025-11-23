@@ -20,19 +20,18 @@ require_once __DIR__ . '/../src/data/config.php';
     <?php
     try {
         $user_id = $_SESSION['user_id'] ?? null;
-        // If user-specific assigned reports are desired, filter by assigned_to
+        // Fetch full report fields so we can render cards
         if ($user_id) {
-            $stmt = $pdo->prepare("SELECT id, name, report_type, status, created_at FROM reports WHERE assigned_to = ? ORDER BY created_at DESC");
+            $stmt = $pdo->prepare("SELECT * FROM reports WHERE assigned_to = ? ORDER BY created_at DESC");
             $stmt->execute([$user_id]);
             $updates = $stmt->fetchAll();
-            // If none, fall back to recent
             if (empty($updates)) {
-                $stmt = $pdo->prepare("SELECT id, name, report_type, status, created_at FROM reports ORDER BY created_at DESC LIMIT 50");
+                $stmt = $pdo->prepare("SELECT * FROM reports ORDER BY created_at DESC LIMIT 50");
                 $stmt->execute();
                 $updates = $stmt->fetchAll();
             }
         } else {
-            $stmt = $pdo->prepare("SELECT id, name, report_type, status, created_at FROM reports ORDER BY created_at DESC LIMIT 50");
+            $stmt = $pdo->prepare("SELECT * FROM reports ORDER BY created_at DESC LIMIT 50");
             $stmt->execute();
             $updates = $stmt->fetchAll();
         }
@@ -45,20 +44,20 @@ require_once __DIR__ . '/../src/data/config.php';
     <?php if (empty($updates)): ?>
         <p class="text-muted">No recent updates.</p>
     <?php else: ?>
-        <ul class="updates-list">
+        <div class="report-grid">
             <?php foreach ($updates as $u): ?>
-                <li>
-                    <div class="update-item">
-                        <div class="update-title"><?= htmlspecialchars($u['name'] ?? $u['report_type'] ?? 'Report') ?></div>
-                        <div class="update-meta">
-                            <span class="update-date"><?= htmlspecialchars($u['created_at']) ?></span>
-                            <span class="update-status status-<?= strtolower(str_replace(' ', '-', $u['status'] ?? 'pending')) ?>"><?= htmlspecialchars($u['status'] ?? 'Pending') ?></span>
-                            <a href="rupdate_status.php?id=<?= htmlspecialchars($u['id']) ?>" class="btn-update small">Update</a>
-                        </div>
-                    </div>
-                </li>
+                <div class="report-card">
+                    <h3><?= htmlspecialchars($u['name'] ?? $u['report_type'] ?? 'Report') ?></h3>
+                    <p><?= htmlspecialchars($u['description'] ?? '') ?></p>
+                    <p><strong>Location:</strong> <?= htmlspecialchars($u['location'] ?? '') ?></p>
+                    <p><strong>Date:</strong> <?= htmlspecialchars($u['created_at'] ?? '') ?></p>
+                    <?php $status = $u['status'] ?? ($u['legit_status'] ?? 'Pending'); ?>
+                    <span class="status-badge status-<?= strtolower(str_replace(' ', '-', $status)) ?>"><?= htmlspecialchars($status) ?></span>
+                    <br>
+                    <a href="rupdate_status.php?id=<?= htmlspecialchars($u['id']) ?>" class="btn-update">Update Status</a>
+                </div>
             <?php endforeach; ?>
-        </ul>
+        </div>
     <?php endif; ?>
 
 </div>
