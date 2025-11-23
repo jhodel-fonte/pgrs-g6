@@ -2,8 +2,9 @@
 // config/config.php
 $host = 'localhost';
 $dbname = 'unity_pgsys_db';
-$username = 'pgsys_admin';
-$password = 'test';
+// Local XAMPP defaults for development
+$username = 'root';
+$password = '';
 
 // $host = "sql213.infinityfree.com";
 // $username = "if0_40422080";
