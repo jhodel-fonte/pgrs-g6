@@ -291,47 +291,86 @@ body {
 }
 
 /* Main Content */
-.main-content {
-    margin-left: 260px;
-    padding: 100px; 
+.dash-content {
+    margin-top: 100px;
+    margin-left: 260px;      
+    padding: 30px 40px;
     transition: 0.3s ease;
 }
 
-/* Cards */
-.cards {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-}
-
-.card {
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
+.admin-card {
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    border-radius: 20px;
+    padding: 25px;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transition: 0.2s ease-in-out;
+    position: relative;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+    transition: all .25s ease;
+    overflow: hidden;
 }
 
-.card:hover {
-    transform: translateY(-5px);
+/* Hover effect */
+.admin-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 12px 22px rgba(0,0,0,0.15);
 }
 
-.card h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
+/* Background circle */
+.admin-card::before {
+    content: "";
+    position: absolute;
+    top: -25px;
+    right: -25px;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    opacity: 0.25;
+    z-index: 1;
 }
 
-.card p {
-    font-size: 30px;
+/* CARD COLORS */
+.col-md-3:nth-child(1) .admin-card {
+    background: linear-gradient(135deg, #ff9aab, #e56b80);
+    color: white;
+}
+.col-md-3:nth-child(1) .admin-card::before {
+    background: #fff;
+}
+
+.col-md-3:nth-child(2) .admin-card {
+    background: linear-gradient(135deg, #ffaf6e, #ff7c36);
+    color: white;
+}
+.col-md-3:nth-child(2) .admin-card::before {
+    background: #fff;
+}
+
+.col-md-3:nth-child(3) .admin-card {
+    background: linear-gradient(135deg, #8b9bff, #6978ff);
+    color: white;
+}
+.col-md-3:nth-child(3) .admin-card::before {
+    background: #fff;
+}
+
+/* Count number */
+.admin-card h1 {
+    font-size: 45px;
     font-weight: bold;
+    margin-bottom: 10px;
+    z-index: 2;
+    position: relative;
 }
 
-/* Colored borders */
-.card.total { border-left: 5px solid #007bff; }
-.card.pending { border-left: 5px solid #ffc107; }
-.card.resolved { border-left: 5px solid #28a745; }
+/* Label */
+.admin-card p {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+    z-index: 2;
+    position: relative;
+}
+
 
 /* Mobile */
 @media (max-width: 900px) {

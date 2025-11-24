@@ -1,35 +1,15 @@
 <?php
 session_start();
 
-/* -------------------------------------------------
-   🔧 SIMULATED USER SESSION (DEMO)
-   Remove this when login system exists
---------------------------------------------------- */
-if (!isset($_SESSION['user'])) {
-    $_SESSION['user'] = [
-        "userprofile" => [
-            "pgCode" => 1,
-            "username" => "DemoUser"
-        ]
-    ];
-}
-
 $userId = $_SESSION['user']['userprofile']['pgCode'];
 
-/* -------------------------------------------------
-   📦 DEMO REPORT ARRAY (REPLACES DATABASE)
---------------------------------------------------- */
 $reports = [
     ["id" => 1, "user_id" => 1, "status" => "Pending"],
     ["id" => 2, "user_id" => 1, "status" => "Resolved"],
     ["id" => 3, "user_id" => 1, "status" => "Pending"],
     ["id" => 4, "user_id" => 1, "status" => "Resolved"],
-    ["id" => 5, "user_id" => 2, "status" => "Pending"], // belongs to another user
+    ["id" => 5, "user_id" => 2, "status" => "Pending"],
 ];
-
-/* -------------------------------------------------
-   📊 COUNT USER REPORTS BASED ON ARRAY
---------------------------------------------------- */
 $total = 0;
 $pending = 0;
 $resolved = 0;
@@ -54,31 +34,40 @@ foreach ($reports as $r) {
 </head>
 
 <body>
-
-<div class="container">
     <?php include 'sidebar.php'; ?>
 
-    <main class="main-content">
+<div class="dash-content">
+    <div class="container">
 
-        <section class="cards p-4">
+        <h2 class="text-center dashboard-title">Dashboard Overview</h2>
 
-            <div class="card total">
-                <h3>Total Reports</h3>
-                <p><?= $total; ?></p>
-            </div>
-            
-            <div class="card pending">
-                <h3>Pending Reports</h3>
-                <p><?= $pending; ?></p>
-            </div>
+        <div class="row g-4 mb-4 mt-2 justify-content-center">
 
-            <div class="card resolved">
-                <h3>Resolved Reports</h3>
-                <p><?= $resolved; ?></p>
+            <div class="col-md-3">
+                <div class="admin-card">
+                    <h1 class="count" ><?= $total ?></h1>
+                    <p>Total Reports</p>
+                </div>
             </div>
 
-        </section>
-    </main>
+            <div class="col-md-3">
+                <div class="admin-card">
+                    <h1 class="count"><?= $pending ?></h1>
+                    <p>Pending Reports</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="admin-card">
+                        <h1 class="count"><?= $resolved ?></h1>
+                    <p>Resolved Reports</p>
+                </div>
+           </div>
+        </div>
+
+            </section>
+        </main>
+    </div>
 </div>
 
 <script src="../user/assets/user.js"></script>
