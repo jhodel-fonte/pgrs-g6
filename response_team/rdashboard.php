@@ -16,8 +16,10 @@
     <?php include 'rrt_sidebar.php'; ?>
 
     <div class="main-content">
-        <h2>Assigned Reports</h2>
-        <div class="report-grid">
+
+        <div class="main-content">
+            <h2>Assigned Reports</h2>
+        <div class="report-grid dashboard-grid">
             <?php
             // Load reports for dashboard. Use centralized PDO config.
             if (!isset($reports)) {

@@ -88,15 +88,19 @@ body::before {
 /* ============================
    MAIN CONTENT
 ============================ */
-.container {
+/* Support both legacy `.container` and `.main-content` wrappers */
+.container,
+.main-content {
     margin-left: 240px;
     padding: 30px;
     position: relative;
     z-index: 1;
     transition: margin-left 0.3s ease;
+    box-sizing: border-box;
 }
 
-.container h2 {
+.container h2,
+.main-content h2 {
     color: #00eaff;
     font-weight: bold;
     margin-bottom: 20px;
@@ -107,8 +111,20 @@ body::before {
 ============================ */
 .report-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    align-items: start;
+    justify-items: stretch;
+    /* constrain and center the grid inside the main-content area */
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Dashboard-specific: match Update Status alignment (left-aligned, full width) */
+.report-grid.dashboard-grid {
+    max-width: none;
+    margin: 0;
+    width: 100%;
 }
 
 .report-card {
@@ -118,6 +134,11 @@ body::before {
     color: white;
     box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
     transition: 0.3s;
+}
+
+.report-card {
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .report-card:hover {
@@ -205,8 +226,10 @@ body::before {
 @media screen and (max-width: 768px) {
     .sidebar { left: -250px; }
     .sidebar.active { left: 0; }
-    .container { margin-left: 0; padding: 15px; }
+    .container, .main-content { margin-left: 0; padding: 15px; }
     .sidebar-toggle { display: block; }
     .report-card { padding: 20px; }
     .report-grid { grid-template-columns: 1fr; }
 }
+/* ===== Admin-compatible text colors when using admin layout ===== */
+
