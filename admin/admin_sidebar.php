@@ -7,10 +7,10 @@
     <h3 class="text text-center mb-4">Admin Panel</h3>
 
     <a href="dashboard.php" class="<?php echo ($currentPage === 'dashboard.php') ? 'active' : ''; ?>"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
-    <a href="manage_users.php" class="<?php echo ($currentPage === 'manage_users.php') ? 'active' : ''; ?>"><i class="fa-solid fa-users me-2"></i> Manage Users</a>
+    <a href="manage_users.php" class="<?php echo ($currentPage === 'manage_users.php') ? 'active' : ''; ?>"><i class="fa-solid fa-user me-2"></i> Manage Users</a>
+    <a href="manage_response_team.php" class="<?php echo ($currentPage === 'manage_response_team.php') ? 'active' : ''; ?>"><i class="fa-solid fa-users me-2"></i> Manage Response Team</a>
     <a href="manage_reports.php" class="<?php echo ($currentPage === 'manage_reports.php') ? 'active' : ''; ?>"><i class="fa-solid fa-file-alt me-2"></i> Manage Reports</a>
     <a href="activity_log.php" class="<?php echo ($currentPage === 'activity_log.php') ? 'active' : ''; ?>"><i class="fa-solid fa-list-check me-2"></i> Activity Log</a>
-    <a href="manage_response_team.php" class="<?php echo ($currentPage === 'manage_response_team.php') ? 'active' : ''; ?>"><i class="fa-solid fa-list-check me-2"></i> Manage Response Team</a>
     
 </div>
 
