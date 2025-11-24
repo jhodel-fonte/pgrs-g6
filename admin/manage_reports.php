@@ -86,7 +86,7 @@ if ($status !== 'All' && is_array($reports)) {
                                 </td>
                                 <td><?= $r['date_created'] ?></td>
                                 <td>
-                                    <button class="btn btn-sm btn-outline-info" 
+                                    <button class="btn btn-sm btn-info" 
                                             data-bs-toggle="modal" 
                                             data-bs-target="#reportModal<?= htmlspecialchars($r['id'] ?? '') ?>">
                                         View Details

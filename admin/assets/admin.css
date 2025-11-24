@@ -75,12 +75,45 @@ body {
    ================ */
 .main-content {
     margin-left: 260px;
-    padding: 30px 40px; /* Top/Bottom = 30px, Left/Right = 40px */
+    padding: 30px 40px; 
     transition: 0.3s ease;
 }
 
-.card-custom {
-    width: 100%;
+.card-custom{
+    position: fixed;
+    top: 80px;              
+    left: 280px;            
+    right: 20px;
+    bottom: 20px;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 18px;
+
+}
+
+.card-custom h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+}
+/* for profile */
+
+.card-customs {
+    position: fixed ;
+    top: 80px;              
+    left: 280px;            
+    right: 20px;
+    bottom: 20px;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 18px;
+    
+}
+
+.scroll-cards {
+    max-height: 100vh;      
+    overflow-y: auto;      
+    overflow-x: auto;    
 }
 
 
@@ -151,16 +184,22 @@ body {
         border-radius: 5px;
     }
 
-   .main-content {
-        margin-left: 0 !important;
-        width: 100% !important;
-        padding: 10px !important;
-        box-sizing: border-box;
+    .main-content {
+        padding: 15px;
     }
 
-    .card {
-        width: 100% !important;
-        margin: 0 !important;
+    .card-custom {
+        left: 0;
+        right: 0;
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .card-customs {
+        left: 0;
+        right: 0;
+        padding: 15px;
+        border-radius: 10px;
     }
 }
 
@@ -319,36 +358,15 @@ body {
     }
 }
 
-/* ======================
- FIX: ERROR ALERT OVERLAP
-====================== */
-.main-content {
-    margin-top: 80px !important;  /* Prevent topbar overlapping content */
-}
-
-
-
-/* ============================
-      DASHBOARD TITLES
-   ============================ */
-.dashboard-title {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 25px;
-    color: #333;
-}
-
-.chart-title {
-    font-size: 22px;
-    margin-top: 25px;
-    font-weight: 600;
-    color: #444;
-}
-
-
 /* ============================
       ADMIN DASHBOARD CARDS
    ============================ */
+.dash-content {
+    margin-left: 260px;      /* desktop sidebar width */
+    padding: 30px 40px;
+    transition: 0.3s ease;
+}
+
 .admin-card {
     background: linear-gradient(145deg, #ffffff, #f0f0f0);
     border-radius: 20px;
@@ -366,7 +384,7 @@ body {
     box-shadow: 0 12px 22px rgba(0,0,0,0.15);
 }
 
-/* Icon Circle (auto added, no HTML changes) */
+/* Background circle */
 .admin-card::before {
     content: "";
     position: absolute;
@@ -379,31 +397,29 @@ body {
     z-index: 1;
 }
 
-/* CARD #1 — Users (Pink/Red) */
+/* CARD COLORS */
 .col-md-3:nth-child(1) .admin-card {
     background: linear-gradient(135deg, #ff9aab, #e56b80);
     color: white;
 }
 .col-md-3:nth-child(1) .admin-card::before {
-    background: #ffffff;
+    background: #fff;
 }
 
-/* CARD #2 — Response Teams (Orange) */
 .col-md-3:nth-child(2) .admin-card {
     background: linear-gradient(135deg, #ffaf6e, #ff7c36);
     color: white;
 }
 .col-md-3:nth-child(2) .admin-card::before {
-    background: #ffffff;
+    background: #fff;
 }
 
-/* CARD #3 — Finished Reports (Blue/Purple) */
 .col-md-3:nth-child(3) .admin-card {
     background: linear-gradient(135deg, #8b9bff, #6978ff);
     color: white;
 }
 .col-md-3:nth-child(3) .admin-card::before {
-    background: #ffffff;
+    background: #fff;
 }
 
 /* Count number */
@@ -411,22 +427,21 @@ body {
     font-size: 45px;
     font-weight: bold;
     margin-bottom: 10px;
-    position: relative;
     z-index: 2;
+    position: relative;
 }
 
-/* Label text */
+/* Label */
 .admin-card p {
     font-size: 18px;
     font-weight: 500;
     margin: 0;
-    position: relative;
     z-index: 2;
+    position: relative;
 }
 
-
 /* ============================
-         CHART BOX
+         LAYOUT WRAPPER
    ============================ */
 .reports-wrapper {
     display: flex;
@@ -436,13 +451,15 @@ body {
     margin: 30px 0;
 }
 
-/* Left: MAP */
+/* ============================
+            MAP
+   ============================ */
 .map-container {
     width: 50%;
     height: 570px;
     border-radius: 18px;
     background: #e6e6e6;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
     overflow: hidden;
 }
 
@@ -450,27 +467,18 @@ body {
     cursor: pointer;
 }
 
-#map:fullscreen {
-    width: 100vw !important;
-    height: 100vh !important;
-}
-
+/* Fullscreen fallback */
 #map.fullscreen-fix {
     width: 100vw !important;
     height: 100vh !important;
 }
 
-
-
-
-/* Right: Chart Container */
+/* ============================
+        CHART CARD
+   ============================ */
 .chart-card-header {
-    display: flex;
-    justify-content: center;   /* centers horizontally */
-    align-items: center;       /* centers vertically */
-    margin-bottom: 15px;
-    width: 100%;
     text-align: center;
+    margin-bottom: 15px;
 }
 
 .chart-card-header h4 {
@@ -479,16 +487,15 @@ body {
     color: #333;
 }
 
-
-/* Keep your existing chart-box styling */
 .chart-box {
     width: 100%;
     padding: 20px;
     border-radius: 18px;
     background: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
+/* Recent reports table */
 .recent-reports {
     background: #ffffff;
     padding: 20px;
@@ -512,28 +519,31 @@ body {
     padding: 12px;
 }
 
-@media (max-width: 900px) {
+/* ============================
+        RESPONSIVE CSS
+   ============================ */
+
+@media (max-width: 992px) {
+
+    .dash-content {
+        margin-left: 0 !important; 
+        padding: 20px;
+    }
+
+    .reports-wrapper {
+        flex-direction: column;
+    }
+
+    .map-container {
+        width: 100%;
+    }
+
     .chart-box {
         width: 100%;
     }
 }
 
-/* ===============================
-      MANAGE USERS MAIN CARD
-   =============================== */
-.card-custom {
-    background: #ffffff;
-    padding: 25px;
-    border-radius: 18px;
-    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
-    border: none;
-}
 
-.card-custom h3 {
-    font-size: 24px;
-    font-weight: 700;
-    color: #333;
-}
 
 /* ===============================
             SEARCH BAR
@@ -681,7 +691,7 @@ body {
    =============================== */
 
 /* Card for create team form */
-.card-custom.create-team {
+.card-customs.create-team {
     background: #1f1f1f;
     color: #fff;
     padding: 30px;
@@ -690,19 +700,19 @@ body {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.card-custom.create-team:hover {
+.card-customs.create-team:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 35px rgba(0,0,0,0.5);
 }
 
 /* Form labels */
-.card-custom.create-team label.form-label {
+.card-customs.create-team label.form-label {
     color: #ddd;
     font-weight: 500;
 }
 
 /* Form inputs */
-.card-custom.create-team .form-control {
+.card-customs.create-team .form-control {
     background: #2a2a2a;
     color: #fff;
     border: 1px solid #444;
@@ -711,7 +721,7 @@ body {
     transition: all 0.3s;
 }
 
-.card-custom.create-team .form-control:focus {
+.card-customs.create-team .form-control:focus {
     border-color: #4e89ff;
     box-shadow: 0 0 10px rgba(78,137,255,0.5);
     background: #2a2a2a;
@@ -719,38 +729,38 @@ body {
 }
 
 /* Submit button */
-.card-custom.create-team .btn-primary {
+.card-customs.create-team .btn-primary {
     background: #4e89ff;
     border-radius: 12px;
     font-weight: 600;
     transition: all 0.3s;
 }
 
-.card-custom.create-team .btn-primary:hover {
+.card-customs.create-team .btn-primary:hover {
     background: #366dec;
     box-shadow: 0 5px 15px rgba(78,137,255,0.4);
 }
 
 /* Alert messages */
-.card-custom.create-team .alert {
+.card-customs.create-team .alert {
     border-radius: 12px;
     padding: 10px 15px;
     font-weight: 500;
     margin-bottom: 20px;
 }
 
-.card-custom.create-team .alert-success {
+.card-customs.create-team .alert-success {
     background: #2e7d32;
     color: #dcedc8;
 }
 
-.card-custom.create-team .alert-danger {
+.card-customs.create-team .alert-danger {
     background: #b71c1c;
     color: #ffcccb;
 }
 
 /* Mock stored accounts section */
-.card-custom.create-team .mock-accounts {
+.card-customs.create-team .mock-accounts {
     background: #2a2a2a;
     padding: 20px;
     border-radius: 16px;
@@ -759,7 +769,7 @@ body {
     color: #fff;
 }
 
-.card-custom.create-team .mock-accounts pre {
+.card-customs.create-team .mock-accounts pre {
     background: transparent;
     color: #fff;
     font-size: 0.9rem;
@@ -774,7 +784,7 @@ body {
 
 /* Scrollable table/card area */
 .scroll-card {
-    max-height: 60vh;      
+    max-height: 55vh;      
     overflow-y: auto;      
     overflow-x: auto;    
 }

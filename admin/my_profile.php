@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class="main-content">
 
-    <div class="card-custom p-4">
+    <div class="card-customs scroll-cards p-4">
 
         <h3 class="mb-3">My Profile</h3>
 

@@ -50,7 +50,7 @@ $approvedReports = [
 
 <?php include 'admin_sidebar.php'; ?>
 
-<div class="main-content">
+<div class="dash-content">
 
     <h2 class="text-center dashboard-title">Dashboard Overview</h2>
 

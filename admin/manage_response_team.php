@@ -83,7 +83,7 @@ if ($status !== 'All' && is_array($reports)) {
                                     } ?>"><?= ($r['is_active'] == 1) ? 'Active' : 'Not Active' ?></span>
                                 </td>
                                 <td>
-                                    <button class="btn btn-sm btn-outline-info" 
+                                    <button class="btn btn-sm btn-info" 
                                             data-bs-toggle="modal" 
                                             data-bs-target="#teamModal<?= htmlspecialchars($r['team_id'] ?? '') ?>">
                                         View Details
@@ -93,7 +93,7 @@ if ($status !== 'All' && is_array($reports)) {
                                             data-bs-target="#editTeamModal<?= htmlspecialchars($r['team_id'] ?? '') ?>">
                                         Edit
                                     </button>
-                                    <button onclick="confirmTeamAction('delete', <?= htmlspecialchars($r['team_id']) ?>)" class="btn btn-outline-danger btn-sm">Delete</button>
+                                    <button onclick="confirmTeamAction('delete', <?= htmlspecialchars($r['team_id']) ?>)" class="btn btn-danger btn-sm">Delete</button>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
