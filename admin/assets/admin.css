@@ -446,6 +446,23 @@ body {
     overflow: hidden;
 }
 
+#map {
+    cursor: pointer;
+}
+
+#map:fullscreen {
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+#map.fullscreen-fix {
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+
+
+
 /* Right: Chart Container */
 .chart-card-header {
     display: flex;

@@ -1,20 +1,54 @@
+/* =====================================================
+   GEOAPIFY SMALL MAP + TRUE FULLSCREEN ON CLICK
+===================================================== */
+
 document.addEventListener("DOMContentLoaded", () => {
-    // LEAFLET MAP INITIALIZATION
-    const mapContainer = document.getElementById("map");
 
-    if (mapContainer) {
-        var map = L.map('map').setView([13.9333, 121.1167], 13);
+    const mapDiv = document.getElementById("map");
+    if (!mapDiv) return;
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19
-        }).addTo(map);
+    // Initialize small map
+    var map = L.map("map").setView([13.9333, 121.1167], 13);
 
-        L.marker([13.9333, 121.1167]).addTo(map)
-            .bindPopup("Test Pin")
-            .openPopup();
-    }
+    L.tileLayer(
+        "https://maps.geoapify.com/v1/tile/osm-bright/{z}/{x}/{y}.png?apiKey=6cbe5b314ed44817b7e1e51d35b6ec27",
+        { maxZoom: 19 }
+    ).addTo(map);
 
+    L.marker([13.9333, 121.1167]).addTo(map).bindPopup("Test Pin");
+
+    /* =====================================================
+       CLICK MAP → ENTER FULLSCREEN
+    ===================================================== */
+    mapDiv.addEventListener("click", () => {
+
+        // Enter fullscreen
+        if (mapDiv.requestFullscreen) {
+            mapDiv.requestFullscreen();
+        } else {
+            // Backup for Safari/iOS
+            mapDiv.classList.add("fullscreen-fix");
+        }
+
+        // Allow time for transition
+        setTimeout(() => {
+            map.invalidateSize();
+        }, 300);
+    });
+
+    /* =====================================================
+       EXIT FULLSCREEN → FIX MAP SIZE
+    ===================================================== */
+    document.addEventListener("fullscreenchange", () => {
+        if (!document.fullscreenElement) {
+            mapDiv.classList.remove("fullscreen-fix");
+            setTimeout(() => {
+                map.invalidateSize();
+            }, 300);
+        }
+    });
 });
+
 
 
 document.addEventListener("DOMContentLoaded", () => {

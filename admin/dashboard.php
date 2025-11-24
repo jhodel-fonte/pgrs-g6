@@ -85,10 +85,9 @@ $approvedReports = [
     <div class="reports-wrapper">
 
     <!-- MAP -->
-    <div class="map-container" id="map"></div>
+   <div class="map-container" id="map"></div>
 
     <div class="chart-container">
-
         <!-- CHART -->
         <div class="chart-card">
 
@@ -130,9 +129,9 @@ $approvedReports = [
             </div>
         </div>
 
-    </div><!-- end chart-container -->
+    </div>
 
-</div><!-- end reports-wrapper -->
+</div>
 
 
 </div>
