@@ -8,7 +8,7 @@
 
     <a href="dashboard.php" class="<?php echo ($currentPage === 'dashboard.php') ? 'active' : ''; ?>"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
     <a href="report.php" class="<?php echo ($currentPage === 'report.php') ? 'active' : ''; ?>"><i class="fa-solid fa-file-circle-plus me-2"></i> Create Report</a>
-    <a href="manage_response_team.php" class="<?php echo ($currentPage === 'manage_response_team.php') ? 'active' : ''; ?>"><i class="fa-solid fa-file-lines me-2"></i>View My Report</a>
+    <a href="view.php" class="<?php echo ($currentPage === 'view.php') ? 'active' : ''; ?>"><i class="fa-solid fa-file-lines me-2"></i>View My Report</a>
     <a href="manage_reports.php" class="<?php echo ($currentPage === 'manage_reports.php') ? 'active' : ''; ?>"><i class="fa-solid fa-bars-progress me-2"></i> Report Status</a>
     
 </div>

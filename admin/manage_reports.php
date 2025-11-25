@@ -47,7 +47,7 @@ if ($status !== 'All' && is_array($reports)) {
                 <?php endforeach; ?>
             </div>
 
-            <!-- Search box -->
+            <!-- Search box -->v
             <div class="mb-3 d-flex justify-content-center">
                 <input type="text" id="reportSearch" class="form w-50" placeholder="Search reports by user, title, or category...">
             </div>
@@ -56,7 +56,7 @@ if ($status !== 'All' && is_array($reports)) {
                 <p class="text-center"><?= htmlspecialchars($reports['message']) ?></p>
             <?php else: ?>
                 <div class="table-responsive scroll-card">
-                    <table class="table table-dark table-striped text-center align-middle rounded-3 overflow-hidden">
+                    <table class="table table-white table-hover text-center align-middle">
                         <thead>
                             <tr>
                                 <th>ID</th>

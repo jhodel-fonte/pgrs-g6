@@ -211,7 +211,7 @@ unset($_SESSION['message']);
         <?php else : ?>
             
             <div class="table-responsive scroll-card">
-            <table class="table table-dark table-hover text-center align-middle">
+            <table class="table table-white table-hover text-center align-middle">
                 <thead>
                     <tr>
                         <th>#</th>

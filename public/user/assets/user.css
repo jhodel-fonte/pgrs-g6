@@ -519,11 +519,34 @@ body {
 /* Responsive Layout */
 @media (max-width: 900px) {
 
-    .container {
+   .container {
         flex-direction: column;
     }
     .bottom-row {
         flex-direction: column;
+    }
+    .sidebar {
+        left: -260px;
+        position: fixed;
+        width: 200px;
+        transition: left 0.3s ease;
+        height: 40%;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+    .sidebar-toggle {
+        display: block;
+    }
+    .dash-content {
+        margin-left: 0;
+        padding: 20px;
+        width: 100%;
+    }
+    .topbar {
+        left: 0;
+        width: 100%;
     }
 }
 
@@ -604,3 +627,41 @@ body {
 .submit-btn:hover {
     background: #3b6fe0;
 }
+
+@media (max-width: 900px) {
+    .user-main {
+        margin-left: 0;
+        padding: 20px;
+    }
+}
+
+/* design for view report */
+
+.report-list-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 15px;
+}
+
+/* Modals */
+.modal-content {
+    border-radius: 10px;
+}
+
+.table th {
+    font-weight: 600;
+}
+
+/* Buttons in table */
+.table button {
+    margin: 2px;
+}
+
+/* Makes the list scrollable */
+.scrollable-table {
+    max-height: 500px;   
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
