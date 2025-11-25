@@ -47,7 +47,7 @@ if ($status !== 'All' && is_array($reports)) {
                 <?php endforeach; ?>
             </div>
 
-            <!-- Search box -->v
+            <!-- Search box -->
             <div class="mb-3 d-flex justify-content-center">
                 <input type="text" id="reportSearch" class="form w-50" placeholder="Search reports by user, title, or category...">
             </div>

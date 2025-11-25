@@ -240,7 +240,7 @@ unset($_SESSION['message']);
 
                         <!-- VIEW BUTTON -->
                         <td>
-                            <button class="btn btn-sm btn-primary"
+                            <button class="btn btn-sm btn-info"
                                 data-bs-toggle="modal"
                                 data-bs-target="#userModal<?= $u['userId']; ?>">
                                 View

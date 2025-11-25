@@ -15,10 +15,9 @@
 <?php include 'sidebar.php'; ?>
 
 <main class="user-main">
-    <div class="report-wrapper">
-    <h1 class="page-title">File a Report</h1>
 
     <div class="report-card shadow-sm">
+        <h1 class="page-title">File a Report</h1>
 
         <form method="POST" enctype="multipart/form-data">
 
@@ -71,9 +70,8 @@
     </div>
 </main>
 
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../user/assets/user.js"></script>
 <script src="../user/assets/reportmap.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap
 </body>
 </html>

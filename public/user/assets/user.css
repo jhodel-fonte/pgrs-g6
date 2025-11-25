@@ -553,15 +553,10 @@ body {
 /* design for reports page */
 /* Main container spacing */
 .user-main {
-    margin-top: 100px;
+    margin-top: 80px;
     margin-left: 260px;      
     padding: 30px 40px;
     transition: 0.3s ease;
-}
-
-.report-wrapper {
-    max-width: 1000px;
-    margin: auto;        
 }
 
 /* Page title styling */
@@ -660,8 +655,12 @@ body {
 
 /* Makes the list scrollable */
 .scrollable-table {
-    max-height: 500px;   
+    max-height: 470px;   
     overflow-y: auto;
     padding-right: 5px;
+}
+
+#modalMap {
+    border: 2px solid #ddd;
 }
 

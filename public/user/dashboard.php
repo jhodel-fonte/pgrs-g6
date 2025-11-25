@@ -179,8 +179,9 @@ foreach ($reports as $r) {
 <script>
     window.demoReports = <?= json_encode($reports); ?>;
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../user/assets/user.js"></script>
 <script src="../user/assets/map.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap
 </body>
 </html>
