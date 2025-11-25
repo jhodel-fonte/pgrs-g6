@@ -22,7 +22,7 @@
         </a>
 
         <h3 class="fw-bold title mb-3">Forgot Password</h3>
-        <p class="text-light small mb-4">Enter your registered mobile number to receive a password reset code.</p>
+        <p class="text-dark small mb-4">Enter your registered mobile number to receive a password reset code.</p>
 
         <form action="forgot_process.php" method="POST">
 

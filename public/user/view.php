@@ -89,7 +89,7 @@ $myReports = [
         "description" => "Fallen tree blocking road.",
         "date" => "Nov 18, 2025",
         "location" => "Brgy. Mabini",
-        "image" => "tree.jpg"
+        "image" => "pg.jpg"
     ],
     [
         "id" => 5,
@@ -175,7 +175,7 @@ $myReports = [
 
         <td class="text-center">
             <button 
-                class="btn btn-sm btn-primary view-btn"
+                class="btn btn-sm btn-outline-primary view-btn"
                 data-report='<?= json_encode($r); ?>'>
                 View
             </button>

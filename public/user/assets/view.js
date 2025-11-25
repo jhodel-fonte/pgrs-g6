@@ -51,7 +51,7 @@ document.querySelectorAll(".view-btn").forEach(button => {
         document.getElementById("modalDate").textContent = r.date;
         document.getElementById("modalLocation").textContent = r.location;
         document.getElementById("modalDescription").textContent = r.description;
-        document.getElementById("modalImage").src = "../user/uploads/" + r.image;
+        document.getElementById("modalImage").src = "../assets/img/" + r.image;
 
         const modal = new bootstrap.Modal(document.getElementById("viewModal"));
         modal.show();
