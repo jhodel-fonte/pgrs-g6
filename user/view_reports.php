@@ -41,20 +41,57 @@ $reports = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <title>My Reports | Padre Garcia Reporting</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
-body { background-color: #0a0a0a; color: #fff; }
-.text-neon { color: #00ffff; }
-.table-dark th, .table-dark td { vertical-align: middle; }
-.status-pending { color: #ffc107; font-weight: bold; }
-.status-ongoing { color: #17a2b8; font-weight: bold; }
-.status-finished { color: #28a745; font-weight: bold; }
-.card-custom { background-color: #111; border: 1px solid #00ffff; border-radius: 10px; padding: 20px; }
+body { 
+    background-color: #fff; 
+    color: #333; 
+}
+
+/* TEXT COLOR */
+.text-color { 
+    color: #4e89ff; 
+}
+
+/* TABLE ALIGNMENT */
+.table-dark th, 
+.table-dark td { 
+    vertical-align: middle; 
+}
+
+/* STATUS COLORS */
+.status-pending { 
+    color: #ffc107; 
+    font-weight: bold; 
+}
+.status-ongoing { 
+    color: #17a2b8; 
+    font-weight: bold; 
+}
+.status-finished { 
+    color: #28a745; 
+    font-weight: bold; 
+}
+
+/* CARD */
+.card-custom { 
+    background-color: #606268ff; 
+    border: 1px; 
+    border-radius: 10px; 
+    padding: 20px; 
+}
+
+/* BUTTONS (Back to Dashboard & others) */
 .btn {
-    background-color: #fff;
-    color: #000;
+    background-color: #0d6efd; /* new button color */
+    color: #fff; 
     font-weight: bold;
     border: none;
     transition: 0.3s;
 }
+
+.btn:hover {
+    opacity: 0.8;
+}
+
 </style>
 </head>
 <body>
@@ -62,7 +99,7 @@ body { background-color: #0a0a0a; color: #fff; }
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="text-neon">📋 My Reports</h2>
-        <a href="dashboard.php" class="btn btn-secondary btn-sm">⬅ Back to Dashboard</a>
+        <a href="dashboard.php" class="btn btn-primary btn-sm">⬅ Back to Dashboard</a>
     </div>
 
     <div class="card-custom">

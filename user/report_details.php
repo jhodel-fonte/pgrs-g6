@@ -38,14 +38,15 @@ if (!$report) {
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* Base Styling */
+/* Base Styling */
 body {
-    background: linear-gradient(180deg, #0a0a0a, #1a1a1a);
+    background-color: #fff;
     font-family: 'Poppins', sans-serif;
-    color: #e5e5e5;
+    color: #333;
     min-height: 100vh;
 }
 
-/* Container Layout */
+/* Container */
 .container {
     max-width: 850px;
 }
@@ -56,142 +57,105 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-h3.text-neon {
+
+h3 {
     font-weight: 600;
-    color: #00eaff;
-    letter-spacing: 1px;
-    text-shadow: 0 0 10px #00eaff, 0 0 25px rgba(0,234,255,0.4);
+    color: #333;
 }
 
-/* Back Button */
+/* Back Button — matches table View button style */
 .btn-back {
-    background: linear-gradient(90deg, #00eaff, #00ffa1);
-    color: #000;
+    background-color: #0d6efd;
+    color: #fff;
     font-weight: 600;
+    border-radius: 6px;
+    padding: 7px 16px;
     border: none;
-    border-radius: 10px;
-    padding: 8px 18px;
     transition: 0.3s;
 }
+
 .btn-back:hover {
-    background: linear-gradient(90deg, #00ffa1, #00eaff);
-    transform: scale(1.05);
+    background-color: #0b5ed7;
 }
 
-/* Card Container */
+/* Card */
 .card-modern {
-    background: rgba(25, 25, 25, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
-    padding: 35px 40px;
+    background-color: #393c3f;
+    border: 1px solid #ffffffff; 
+    border-radius: 12px;
+    padding: 30px;
     margin-top: 20px;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 0 35px rgba(0, 234, 255, 0.05);
-    transition: all 0.3s ease;
-}
-.card-modern:hover {
-    box-shadow: 0 0 50px rgba(0, 234, 255, 0.15);
 }
 
 /* Typography */
 h4 {
-    color: #ffffff;
+    color: #ffffffff;
     font-weight: 600;
 }
+
 p, span, div {
-    color: #cfd3d6;
+    color: #ffffffff;
     line-height: 1.6;
 }
+
 .info-label {
-    color: #00eaff;
+    color: #4e89ff;
     font-weight: 500;
 }
 
-/* Image Styling */
+/* Image */
 .report-image {
     width: 100%;
-    max-height: 380px;
+    max-height: 350px;
     object-fit: cover;
-    border-radius: 14px;
+    border-radius: 10px;
     margin: 20px 0;
-    border: 1px solid rgba(0, 234, 255, 0.2);
-    transition: 0.4s;
-}
-.report-image:hover {
-    transform: scale(1.01);
-    box-shadow: 0 0 20px rgba(0, 234, 255, 0.25);
+    border: 1px solid #ccc;
 }
 
-/* Status Section */
+/* Status Container */
 .status-container {
-    background: rgba(15, 15, 15, 0.95);
-    border-radius: 16px;
-    padding: 25px;
-    border: 1px solid rgba(255,255,255,0.05);
+    background-color: #333;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #333;
     margin-top: 25px;
 }
+
 .status-title {
     font-weight: 600;
     font-size: 1.1rem;
-    color: #00eaff;
+    color: #4e89ff;
     margin-bottom: 15px;
-    text-shadow: 0 0 10px rgba(0,234,255,0.4);
 }
+
+/* Status icons */
 .status-item {
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-    transition: 0.3s;
+    gap: 12px;
+    margin-bottom: 15px;
 }
-.status-item:hover {
-    transform: translateX(5px);
-}
+
 .status-light {
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     border: 2px solid #333;
-    transition: 0.4s;
 }
-.status-light.pending { background: #555; }
-.status-light.ongoing {
-    background: #ffcc00;
-    box-shadow: 0 0 12px #ffcc00;
-    animation: glowYellow 1.8s infinite;
-}
-.status-light.finished {
-    background: #00ff9d;
-    box-shadow: 0 0 14px #00ff9d;
-    animation: glowGreen 1.8s infinite;
-}
+
+.status-light.pending { background: #ffffffff; }
+.status-light.ongoing { background: #ffc107; }
+.status-light.finished { background: #28a745; }
+
 .status-label {
     font-size: 1rem;
-    color: #ccc;
+    color: #ffffffff;
 }
+
 .active-status {
     font-weight: 600;
-    color: #00eaff;
-}
-
-/* Glow Animations */
-@keyframes glowYellow {
-    0%, 100% { box-shadow: 0 0 10px #ffcc00; }
-    50% { box-shadow: 0 0 20px #ffcc00; }
-}
-@keyframes glowGreen {
-    0%, 100% { box-shadow: 0 0 10px #00ff9d; }
-    50% { box-shadow: 0 0 20px #00ff9d; }
-}
-
-/* Responsive */
-@media (max-width: 576px) {
-    .card-modern {
-        padding: 25px 20px;
-    }
-    .btn-back {
-        font-size: 0.9rem;
-    }
+    color: #4e89ff;
 }
 </style>
 </head>
