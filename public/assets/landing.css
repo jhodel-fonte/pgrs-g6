@@ -120,3 +120,90 @@ footer {
     font-size: 0.9rem;
     letter-spacing: 0.5px;
 }
+/* Card container */
+/* Container for the Go Bag section */
+#gobag {
+  display: flex;
+  justify-content: center; /* center the card horizontally */
+  padding: 40px 20px;
+  background: #ffffff;
+}
+
+/* Card styling */
+.gobag-card {
+  display: flex;
+  flex-direction: column; /* stack icon and content vertically */
+  align-items: center; /* center contents horizontally */
+  gap: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  padding: 20px 25px;
+  max-width: 600px;
+  width: 100%;
+}
+
+/* Bag icon styling */
+#bag-icon {
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+#bag-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Hidden content that appears after clicking */
+.gobag-content {
+  display: none; /* hidden initially */
+  text-align: center;
+  width: 100%;
+  margin-top: 15px;
+}
+
+/* Bag list styling */
+#bag-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 0;
+  max-height: 0;
+  text-align: center;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+}
+
+#bag-list.show {
+  max-height: 1000px; /* allows slide-down effect */
+  padding: 10px 0 0 0;
+}
+
+#bag-list li {
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+  font-weight: 500;
+  color: #333;
+}
+
+#bag-list li:last-child {
+  border-bottom: none;
+}
+
+/* Responsive for small screens */
+@media (max-width: 480px) {
+  .gobag-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  #bag-icon {
+    margin-bottom: 15px;
+  }
+
+  .gobag-content h2,
+  .gobag-content p {
+    text-align: center;
+  }
+}

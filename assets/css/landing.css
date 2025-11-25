@@ -120,3 +120,89 @@ footer {
     font-size: 0.9rem;
     letter-spacing: 0.5px;
 }
+/* Container and layout */
+  #gobag {
+    background: #f0f4f8; 
+    padding: 50px 20px;
+  }
+
+  #gobag .container {
+    display: flex;
+    align-items: flex-start; 
+    gap: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* Bag icon styling */
+  #bag-icon {
+    cursor: pointer;
+    flex-shrink: 0;
+    width: 80px;  /* smaller size */
+    height: 80px;
+    transition: transform 0.3s ease;
+  }
+
+  #bag-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  #bag-icon:hover {
+    transform: scale(1.1);
+  }
+
+  /* Bag list styling with slide-down animation */
+  #bag-list {
+    list-style: none;
+    padding: 0 20px;
+    margin: 0;
+    max-height: 0;           
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.5s ease;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    flex: 1; 
+  }
+
+  #bag-list.show {
+    max-height: 1000px;     
+    padding: 20px;
+  }
+
+  #bag-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    font-weight: 500;
+    color: #333;
+  }
+
+  #bag-list li:last-child {
+    border-bottom: none;
+  }
+
+  /* Heading and paragraph left aligned */
+  #gobag h2, #gobag p {
+    text-align: left;
+    margin-bottom: 10px;
+  }
+
+  /* Responsive: stack on mobile */
+  @media (max-width: 768px) {
+    #gobag .container {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    #bag-list {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    #gobag h2, #gobag p {
+      text-align: center;
+    }
+  }

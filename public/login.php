@@ -1,22 +1,15 @@
 <?php
 session_start();
 
-// var_dump($_SESSION['user']) ;
-// var_dump($_SESSION['isOtpVerified']) ;
-// echo '1';
-if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isValid'] === 1 && isset($_SESSION['isOtpVerified']) && $_SESSION['isOtpVerified'] === 1) {
-    //aready login so it will redirect to main
+// Redirect if already logged in
+if (
+    isset($_SESSION['user']) &&
+    isset($_SESSION['isValid']) && $_SESSION['isValid'] === 1 &&
+    isset($_SESSION['isOtpVerified']) && $_SESSION['isOtpVerified'] === 1
+) {
     header("Location: ../public/user/user_dashboard.php");
     exit;
 }
-
-/* if (isset($_SESSION['user']) && (!isset($_SESSION['isOtpVerified']) || $_SESSION['isOtpVerified'] === 0)) {
-    //redirect to otp if not verified
-    echo 'Must not trigger Beacuse it is for manual inster of link';
-    header("Location: ../public/otp.php");
-    exit;
-} */
-
 ?>
 
 <!DOCTYPE html>
@@ -34,112 +27,123 @@ if (isset($_SESSION['user']) && isset($_SESSION['isValid']) && $_SESSION['isVali
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="./assets/style.css">
+
+  <style>
+   .home-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: black;         
+    background: transparent;    
+    border: none;               
+    padding: 10;                
+    font-size: 1rem;           
+}
+  </style>
 </head>
 <body>
 
-  <div class="login-bg">
-    <div class="overlay"></div>
+<div class="login-bg">
+  <div class="overlay"></div>
 
-    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
 
-      <div class="login-card p-5 text-center shadow-lg">
-        <a href="index.php"><img src="assets/img/logo.png" alt="UNITY PGSRS Logo" class="mb-2" style="width: 80px;"></a>
-        <h3 class="fw-bold text">Padre Garcia Service Report System</h3>
+    <!-- Login Card -->
+    <div class="login-card p-5 text-center shadow-lg position-relative">
 
-        <form action="../handlers/auth.php?login=1" method="POST">
+      <!-- Home button -->
+      <a href=" ../index.php" class="btn btn-outline-primary home-btn d-inline-flex align-items-center">
+        <span class="me-2">←</span> Home
+      </a>
 
-          <!-- Username -->
-          <div class="mb-3 text-start">
-            <label class="form-label text-dark">Username</label>
-            <input type="text" name="username" class="form-control form-control-lg" required>
-          </div>
+      <a href="index.php">
+        <img src="assets/img/logo.png" alt="UNITY PGSRS Logo" class="mb-2" style="width: 80px;">
+      </a>
+      <h3 class="fw-bold text">Padre Garcia Service Report System</h3>
 
-          <!-- Password -->
-          <div class="mb-4 text-start">
-            <label class="form-label text-dark">Password</label>
-            <input type="password" name="password" class="form-control form-control-lg" required>
-          </div>
+      <form id="loginForm" action="../handlers/auth.php?login=1" method="POST">
 
-          <!-- Login Button -->
-          <button type="submit" class="btn w-100 py-2">Login</button>
+        <!-- Username -->
+        <div class="mb-3 text-start">
+          <label class="form-label text-dark">Username</label>
+          <input type="text" name="username" class="form-control form-control-lg" required>
+        </div>
 
-          <!-- Links -->
-          <div class="mt-3">
-            <a href="forgot_pass.php" class="link text-decoration-none me-3">Forgot Password?</a>
-            <a href="register.php" class="link text-decoration-none">Create Account</a>
-          </div>
+        <!-- Password -->
+        <div class="mb-4 text-start">
+          <label class="form-label text-dark">Password</label>
+          <input type="password" name="password" class="form-control form-control-lg" required>
+        </div>
 
-        </form>
-      </div>
+        <!-- Login Button -->
+        <button type="submit" class="btn w-100 py-2">Login</button>
 
+        <!-- Links -->
+        <div class="mt-3">
+          <a href="forgot_pass.php" class="link text-decoration-none me-3">Forgot Password?</a>
+          <a href="register.php" class="link text-decoration-none">Create Account</a>
+        </div>
+      </form>
     </div>
+  </div>
 </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        if (performance.navigation.type === 1) {
-            window.location.href = "login.php";
-        }     
-    </script>
+<!-- JS Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const loginForm = document.getElementById('loginForm');
-            const errorMessageDiv = document.getElementById('error-message');
+<script>
+  if (performance.navigation.type === 1) {
+      window.location.href = "login.php";
+  }
 
-            loginForm.addEventListener('submit', async (event) => {
-                event.preventDefault();//prevent reload
-                // errorMessageDiv.textContent = '';//handle previous message
+  document.addEventListener('DOMContentLoaded', () => {
+      const loginForm = document.getElementById('loginForm');
+      const errorMessageDiv = document.getElementById('error-message');
 
-                try {
-                    //get the data
-                    const response = await fetch('../handlers/auth.php?login=1', {
-                        method: 'POST',
-                        body: new FormData(loginForm)
-                    });
+      loginForm.addEventListener('submit', async (event) => {
+          event.preventDefault();
 
-                    const data = await response.json();//get response to js
+          try {
+              const response = await fetch('../handlers/auth.php?login=1', {
+                  method: 'POST',
+                  body: new FormData(loginForm)
+              });
 
-                    //process 
-                    if (data.response === 'error') {
-                        // errorMessageDiv.textContent = `Login Error: ${data.message}`;
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Server Error',
-                            text: `HTTP Error: ${response.status}`,
-                        });
-                        // return;
-                    } else {
-                        console.log('Login successful, processing...'); //in our case the auth.php redirects but in case i leave it here
-                    }
+              const data = await response.json();
 
-                } catch (error) {
-                    //other error handling
-                    console.error('Fetch error:', error);
-                    errorMessageDiv.textContent = 'A network error occurred. Please try again.';
-                }
-            });
-        });
-    </script>
+              if (data.response === 'error') {
+                  Swal.fire({
+                      icon: 'error',
+                      title: 'Server Error',
+                      text: `HTTP Error: ${response.status}`,
+                  });
+              } else {
+                  console.log('Login successful, processing...');
+              }
 
-    <?php 
-        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['error'])){
-            echo "<script>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Login Error',
-                    text: '" . htmlspecialchars($_GET['error'], ENT_QUOTES) . "', 
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.history.pushState(null, '', 'login.php');
-                    }
-                });
-            </script>";
-        }
-    ?>
+          } catch (error) {
+              console.error('Fetch error:', error);
+              if(errorMessageDiv) errorMessageDiv.textContent = 'A network error occurred. Please try again.';
+          }
+      });
+  });
 
-    
+  <?php 
+    if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['error'])){
+        echo "Swal.fire({
+            icon: 'error',
+            title: 'Login Error',
+            text: '" . htmlspecialchars($_GET['error'], ENT_QUOTES) . "',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.history.pushState(null, '', 'login.php');
+            }
+        });";
+    }
+  ?>
+</script>
+
 </body>
 </html>

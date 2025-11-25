@@ -195,6 +195,13 @@ label {
   text-decoration: underline;
 }
 
+.home-btn:hover,
+.home-btn:focus,
+.home-btn:active {
+    color: black;             
+    text-decoration: none;      
+    background: transparent;    
+}
 /* Responsive tweaks */
 @media (max-width: 576px) {
   h2 {

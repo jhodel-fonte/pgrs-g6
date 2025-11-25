@@ -36,7 +36,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Portal</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="./public/login.php">Login</a></li>
+                        <li><a class="dropdown-item" href="public/login.php">Login</a></li>
                         <li><a class="dropdown-item" href="./public/register.php">Register</a></li>
                     </ul>
                 </li>
@@ -45,6 +45,8 @@
         </div>
     </div>
 </nav>
+
+
 
 <!-- HOME / HERO + CAROUSEL -->
 <section id="home" class="mt-5 pt-4">
@@ -87,7 +89,6 @@
     </div>
 </section>
 
-
 <!-- ABOUT SECTION -->
 <section id="about" class="py-5 bg-light">
     <div class="container">
@@ -100,6 +101,34 @@
         <P class="lead text-center mx-auto">If nasa login na click lang yung logo ng unity para bumalik sa home page</P>
         <P class="lead text-center mx-auto">check pm na lang po sir para ma access yung admin at user</P>
     </div>
+</section>
+<section id="gobag">
+  <div class="gobag-card">
+    <!-- Bag Icon -->
+    <div id="bag-icon">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="12" y="16" width="40" height="40" rx="5" stroke="#333" stroke-width="2" fill="#f5f5f5"/>
+        <path d="M20 16 C20 8, 44 8, 44 16" stroke="#333" stroke-width="2" fill="none"/>
+        <circle cx="24" cy="30" r="3" fill="#00f"/>
+        <rect x="32" y="28" width="6" height="6" fill="#ffa500"/>
+        <rect x="28" y="38" width="8" height="4" fill="#ff0000"/>
+        <rect x="22" y="42" width="4" height="8" fill="#ffff00"/>
+      </svg>
+    </div>
+
+    <!-- List (hidden by default) -->
+    <ul id="bag-list">
+      <li><H2>Disaster Preparedness Go Bag</H2></li>
+      <li>Water</li>
+      <li>Canned foods</li>
+      <li>First-aid kit</li>
+      <li>Medications</li>
+      <li>Flashlight + batteries</li>
+      <li>Important documents & cash</li>
+      <li>Multi-tool & hygiene items</li>
+      <li>Battery-powered or crank radio</li>
+    </ul>
+  </div>
 </section>
 
 
@@ -142,6 +171,14 @@
 
 <!-- BOOTSTRAP JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const bagIcon = document.getElementById('bag-icon');
+  const bagList = document.getElementById('bag-list');
+
+  bagIcon.addEventListener('click', () => {
+    bagList.classList.toggle('show'); 
+  });
+</script>
 
 </body>
 </html>
