@@ -60,7 +60,7 @@ document.querySelectorAll(".view-btn").forEach(button => {
         setTimeout(() => {
             if (!modalMap) {
                 modalMap = L.map("modalMap").setView([13.834, 121.218], 14);
-                L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(modalMap);
+                L.tileLayer("https://maps.geoapify.com/v1/tile/osm-bright/{z}/{x}/{y}.png?apiKey=6cbe5b314ed44817b7e1e51d35b6ec27").addTo(modalMap);
             }
 
             if (marker) marker.remove();

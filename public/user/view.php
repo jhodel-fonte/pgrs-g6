@@ -129,7 +129,7 @@ $myReports = [
 
 <?php include 'sidebar.php'; ?>
 
-<main class="user-main">
+<main class="view-main">
         <h1 class="page-title">My Reports</h1>
 
         <div class="d-flex justify-content-between align-items-center mb-3">
