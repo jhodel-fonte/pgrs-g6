@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/landing.css">
+    <link rel="stylesheet" href="./public/assets/landing.css">
 </head>
 <body>
 
@@ -36,8 +36,8 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Portal</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="login.php">Login</a></li>
-                        <li><a class="dropdown-item" href="register.php">Register</a></li>
+                        <li><a class="dropdown-item" href="./public/login.php">Login</a></li>
+                        <li><a class="dropdown-item" href="./public/register.php">Register</a></li>
                     </ul>
                 </li>
 
@@ -52,7 +52,7 @@
         <div class="carousel-inner">
 
             <div class="carousel-item active">
-                <img src="assets/img/pgsrsBG.jpg" class="d-block w-100 hero-img" alt="Padre Garcia 1">
+                <img src="public/assets/img/pgsrsBG.jpg" class="d-block w-100 hero-img" alt="Padre Garcia 1">
                 <div class="carousel-caption">
                     <h1 class="fw-bold">Padre Garcia Service Report System</h1>
                     <p>Providing seamless reporting for public service.</p>
@@ -60,7 +60,7 @@
             </div>
 
             <div class="carousel-item">
-                <img src="assets/img/Batangas-PadreGarcia-Most-Holy-Rosary-Parish-Church-1024.jpg" class="d-block w-100 hero-img" alt="Padre Garcia 2">
+                <img src="public/assets/img/Batangas-PadreGarcia-Most-Holy-Rosary-Parish-Church-1024.jpg" class="d-block w-100 hero-img" alt="Padre Garcia 2">
                 <div class="carousel-caption">
                     <h1 class="fw-bold">Fast. Reliable. Transparent.</h1>
                     <p>Your reports matter — together we build a better community.</p>
@@ -68,7 +68,7 @@
             </div>
 
             <div class="carousel-item">
-                <img src="assets/img/pg.jpg" class="d-block w-100 hero-img" alt="Padre Garcia 3">
+                <img src="public/assets/img/pg.jpg" class="d-block w-100 hero-img" alt="Padre Garcia 3">
                 <div class="carousel-caption">
                     <h1 class="fw-bold">UNITY PGSRS</h1>
                     <p>The official service reporting system of Padre Garcia.</p>

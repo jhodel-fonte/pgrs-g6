@@ -1,35 +1,37 @@
 <?php
-session_start();
-require '../config/db.php';
+// alam mo na to
+$users = [
+    ["id" => 1, "name" => "John Doe"],
+    ["id" => 2, "name" => "Jane Smith"],
+    ["id" => 3, "name" => "Carlos Reyes"]
+];
+$userCount = count($users);
 
+$responseTeams = [
+    ["id" => 1, "name" => "Firefighter Team"],
+    ["id" => 2, "name" => "Police Team"]
+];
+$teamCount = count($responseTeams);
 
-// 1. ADMIN ACCESS CHECK
-if (!isset($_SESSION['role']) || strtolower($_SESSION['role']) !== 'admin') {
-    header("Location: ../login.php");
-    exit;
-}
-// 2. FETCH DASHBOARD COUNTS
-$userCount = $pdo->query("SELECT COUNT(*) FROM users WHERE role = 'user' AND status = 'Approved'")->fetchColumn();
-$teamCount = $pdo->query("SELECT COUNT(*) FROM users WHERE role = 'response_team'")->fetchColumn();
-$finishedCount = $pdo->query("SELECT COUNT(*) FROM reports WHERE status = 'finished'")->fetchColumn();
+$finishedReports = [
+    ["id" => 1, "status" => "Completed"],
+    ["id" => 2, "status" => "Completed"],
+    ["id" => 3, "status" => "Completed"],
+    ["id" => 4, "status" => "Completed"]
+];
+$finishedCount = count($finishedReports);
 
+$months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+$totals = [5, 8, 12, 20, 15, 9];
 
-// 3. MONTHLY REPORT STATISTICS
-$stmt = $pdo->query("
-    SELECT MONTH(date_submitted) AS month, COUNT(*) AS total
-    FROM reports
-    GROUP BY MONTH(date_submitted)
-    ORDER BY month
-");
+$approvedReports = [
+    ["title" => "Fallen Tree", "category" => "Emergency", "location" => "Brgy. Pagasa", "date" => "2025-11-20"],
+    ["title" => "Gas Leak", "category" => "Hazard", "location" => "Brgy. Merville", "date" => "2025-11-18"],
+    ["title" => "Road Damage", "category" => "Infrastructure", "location" => "Brgy. Mabini", "date" => "2025-11-17"]
+];
 
-$monthlyData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$months = array_map(fn($r) => date("F", mktime(0, 0, 0, $r['month'], 1)), $monthlyData);
-$totals = array_column($monthlyData, 'total');
-
-// Required for active sidebar
-$current_page = basename($_SERVER['PHP_SELF']);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,17 +39,18 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Dashboard | Padre Garcia Reporting</title>
 
-<!-- External Assets -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<link rel="stylesheet" href="../assets/css/admin.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../admin/assets/admin.css">
 </head>
 
 <body>
 
 <?php include 'admin_sidebar.php'; ?>
 
-<div class="main-content">
+<div class="dash-content">
 
     <h2 class="text-center dashboard-title">Dashboard Overview</h2>
 
@@ -63,7 +66,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <div class="col-md-3">
             <div class="admin-card">
                 <h1 class="count" data-value="<?= $teamCount ?>">0</h1>
-                <p>Response Team Members</p>
+                <p>Response Team</p>
             </div>
         </div>
 
@@ -73,13 +76,63 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <p>Finished Works</p>
             </div>
         </div>
-
     </div>
 
-    <h3 class="chart-title text-center">Monthly Reports</h3>
-    <div class="chart-box">
+<br>
+
+    <h3 class="chart-title text-center mb-3">Reports Overview</h3>
+
+    <div class="reports-wrapper">
+
+    <!-- MAP -->
+   <div class="map-container" id="map"></div>
+
+    <div class="chart-container">
+        <!-- CHART -->
+        <div class="chart-card">
+
+    <div class="chart-card-header">
+        <h4>Monthly Reports</h4>
+    </div>
+
+    <div class="chart-card-body">
         <canvas id="monthlyChart"></canvas>
     </div>
+
+</div>
+
+        <!-- RECENT REPORTS TABLE -->
+        <div class="recent-reports mt-4">
+            <h3 class="text-center mb-3">Recent Approved Reports</h3>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped text-center align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Report Title</th>
+                            <th>Category</th>
+                            <th>Location</th>
+                            <th>Date Approved</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($approvedReports as $report): ?>
+                        <tr>
+                            <td><?= $report['title'] ?></td>
+                            <td><?= $report['category'] ?></td>
+                            <td><?= $report['location'] ?></td>
+                            <td><?= $report['date'] ?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
 
 </div>
 
@@ -88,7 +141,9 @@ let chartMonths = <?= json_encode($months) ?>;
 let chartTotals = <?= json_encode($totals) ?>;
 </script>
 
-<script src="../assets/js/admin.js"></script>
+<!-- Load Leaflet BEFORE your admin.js -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="../admin/assets/admin.js"></script>
 
 </body>
 </html>
