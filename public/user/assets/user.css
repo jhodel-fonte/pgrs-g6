@@ -628,6 +628,11 @@ body {
         margin-left: 0;
         padding: 20px;
     }
+    .scrollable-table {
+        max-height: unset !important;
+        overflow-y: visible !important;
+        padding-right: 0 !important;
+    }
 }
 
 /* design for view report */
