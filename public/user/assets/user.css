@@ -827,8 +827,8 @@ body {
 }
 /*for profile*/
 .profile-card {
-    max-width: 750px;
-    margin: auto;
+    margin: auto;      
+    padding: 30px 40px;
 }
 
 .profile-card img {
