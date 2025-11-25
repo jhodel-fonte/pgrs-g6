@@ -2,16 +2,15 @@
 // demo report-status.php
 session_start();
 
-// Demo data (replace with real DB later)
 $reports = [
     [
         "id" => 101,
         "category" => "Fire",
-        "status" => "Approved",    // Approved, Dispatched, Ongoing, Resolved
+        "status" => "Approved",    
         "date" => "2025-11-20",
         "location" => "Brgy. Pagasa",
         "image" => "fire.jpg",
-        // simulate team location (lat,lng) for map
+        // gawa-gawa lang 
         "team_lat" => 13.9333,
         "team_lng" => 121.1167,
         "user_lat" => 13.9340,
@@ -56,7 +55,6 @@ $reports = [
     ],
 ];
 
-// map statuses to numeric steps
 $statusSteps = ["Approved" => 1, "Dispatched" => 2, "Ongoing" => 3, "Resolved" => 4];
 
 ?>
@@ -94,7 +92,6 @@ $statusSteps = ["Approved" => 1, "Dispatched" => 2, "Ongoing" => 3, "Resolved" =
                     <small class="ms-2 text-muted"><?= htmlspecialchars($r['date']) ?></small>
                 </div>
 
-                <!-- progress / steps -->
                 <div class="timeline" data-step="<?= $step ?>">
                     <div class="progress-bar-bg">
                         <div class="progress-bar-fill"></div>
@@ -128,7 +125,7 @@ $statusSteps = ["Approved" => 1, "Dispatched" => 2, "Ongoing" => 3, "Resolved" =
     </div>
 </main>
 
-<!-- Modal: Details + map -->
+<!-- Modal -->
 <div class="modal fade" id="statusModal" tabindex="-1">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content">
@@ -164,11 +161,9 @@ $statusSteps = ["Approved" => 1, "Dispatched" => 2, "Ongoing" => 3, "Resolved" =
   </div>
 </div>
 
-<!-- libs -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- your JS -->
 <script>
 const GEOAPIFY_KEY = "6cbe5b314ed44817b7e1e51d35b6ec27"; // 
 const DEMO_REPORTS = <?= json_encode($reports) ?>;
