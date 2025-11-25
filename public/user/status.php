@@ -5,11 +5,11 @@ session_start();
 $reports = [
     [
         "id" => 101,
-        "category" => "Fire",
+        "category" => "Environmental Concerns",
         "status" => "Approved",    
         "date" => "2025-11-20",
         "location" => "Brgy. Pagasa",
-        "image" => "fire.jpg",
+        "image" => "smoke.jpg",
         // gawa-gawa lang 
         "team_lat" => 13.9333,
         "team_lng" => 121.1167,
@@ -18,7 +18,7 @@ $reports = [
     ],
     [
         "id" => 102,
-        "category" => "Fire",
+        "category" => "Health & Sanitation",
         "status" => "Dispatched",
         "date" => "2025-11-18",
         "location" => "Brgy. Merville",
@@ -30,7 +30,7 @@ $reports = [
     ],
     [
         "id" => 103,
-        "category" => "Accident",
+        "category" => "Peace & Order",
         "description" => "may tae sa kalsada",
         "status" => "Ongoing",
         "date" => "2025-11-17",
@@ -43,7 +43,7 @@ $reports = [
     ],
     [
         "id" => 104,
-        "category" => "fire",
+        "category" => "Others",
         "status" => "Resolved",
         "date" => "2025-11-12",
         "location" => "Brgy. Mabini",
@@ -64,7 +64,7 @@ $statusSteps = ["Approved" => 1, "Dispatched" => 2, "Ongoing" => 3, "Resolved" =
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Report Status | Unity PGSRS</title>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <link rel="stylesheet" href="../user/assets/user.css">

@@ -114,7 +114,7 @@ foreach ($reports as $r) {
 
 <!-- 🔵 MIDDLE ROW — RECENT REPORTS TABLE (NOW SCROLLABLE) -->
 <div class="recent-reports p-4 rounded shadow-sm scroll-card mb-4">
-    <h3 class="mb-3">Recent Reports</h3>
+    <h3 class="mb-3">Reports</h3>
 
     <div class="scrollable-list">
         <table class="table table-striped mb-0">
@@ -162,7 +162,7 @@ foreach ($reports as $r) {
     <!-- RIGHT — STATUS CHART -->
     <div class="col-md-6 mb-4">
         <div class="status-chart p-4 rounded shadow-sm scroll-card">
-            <h3 class="mb-3">Status Overview</h3>
+            <h3 class="mb-3">Report Chart</h3>
 
             <div class="chart-placeholder d-flex justify-content-center align-items-center"
                  style="height: 250px; background: #f5f5f5; border-radius: 10px;">

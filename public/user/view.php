@@ -3,71 +3,17 @@
 $myReports = [
         [
         "id" => 1,
-        "category" => "Fire",
+        "category" => "Health & Sanitation",
         "status" => "Pending",
-        "description" => "Fire near barangay hall.",
+        "description" => "poop near barangay hall.",
         "date" => "Nov 25, 2025",
         "location" => "Barangay Hall",
         "image" => "fire.jpg"
     ],
     [
         "id" => 2,
-        "category" => "Accident",
-        "status" => "Resolved",
-        "description" => "Two vehicles collided.",
-        "date" => "Nov 20, 2025",
-        "location" => "National Highway",
-        "image" => "accident.jpg"
-    ],
-    [
-        "id" => 3,
-        "category" => "Rescue",
-        "status" => "Pending",
-        "description" => "Dog stuck in drainage.",
-        "date" => "Nov 23, 2025",
-        "location" => "San Jose St.",
-        "image" => "rescue.jpg"
-    ],
-    [
-        "id" => 4,
-        "category" => "Others",
-        "status" => "Resolved",
-        "description" => "Fallen tree blocking road.",
-        "date" => "Nov 18, 2025",
-        "location" => "Brgy. Mabini",
-        "image" => "tree.jpg"
-    ],
-    [
-        "id" => 5,
-        "category" => "Rescue",
-        "status" => "Pending",
-        "description" => "Dog stuck in drainage.",
-        "date" => "Nov 23, 2025",
-        "location" => "San Jose St.",
-        "image" => "rescue.jpg"
-    ],
-    [
-        "id" => 6,
-        "category" => "Others",
+        "category" => "Peace & Order",
         "status" => "Ongoing",
-        "description" => "Fallen tree blocking road.",
-        "date" => "Nov 18, 2025",
-        "location" => "Brgy. Mabini",
-        "image" => "tree.jpg"
-    ],
-    [
-        "id" => 1,
-        "category" => "Fire",
-        "status" => "Pending",
-        "description" => "Fire near barangay hall.",
-        "date" => "Nov 25, 2025",
-        "location" => "Barangay Hall",
-        "image" => "fire.jpg"
-    ],
-    [
-        "id" => 2,
-        "category" => "Accident",
-        "status" => "Resolved",
         "description" => "Two vehicles collided.",
         "date" => "Nov 20, 2025",
         "location" => "National Highway",
@@ -75,7 +21,7 @@ $myReports = [
     ],
     [
         "id" => 3,
-        "category" => "Rescue",
+        "category" => "Peace & Order",
         "status" => "Pending",
         "description" => "Dog stuck in drainage.",
         "date" => "Nov 23, 2025",
@@ -84,7 +30,7 @@ $myReports = [
     ],
     [
         "id" => 4,
-        "category" => "Others",
+        "category" => "Environmental Concerns",
         "status" => "Resolved",
         "description" => "Fallen tree blocking road.",
         "date" => "Nov 18, 2025",
@@ -93,9 +39,9 @@ $myReports = [
     ],
     [
         "id" => 5,
-        "category" => "Rescue",
+        "category" => "Infrastructure",
         "status" => "Pending",
-        "description" => "Dog stuck in drainage.",
+        "description" => "broken street light.",
         "date" => "Nov 23, 2025",
         "location" => "San Jose St.",
         "image" => "rescue.jpg"
@@ -104,7 +50,7 @@ $myReports = [
         "id" => 6,
         "category" => "Others",
         "status" => "Resolved",
-        "description" => "Fallen tree blocking road.",
+        "description" => "There is something on the tree.",
         "date" => "Nov 18, 2025",
         "location" => "Brgy. Mabini",
         "image" => "tree.jpg"
