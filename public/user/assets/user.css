@@ -545,7 +545,7 @@ body {
         width: 100%;
     }
     .topbar {
-        left: 0;
+        left: 0%;
         width: 100%;
     }
 }
@@ -623,7 +623,7 @@ body {
     background: #3b6fe0;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
     .user-main {
         margin-left: 0;
         padding: 20px;
@@ -818,4 +818,19 @@ body {
 @media (max-width:900px){
   .status-grid{ grid-template-columns: 1fr; }
   #modalMap{ height:300px !important; }
+}
+/*for profile*/
+.profile-card {
+    max-width: 750px;
+    margin: auto;
+}
+
+.profile-card img {
+    border: 4px solid #4e89ff;
+}
+
+#editInfoBtn,
+#changePassBtn {
+    padding: 8px 18px;
+    border-radius: 8px;
 }
