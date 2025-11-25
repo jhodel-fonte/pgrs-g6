@@ -526,3 +526,81 @@ body {
         flex-direction: column;
     }
 }
+
+/* design for reports page */
+/* Main container spacing */
+.user-main {
+    margin-top: 100px;
+    margin-left: 260px;      
+    padding: 30px 40px;
+    transition: 0.3s ease;
+}
+
+.report-wrapper {
+    max-width: 1000px;
+    margin: auto;        
+}
+
+/* Page title styling */
+.page-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+
+/* White card wrapper */
+.report-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 1000px;  /* wider */
+    margin: auto;
+}
+
+/* Labels */
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* Inputs */
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+/* Map Card */
+.map-card {
+    height: 350px;
+    width: 100%;
+    border-radius: 10px;
+    margin: 10px 0 20px 0;
+    overflow: hidden;
+    border: 2px solid #e3e3e3;
+}
+
+/* Submit button */
+.submit-btn {
+    width: 100%;
+    background: #4e89ff;
+    border: none;
+    padding: 14px;
+    font-size: 17px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.submit-btn:hover {
+    background: #3b6fe0;
+}
