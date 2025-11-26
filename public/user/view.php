@@ -3,7 +3,7 @@
 $myReports = [
         [
         "id" => 1,
-        "category" => "Health & Sanitation",
+        "category" => "Fire",
         "status" => "Pending",
         "description" => "poop near barangay hall.",
         "date" => "Nov 25, 2025",
@@ -12,7 +12,7 @@ $myReports = [
     ],
     [
         "id" => 2,
-        "category" => "Peace & Order",
+        "category" => "Others",
         "status" => "Ongoing",
         "description" => "Two vehicles collided.",
         "date" => "Nov 20, 2025",
@@ -21,7 +21,7 @@ $myReports = [
     ],
     [
         "id" => 3,
-        "category" => "Peace & Order",
+        "category" => "Electrical Hazzard",
         "status" => "Pending",
         "description" => "Dog stuck in drainage.",
         "date" => "Nov 23, 2025",
@@ -30,7 +30,7 @@ $myReports = [
     ],
     [
         "id" => 4,
-        "category" => "Environmental Concerns",
+        "category" => "Rescue",
         "status" => "Resolved",
         "description" => "Fallen tree blocking road.",
         "date" => "Nov 18, 2025",
@@ -39,7 +39,7 @@ $myReports = [
     ],
     [
         "id" => 5,
-        "category" => "Infrastructure",
+        "category" => "fire",
         "status" => "Pending",
         "description" => "broken street light.",
         "date" => "Nov 23, 2025",

@@ -32,11 +32,14 @@
                 <label>Category</label>
                 <select required>
                     <option value="">Select Type</option>
-                    <option>Infrastructure</option>
+                    <option>Fire</option>
+                    <option>Rescue</option>
+                    <option>Electrical Hazzard</option>
+                    <!-- <option>Infrastructure</option>
                     <option>Utilities & Public Services</option>
                     <option>Peace & Order</option>
                     <option>Health & Sanitation</option>
-                    <option>Environmental Concerns</option>
+                    <option>Environmental Concerns</option> -->
                     <option>Others</option>
                 </select>
             </div>

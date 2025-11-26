@@ -5,7 +5,7 @@ session_start();
 $reports = [
     [
         "id" => 101,
-        "category" => "Environmental Concerns",
+        "category" => "Fire",
         "status" => "Approved",    
         "date" => "2025-11-20",
         "location" => "Brgy. Pagasa",
@@ -18,7 +18,7 @@ $reports = [
     ],
     [
         "id" => 102,
-        "category" => "Health & Sanitation",
+        "category" => "Electrical Hazzard",
         "status" => "Dispatched",
         "date" => "2025-11-18",
         "location" => "Brgy. Merville",
@@ -30,7 +30,7 @@ $reports = [
     ],
     [
         "id" => 103,
-        "category" => "Peace & Order",
+        "category" => "Others",
         "description" => "may tae sa kalsada",
         "status" => "Ongoing",
         "date" => "2025-11-17",

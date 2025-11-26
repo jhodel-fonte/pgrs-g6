@@ -72,8 +72,9 @@ $approvedReports = [
 
         <div class="col-md-3">
             <div class="admin-card">
-                <h1 class="count" data-value="<?= $finishedCount ?>">0</h1>
-                <p>Finished Works</p>
+                <!-- paltan mo na lang to ng total reports -->
+                <h1 class="count" data-value="<?= $finishedCount ?>">0</h1> 
+                <p>Total Reports</p>
             </div>
         </div>
     </div>
